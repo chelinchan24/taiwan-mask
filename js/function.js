@@ -16,7 +16,7 @@ el.style.width = '32px';
 el.style.height = '40px';
 
 el.addEventListener("click", function(){
-    history.pushState('', '', "?@奇永藥局")
+    history.pushState('', '', "#!奇永藥局")
 });
 
 var marker = new mapboxgl.Marker(el)

@@ -40,6 +40,12 @@ body, html {
 }
 
 /* 文字 */
+.小標題 {
+    font-size: 14 inheritpx;
+    font-weight: 500;
+    color: #808080;
+}
+
 .中標題 {
     font-size: 16px;
     font-weight: 600;
@@ -58,6 +64,7 @@ body, html {
     border-radius: 12px;
     box-sizing: border-box;
     padding: 24px;
+    overflow: hidden;
 }
 
 .卡片-數字欄位 {
@@ -83,6 +90,7 @@ body, html {
 
 .卡片-數據_單位 {
     font-size: 13px;
+    font-weight: 500;
 }
 
 .卡片-描述 {
@@ -99,6 +107,18 @@ body, html {
     font-size: 13px;
 }
 
+.卡片-充足{
+    background: #EBF3FF;
+}
+
+.卡片-充足 .卡片-數據_大, .卡片-充足 .卡片-數據_小, .卡片-充足 .卡片-名稱 {
+     color: #3B64CD;
+}
+
+.卡片-充足 .卡片-數據_單位, .卡片-充足 .卡片-地址, .卡片-充足 .小標題 {
+    color: #8CA2D8;
+}
+
 .卡片-幾乎售罄{
     background: #FFF6E0;
 }
@@ -107,7 +127,7 @@ body, html {
      color: #C78329;
 }
 
-.卡片-幾乎售罄 .卡片-數據_單位, .卡片-幾乎售罄 .卡片-地址 {
+.卡片-幾乎售罄 .卡片-數據_單位, .卡片-幾乎售罄 .卡片-地址, .卡片-幾乎售罄 .小標題 {
     color: #D2A567;
 }
 
@@ -119,7 +139,7 @@ body, html {
     color: #C72929;
 }
 
-.卡片-即將售罄 .卡片-數據_單位, .卡片-即將售罄 .卡片-地址 {
+.卡片-即將售罄 .卡片-數據_單位, .卡片-即將售罄 .卡片-地址, .卡片-即將售罄 .小標題 {
     color: #D26767;
 }
 
@@ -128,11 +148,11 @@ body, html {
 }
 
 .卡片-售罄 .卡片-數據_大, .卡片-售罄 .卡片-數據_小, .卡片-售罄 .卡片-名稱 {
-    color: #363636;
+    color: #9F9F9F;
 }
 
-.卡片-售罄 .卡片-數據_單位, .卡片-售罄 .卡片-地址 {
-    color: #656565;
+.卡片-售罄 .卡片-數據_單位, .卡片-售罄 .卡片-地址, .卡片-售罄 .小標題 {
+    color: #B2B2B2;
 }
 
 .選單按鈕 {
@@ -487,4 +507,27 @@ nav {
 .側邊欄-結果-項目-資訊-地址 {
     font-size: 13px;
     color: #656565;
+}
+
+#側邊欄-靜態地圖 {
+    width: 100%;
+    height: 200px;
+    background: #E0F0FE;
+    border-radius: 12px;
+    margin-bottom: 14px;
+}
+
+#側邊欄-販售存量 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#側邊欄-販售存量-成人, #側邊欄-販售存量-兒童 {
+    width: calc(50% - 6px);
+}
+
+.側邊欄-販售存量_規格-數據 {
+    display: flex;
+    align-items: baseline;
 }
