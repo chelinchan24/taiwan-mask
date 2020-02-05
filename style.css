@@ -1,0 +1,490 @@
+@import url('http://fonts.googleapis.com/earlyaccess/notosanstc.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap');
+
+body, html {
+    font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+}
+
+/* 圖標 */
+
+.這是什麼 {
+    width: 18px;
+    height: 18px;
+    display: block;
+    background: url('./src/ic_whatisthis.png');
+    background-size: cover;
+}
+
+.尋找銷售點 {
+    background: url('./src/ic_search.png');
+}
+
+.logo {
+    background: url('./src/logo.png');
+    background-size: cover;
+}
+
+.關於 {
+    background: url('./src/ic_about.png');
+}
+
+.返回 {
+    background: url('./src/ic_back.png');
+}
+
+/* 文字 */
+.中標題 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #808080;
+}
+
+:root {
+    --將售罄-標題: #C78329;
+    --將售罄-次標題: #D2A567;
+}
+
+/* 元件 */
+
+.卡片 {
+    display: block;
+    border-radius: 12px;
+    box-sizing: border-box;
+    padding: 24px;
+}
+
+.卡片-數字欄位 {
+    display: flex;
+    align-items: baseline;
+}
+
+.卡片-數據_大 {
+    font-size: 48px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.卡片-數據_小 {
+    font-size: 32px;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 4px;
+}
+
+.卡片-數據_單位 {
+    font-size: 13px;
+}
+
+.卡片-描述 {
+    font-size: 14px;
+}
+
+.卡片-名稱 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.卡片-地址 {
+    font-size: 13px;
+}
+
+.卡片-幾乎售罄{
+    background: #FFF6E0;
+}
+
+.卡片-幾乎售罄 .卡片-數據_大, .卡片-幾乎售罄 .卡片-數據_小, .卡片-幾乎售罄 .卡片-名稱 {
+     color: #C78329;
+}
+
+.卡片-幾乎售罄 .卡片-數據_單位, .卡片-幾乎售罄 .卡片-地址 {
+    color: #D2A567;
+}
+
+.卡片-即將售罄{
+    background: #FFE0E0;
+}
+
+.卡片-即將售罄 .卡片-數據_大, .卡片-即將售罄 .卡片-名稱 {
+    color: #C72929;
+}
+
+.卡片-即將售罄 .卡片-數據_單位, .卡片-即將售罄 .卡片-地址 {
+    color: #D26767;
+}
+
+.卡片-售罄{
+    background: #F9F9F9;
+}
+
+.卡片-售罄 .卡片-數據_大, .卡片-售罄 .卡片-數據_小, .卡片-售罄 .卡片-名稱 {
+    color: #363636;
+}
+
+.卡片-售罄 .卡片-數據_單位, .卡片-售罄 .卡片-地址 {
+    color: #656565;
+}
+
+.選單按鈕 {
+    background: #F2F7FF;
+    border-radius: 12px;
+    padding: 20px 22px;
+    box-sizing: border-box;
+    color: #1A2D3E;
+    display: flex;
+}
+
+.選單按鈕-圖標 {
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    margin-right: 16px;
+    background-size: cover !important;
+}
+/* 地圖 */
+#地圖容器 {
+    width: 100%;
+    height: 100%;
+}
+
+#地圖-控制 {
+    z-index: 1000;
+    position: fixed;
+    right: 454px;
+    bottom: 30px;
+}
+
+#地圖-控制-定位 {
+    width: 64px;
+    height: 64px;
+    display: block;
+    background: url('./src/ic_locate.png');
+    border-radius: 12px;
+    box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
+    margin-bottom: 16px;
+    background-size: cover !important;
+}
+
+.地圖-控制-定位_啟用 {
+    background: url('./src/ic_located.png') !important;
+}
+
+#地圖-控制-縮放 {
+    width: 64px;
+    height: 120px;
+    background: #ffffff;
+    display: block;
+    border-radius: 12px;
+    box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#地圖-控制-縮放-放大 {
+    width: 48px;
+    height: 48px;
+    display: block;
+    background: url('./src/ic_zoomIn_normal.png');
+    background-size: cover !important;
+    transition: 0.1s ease;
+    margin-bottom: 8px;
+}
+
+#地圖-控制-縮放-放大:hover {
+    opacity: 0.5;
+    background: url('./src/ic_zoomIn_press.png');
+}
+
+#地圖-控制-縮放-放大:active {
+    transition: 0.1s ease;
+    opacity: 1;
+    background: url('./src/ic_zoomIn_press.png');
+}
+
+#地圖-控制-縮放-縮小 {
+    width: 48px;
+    height: 48px;
+    display: block;
+    background: url('./src/ic_zoomOut_normal.png');
+    background-size: cover !important;
+    transition: 0.1s ease;
+}
+
+#地圖-控制-縮放-縮小:hover {
+    opacity: 0.5;
+    background: url('./src/ic_zoomOut_press.png');
+}
+
+#地圖-控制-縮放-縮小:active {
+    transition: 0.1s ease;
+    opacity: 1;
+    background: url('./src/ic_zoomOut_press.png');
+}
+
+#地圖 {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* 導覽列 */
+nav {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    margin-bottom: 24px;
+}
+
+#nav-左, #nav-右 {
+    flex: 1;
+}
+
+#nav-右 {
+    text-align: right;
+}
+
+#nav-左-logo {
+    width: 120px;
+    height: 32px;
+    display: block;
+}
+
+#nav-左-返回總覽 {
+    display: flex;
+    align-items: center;
+}
+
+.nav-圖標 {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    background-size: cover !important;
+}
+
+#nav-右-關於 {
+    width: 28px;
+}
+
+#nav-右-最後更新 {
+    display: inline-flex;
+    height: 36px;
+    padding: 0px 14px;
+    background: #F5F5F5;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+#nav-右-最後更新-icon {
+    width: 18px;
+    height: 18px;
+    background: url('./src/ic_lastUpdate.png');
+    background-size: cover !important;
+    margin-right: 6px;
+}
+
+#nav-右-最後更新-時間 {
+    font-size: 13px;
+    color: #575757;
+    margin-right: 6px;
+}
+
+.nav-標題 {
+    margin-left: 12px;
+    color: #000000;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* 側邊欄 */
+
+#側邊欄 {
+    z-index: 1000;
+    position: fixed;
+    display: block;
+    height: auto;
+    top: 30px;
+    right: 30px;
+    bottom: 0px;
+    width: 396px;
+    box-sizing: border-box;
+    padding: 30px;
+    overflow: scroll;
+    background: #FFFFFF;
+    box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
+    border-radius: 24px 24px 0 0;
+}
+
+#側邊欄-內容 {
+    height: auto;
+    display: block;
+    width: 100%;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+.側邊欄-中標題 {
+    margin-bottom: 16px;
+}
+
+#側邊欄-最近更新 {
+    width: 100%;
+    height: 36px;
+    background: #F5F5F5;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: #575757;
+    margin-bottom: 14px;
+}
+
+#側邊欄-最近更新 div {
+    margin-right: 8px;
+}
+
+#側邊欄-區域狀況 {
+    background: #005DDB;
+    display: block;
+    margin-bottom: 14px;
+}
+
+#側邊欄-區域狀況-標題 {
+    color: #C5E1F5;
+    font-weight: 600;
+}
+
+#側邊欄-區域狀況-內容 {
+    display: flex;
+    margin-top: 10px;
+}
+
+#側邊欄-區域狀況-內容-販售中藥局, #側邊欄-區域狀況-內容-剩餘口罩 {
+    flex: 1;
+}
+
+.側邊欄-區域狀況-內容_主題-數據 {
+    color: #FFFFFF;
+}
+
+.側邊欄-區域狀況-內容_主題-名稱 {
+    color: #BFD6F5;
+}
+
+#側邊欄-尋找銷售點 {
+    margin-bottom: 40px;
+}
+
+.側邊欄_區塊-卡片容器 {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    line-break: unset;
+}
+
+#側邊欄-即將售罄, .側邊欄_區塊-卡片_剛售罄 {
+    display: block;
+    margin-bottom: 40px;
+}
+
+.側邊欄-即將售罄-卡片, .側邊欄-剛售罄-卡片 {
+    min-width: 154px;
+    width: 154px;
+    margin-right: 8px;
+}
+
+.側邊欄-剛售罄-卡片{
+    background: #F9F9F9;
+}
+
+.側邊欄_區塊-卡片_剛售罄 .卡片-名稱 {
+    color: #363636;
+}
+
+.側邊欄_區塊-卡片_剛售罄 .卡片-名稱 {
+    color: #656565;
+}
+
+#側邊欄-過濾 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+#側邊欄-過濾-城市, #側邊欄-過濾-地區 {
+    flex: 1;
+    display: flex;
+    background: #F2F7FF;
+    color: #1A2D3E;
+    max-width: calc(50% - 6px);
+    height: 48px;
+    font-size: 15px;
+    padding: 0px 22px;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+
+.側邊欄-結果 {
+    width: 100%;
+    display: flex;
+    align-content: center;
+}
+
+.側邊欄-結果-項目 {
+    display: flex;
+    height: 104px;
+    width: 100%;
+    align-items: center;
+    background: #F9F9F9;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 14px;
+    border-radius: 12px;
+}
+
+.側邊欄-結果-項目-計數 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 84px;
+    height: 84px;
+    border-radius: 12px;
+    margin-right: 18px;
+}
+
+.側邊欄-結果-項目-計數-數據 {
+    display: flex;
+    align-items: baseline;
+}
+
+/*.側邊欄-結果-項目-計數-數據 .卡片-數據_大 {*/
+/*    font-size: 32px;*/
+/*}*/
+
+.側邊欄-結果-項目-資訊 {
+
+}
+
+.側邊欄-結果-項目-資訊-名稱 {
+    font-size: 19px;
+    color: #000000;
+    font-weight: 600;
+}
+
+.側邊欄-結果-項目-資訊-地址 {
+    font-size: 13px;
+    color: #656565;
+}

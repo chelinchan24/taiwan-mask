@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>OpenMapTiles OSM Bright style</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='style.css' rel='stylesheet' />
+</head>
+<body>
+<section id="地圖容器">
+    <div id="地圖-控制">
+        <div id="地圖-控制-定位" class="地圖-控制-定位_啟用 地圖-控制-定位"></div>
+        <div id="地圖-控制-縮放">
+            <div id="地圖-控制-縮放-放大"></div>
+            <div id="地圖-控制-縮放-縮小"></div>
+        </div>
+    </div>
+    <div id="地圖"></div>
+</section>
+<article id="側邊欄">
+    <nav>
+        <div id="nav-左">
+            <div id="nav-左-logo" class="logo"></div>
+        </div>
+        <div id="nav-右">
+            <div id="nav-右-關於" class="關於 nav-圖標"></div>
+        </div>
+    </nav>
+    <section id="側邊欄-內容">
+        <div id="側邊欄-最近更新">
+            <div>最後更新
+                <span id="側邊欄-最近更新-時間">22:30</span>，每半小時更新一次
+            </div>
+            <div class="這是什麼" id="側邊欄-最近更新-這是什麼"></div>
+        </div>
+        <div id="側邊欄-區域狀況" class="卡片">
+            <div class="中標題" id="側邊欄-區域狀況-標題">
+                <!-- 選擇器加入到這裡 -->
+                <span id="側邊欄-區域狀況-地區">台南市</span>狀況</div>
+            <div id="側邊欄-區域狀況-內容">
+                <div id="側邊欄-區域狀況-內容-販售中藥局">
+                    <div id="側邊欄-區域狀況-內容-販售中藥局-數據" class="卡片-數據_大 側邊欄-區域狀況-內容_主題-數據">45</div>
+                    <div class="卡片-描述 側邊欄-區域狀況-內容_主題-名稱">販售中藥局</div>
+                </div>
+                <div id="側邊欄-區域狀況-內容-剩餘口罩">
+                    <div id="側邊欄-區域狀況-內容-剩餘口罩-數據" class="卡片-數據_大 側邊欄-區域狀況-內容_主題-數據">1,450</div>
+                    <div class="卡片-描述 側邊欄-區域狀況-內容_主題-名稱">剩餘口罩</div>
+                </div>
+            </div>
+        </div>
+        <div id="側邊欄-尋找銷售點" class="選單按鈕">
+            <div class="選單按鈕-圖標 尋找銷售點"></div>
+            <div>尋找銷售點</div>
+        </div>
+        <div id="側邊欄-即將售罄">
+            <div class="中標題 側邊欄-中標題">即將售罄</div>
+            <div id="側邊欄-即將售罄-內容" class="側邊欄_區塊-卡片容器">
+                <div id="側邊欄-幾乎售罄-1" class="側邊欄-即將售罄-卡片 卡片 卡片-幾乎售罄 ">
+                    <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                        <div id="側邊欄-幾乎售罄-1-數據" class="卡片-數據_大">23</div>
+                        <div class="卡片-數據_單位">片</div>
+                    </div>
+                    <div id="側邊欄-幾乎售罄-1-名稱" class="卡片-名稱">大狗哥藥局</div>
+                    <div id="側邊欄-幾乎售罄-1-地址" class="卡片-地址">台南市北區公園路4599-34號8樓之321號</div>
+                </div>
+                <div id="側邊欄-即將售罄-2" class="側邊欄-即將售罄-卡片 卡片 卡片-即將售罄 ">
+                    <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                        <div id="側邊欄-即將售罄-2-數據" class="卡片-數據_大">23</div>
+                        <div class="卡片-數據_單位">片</div>
+                    </div>
+                    <div id="側邊欄-即將售罄-2-名稱" class="卡片-名稱">大狗哥藥局</div>
+                    <div id="側邊欄-即將售罄-2-地址" class="卡片-地址">台南市北區公園路4599-34號8樓之322號</div>
+                </div>
+                <div id="側邊欄-幾乎售罄-3" class="側邊欄-即將售罄-卡片 卡片 卡片-幾乎售罄 ">
+                    <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                        <div id="側邊欄-幾乎售罄-3-數據" class="卡片-數據_大">23</div>
+                        <div class="卡片-數據_單位">片</div>
+                    </div>
+                    <div id="側邊欄-幾乎售罄-3-名稱" class="卡片-名稱">大狗哥藥局</div>
+                    <div id="側邊欄-幾乎售罄-3-地址" class="卡片-地址">台南市北區公園路4599-34號8樓之321號</div>
+                </div>
+            </div>
+        </div>
+        <div id="側邊欄-剛售罄">
+            <div class="中標題 側邊欄-中標題">剛售罄</div>
+            <div id="側邊欄-剛售罄-內容" class="側邊欄_區塊-卡片容器">
+                <div id="側邊欄-剛售罄-1" class="側邊欄-剛售罄-卡片 卡片">
+                    <div id="側邊欄-剛售罄-1-名稱" class="卡片-名稱">大狗哥藥局</div>
+                    <div id="側邊欄-剛售罄-1-地址" class="卡片-地址">台南市北區公園路4599-34號8樓之321號</div>
+                </div>
+                <div id="側邊欄-剛售罄-2" class="側邊欄-剛售罄-卡片 卡片">
+                    <div id="側邊欄-剛售罄-2-名稱" class="卡片-名稱">大狗哥藥局</div>
+                    <div id="側邊欄-剛售罄-2-地址" class="卡片-地址">台南市北區公園路4599-34號8樓之322號</div>
+                </div>
+                <div id="側邊欄-剛售罄-3" class="側邊欄-剛售罄-卡片 卡片">
+                    <div id="側邊欄-剛售罄-3-名稱" class="卡片-名稱">大狗哥藥局</div>
+                    <div id="側邊欄-剛售罄-3-地址" class="卡片-地址">台南市北區公園路4599-34號8樓之333號</div>
+                </div>
+            </div>   
+        </div>
+    </section>
+</article>
+<script src="js/function.js"></script>
+</body>
+</html>
+

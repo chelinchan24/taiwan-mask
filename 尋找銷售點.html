@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>OpenMapTiles OSM Bright style</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='style.css' rel='stylesheet' />
+</head>
+<body>
+<section id="地圖容器">
+    <div id="地圖-控制">
+        <div id="地圖-控制-定位" class="地圖-控制-定位_啟用 地圖-控制-定位"></div>
+        <div id="地圖-控制-縮放">
+            <div id="地圖-控制-縮放-放大"></div>
+            <div id="地圖-控制-縮放-縮小"></div>
+        </div>
+    </div>
+    <div id="地圖"></div>
+</section>
+<article id="側邊欄">
+    <nav>
+        <div id="nav-左">
+            <div id="nav-左-返回總覽">
+                <div class="返回 nav-圖標"></div>
+                <div class="nav-標題">尋找銷售點</div>
+            </div>
+        </div>
+        <div id="nav-右">
+            <div id="nav-右-最後更新">
+                <div id="nav-右-最後更新-icon"></div>
+                <div id="nav-右-最後更新-時間">03:19</div>
+                <div class="這是什麼" id="側邊欄-最近更新-這是什麼"></div>
+            </div>
+        </div>
+    </nav>
+    <section id="側邊欄-內容">
+        <div id="側邊欄-過濾">
+            <div id="側邊欄-過濾-城市"><span>台南市</span></div>
+            <div id="側邊欄-過濾-地區"><span>台南市</span></div>
+        </div>
+        <div id="側邊欄-結果">
+            <div class="側邊欄-結果-項目">
+                <div class="側邊欄-結果-項目-計數 卡片-幾乎售罄">
+                    <div class="側邊欄-結果-項目-計數-數據">
+                        <div class="卡片-數據_小">32</div>
+                        <div class="卡片-數據_單位">片</div>
+                    </div>
+                </div>
+                <div class="側邊欄-結果-項目-資訊">
+                    <div class="側邊欄-結果-項目-資訊-名稱">狗哥藥局</div>
+                    <div class="側邊欄-結果-項目-資訊-地址">台南市北區公園西路388256號</div>
+                </div>
+            </div>
+            <div class="側邊欄-結果-項目">
+                <div class="側邊欄-結果-項目-計數 卡片-即將售罄">
+                    <div class="側邊欄-結果-項目-計數-數據">
+                        <div class="卡片-數據_大">3</div>
+                        <div class="卡片-數據_單位">片</div>
+                    </div>
+                </div>
+                <div class="側邊欄-結果-項目-資訊">
+                    <div class="側邊欄-結果-項目-資訊-名稱">狗哥藥局</div>
+                    <div class="側邊欄-結果-項目-資訊-地址">台南市北區公園西路388256號</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+<script src="js/function.js"></script>
+</body>
+</html>
+
