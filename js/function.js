@@ -24,7 +24,13 @@ var marker = new mapboxgl.Marker(el)
     .addTo(map);
 // camera
 //CameraOptions, AnimationOptions
-map.easeTo({center:{lon:121.243634, lat:24.973393}, zoom:13, duration:4000})
+$('#地圖-控制-縮放-放大').click(function(){
+    map.flyTo({zoom: map.getZoom()+1,})
+});
+
+$('#地圖-控制-縮放-縮小').click(function(){
+    map.flyTo({zoom: map.getZoom()-1,})
+});
 
 //更改版權位置
-map.addControl(new mapboxgl.AttributionControl(), 'top-left');
+map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
