@@ -285,8 +285,15 @@ nav {
 }
 
 #nav-左-返回總覽 {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+#nav-左-返回總覽:hover {
+    opacity: 0.6;
+    transition: 0.1s ease;
 }
 
 .nav-圖標 {
@@ -543,4 +550,89 @@ nav {
     padding: 22px;
     box-sizing: border-box;
     border-radius: 12px;
+}
+
+#側邊欄-關於標題 {
+    height: 220px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#側邊欄-關於標題-logo {
+    width: 120px;
+    height: 32px;
+    display: block;
+    margin-bottom: 14px;
+}
+
+#側邊欄-關於標題-文字 {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    color: #006CFF;
+}
+
+.側邊欄-關於-人 {
+    background: #F9F9F9;
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.側邊欄-關於-人-資訊-名字與專業 {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.側邊欄-關於-人-資訊 {
+    display: flex;
+    margin-bottom: 22px;
+}
+
+.側邊欄-關於-人-名字 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.側邊欄-關於-人-專業 {
+    color: #838383;
+}
+
+.側邊欄-關於-人-資訊-照片 {
+    width: 72px;
+    height: 73px;
+    border-radius: 100%;
+}
+
+.側邊欄-關於-人-連結 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.側邊欄-關於-人-連結-按鈕 {
+    width: calc(50% - 6px);
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    background: #E0ECFF;
+    transition: 0.1s;
+}
+
+.側邊欄-關於-人-連結-按鈕:hover {
+    transition: 0.15s;
+    opacity: 0.5;
+}
+
+#側邊欄-版權 {
+    margin-top: 40px;
+    font-size: 13px;
+    text-align: center;
+    color: #666666;
 }
