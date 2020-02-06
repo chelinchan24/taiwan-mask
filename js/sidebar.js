@@ -1,3 +1,4 @@
+
 //頁面
 var dashboardPage = $('#側邊欄-頁面-總覽');
 var findRetailerPage = $('#側邊欄-頁面-尋找銷售點')
@@ -10,7 +11,7 @@ var aboutBtn = $('#nav-右-關於');
 var navBackBtn = $('#nav-左-返回總覽');
 
 //按鈕
-    //導覽列返回
+//導覽列返回
 navBackBtn.click(function() {
     aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
@@ -18,19 +19,19 @@ navBackBtn.click(function() {
     dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
 });
 
-    //總覽-尋找銷售點
+//總覽-尋找銷售點
 findRetailerBtn.click(function() {
     dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
 });
 
-    //總覽-關於
+//總覽-關於
 aboutBtn.click(function() {
     dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     aboutPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
 });
 
-    //尋找銷售點-檢視藥局
+//尋找銷售點-檢視藥局
 // aboutBtn.click(function() { //隨選項變動
 //     dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
 //     retailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
@@ -41,24 +42,27 @@ aboutBtn.click(function() {
 
 //----- 行動版側邊欄
 
-// if ($(window).width() <= 800) {
-//     if ($('#側邊欄').hasClass ('側邊欄-行動版-展開')) {
-//         console.log('fuck');
-//
-//         if ($('#側邊欄-內容').scrollTop() <=0) {
-//
-//             $('#側邊欄').removeClass('側邊欄-行動版-展開');
-//         };
-//
-//     });
-//     }
-//     else {
-//         $('#側邊欄').on('touchmove', function(){
-//             console.log('滑動！')
-//             $('#側邊欄').addClass('側邊欄-行動版-展開');
-//         });
-//     }
-// }
+if ($(window).width() <= 800) {
+    if ($('#側邊欄').hasClass ('側邊欄-行動版-展開')) {
+
+
+        if ($('#側邊欄-內容').scrollTop() <=0) {
+            $('#側邊欄').removeClass('側邊欄-行動版_展開');
+        };
+
+
+    } else {
+        $('#側邊欄').on('mousedown', function(){
+            console.log('滑動！')
+            $('#側邊欄').addClass('側邊欄-行動版_展開');
+        });
+
+        $('#側邊欄').on('touchmove', function(){
+            console.log('滑動！')
+            $('#側邊欄').addClass('側邊欄-行動版_展開');
+        });
+    };
+}
 
 //----- 彈出視窗
 var popWinBox = $('#彈出視窗')
@@ -90,28 +94,28 @@ $('#彈出視窗').click(function (){
 
 //----- 下拉選單
 $(document).click(function(e) {
-  if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
-  {
-    if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_顯示") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_顯示")){
-
-      if($(e.target).closest('.下拉選單_顯示').length == 0){
-        $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
-        $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
-      }
-    }
-  }
-  else
-  {
-    if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length == 1)
+    if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
     {
-      $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
-    }
+        if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_顯示") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_顯示")){
 
-    if($(e.target).closest('.側邊欄-過濾-地區-按鈕').length == 1)
-    {
-      $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+            if($(e.target).closest('.下拉選單_顯示').length == 0){
+                $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+                $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+            }
+        }
     }
-  }
+    else
+    {
+        if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length == 1)
+        {
+            $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+        }
+
+        if($(e.target).closest('.側邊欄-過濾-地區-按鈕').length == 1)
+        {
+            $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+        }
+    }
 });
 
 $('#側邊欄-過濾-城市').click(function (){
