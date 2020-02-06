@@ -397,10 +397,12 @@ nav {
     margin-bottom: 24px;
     padding: 0px 30px;
     box-sizing: border-box;
+    justify-content: space-between;
 }
 
 #nav-左, #nav-右 {
     flex: 1;
+    max-width:calc(50% - 6px)
 }
 
 #nav-右 {
@@ -470,6 +472,8 @@ nav {
     color: #000000;
     font-weight: bold;
     font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* 側邊欄 */
@@ -1113,20 +1117,39 @@ nav {
         box-sizing: border-box;
         overflow: scroll;
         padding: 0px 30px 0px 30px;
+        flex: 1;
     }
 
-    .側邊欄-行動版-展開 {
+    .側邊欄-行動版_展開 {
         transition: 0.2s ease;
         height: calc(100% - 30px) !important;
         bottom: 0 !important;
     }
 
+    .側邊欄-行動版_關閉 {
+        overflow: hidden !important;
+    }
+
     #彈出視窗 {
         position: fixed;
     }
-
-    nav, .側邊欄-內容{
-        padding: 0px 16px;
+    
+    nav {
+        padding: 22px 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0px;
+        width: 100%;
+        height: unset;
+    }
+    
+    #側邊欄 {
+        padding-top: 0px;
+    }
+    
+    .側邊欄-內容{
+        padding: 0px 16px
     }
     
     #地圖-控制 {
