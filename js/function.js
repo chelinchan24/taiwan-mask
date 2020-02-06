@@ -73,19 +73,19 @@ for(var k in county)
 console.log(window.location.search);
 
 // 產 Marker
-// var el = document.createElement('div');
-// el.className = 'marker';
-// el.style.backgroundImage = "url(https://i.imgur.com/MK4NUzI.png)";
-// el.style.width = '32px';
-// el.style.height = '40px';
-//
-// el.addEventListener("click", function(){
-//     history.pushState('', '', "#!奇永藥局")
-// });
-//
-// var marker = new mapboxgl.Marker(el)
-//     .setLngLat([121.243634, 24.973393])
-//     .addTo(map);
+var el = document.createElement('div');
+el.className = 'marker';
+el.style.backgroundImage = "url(https://i.imgur.com/MK4NUzI.png)";
+el.style.width = '32px';
+el.style.height = '40px';
+
+el.addEventListener("click", function(){
+    history.pushState('', '', "#!奇永藥局")
+});
+
+var marker = new mapboxgl.Marker(el)
+    .setLngLat([121.243634, 24.973393])
+    .addTo(map);
 // camera
 //CameraOptions, AnimationOptions
 $('#地圖-控制-縮放-放大').click(function(){
