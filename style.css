@@ -80,6 +80,12 @@ a {
     overflow: hidden;
     cursor: pointer;
     user-select: none;
+    transition: 0.15s;
+}
+
+.卡片:hover {
+    transition: 0.15s;
+    opacity: 0.7;
 }
 
 .卡片-數字欄位 {
@@ -136,10 +142,6 @@ a {
 
 .卡片-幾乎售罄{
     background: #FFF6E0;
-}
-
-.卡片-幾乎售罄:hover{
-    box-shadow: 0 11px 22px -9px #E6C494;
 }
 
 .卡片-幾乎售罄 .卡片-數據_大, .卡片-幾乎售罄 .卡片-數據_小, .卡片-幾乎售罄 .卡片-名稱 {
@@ -213,6 +215,8 @@ a {
     padding: 6px;
     height: 193px;
     overflow: scroll;
+    z-index: 2000;
+    box-sizing: border-box;
 }
 
 .下拉選單::-webkit-scrollbar {
@@ -242,6 +246,46 @@ a {
     color: #474747;
 }
 
+@keyframes 下拉選單_展開{
+    from {
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+        visibility: ;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+        display: block !important;
+    }
+}
+
+@keyframes 下拉選單_收起{
+    from {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    to {
+        height: 0;
+        opacity: 0;
+        visibility: hidden;
+        display: none !important;
+    }
+}
+
+.下拉選單_收起 {
+    animation-duration: 0.4s;
+    animation-name: 下拉選單_收起;
+    animation-fill-mode: forwards;
+}
+
+.下拉選單_展開 {
+    animation-duration: 0.25s;
+    animation-name: 下拉選單_展開;
+    animation-fill-mode: forwards;
+}
 
 /* 地圖 */
 #地圖容器 {
@@ -400,6 +444,11 @@ nav {
     border-radius: 12px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+#nav-右-最後更新:hover {
+    opacity: 0.7;
 }
 
 #nav-右-最後更新-icon {
@@ -479,7 +528,7 @@ nav {
 } */
 
 .側邊欄-頁面_顯示 {
-    animation-duration: 0.2s;
+    animation-duration: 0.3s;
     animation-name: 側邊欄-頁面_顯示;
     animation-fill-mode: forwards;
 }
@@ -532,6 +581,10 @@ nav {
     cursor: inherit;
 }
 
+#側邊欄-區域狀況:hover {
+    opacity: 1;
+}
+
 #側邊欄-區域狀況-標題 {
     color: #C5E1F5;
     font-weight: 600;
@@ -568,6 +621,10 @@ nav {
 #側邊欄-即將售罄, .側邊欄_區塊-卡片_剛售罄 {
     display: block;
     margin-bottom: 40px;
+}
+
+#側邊欄-即將售罄::-webkit-scrollbar{
+    display: none;
 }
 
 .側邊欄-即將售罄-卡片, .側邊欄-剛售罄-卡片 {
@@ -914,7 +971,6 @@ nav {
 #彈出視窗 {
     width: 100%;
     height: 100%;
-    background: #00000040;
     position: absolute;
     top: 0;
     left: 0;
@@ -925,35 +981,63 @@ nav {
 @keyframes 彈出視窗_顯示{
     from {
         opacity: 0;
+        visibility: hidden;
+        background: 00000000;
+        visibility: ;
     }
 
     to {
         opacity: 1;
+        visibility: visible;
         display: block !important;
+        background: #00000040;
     }
 }
 
 @keyframes 彈出視窗_關閉{
     from {
         opacity: 1;
+        visibility: visible;
+        background: #00000040;
     }
 
     to {
         opacity: 0;
+        visibility: hidden;
         display: none !important;
+        background: 00000000;
+    }
+}
+
+@keyframes 彈出視窗-視窗_顯示{
+    from {
+       bottom: -100vh
+    }
+
+    to {
+       bottom: 0vh
+    }
+}
+
+@keyframes 彈出視窗-視窗_關閉{
+    from {
+        bottom: 0vh
+    }
+
+    to {
+        bottom: -100vh
     }
 }
 
 .彈出視窗_顯示 {
     z-index: 3000;
-    animation-duration: 0.2s;
+    animation-duration: 0.25s;
     animation-name: 彈出視窗_顯示;
     animation-fill-mode: forwards;
 }
 
 .彈出視窗_關閉 {
-    z-index: -1;
-    animation-duration: 0.2s;
+    animation-duration: 0.4s;
     animation-name: 彈出視窗_關閉;
     animation-fill-mode: forwards;
 }
@@ -968,6 +1052,18 @@ nav {
     box-sizing: border-box;
     border-radius: 24px 24px 0 0;
     /*! top: 0; */
+}
+
+.彈出視窗_顯示 #彈出視窗-視窗{
+    animation-duration: 0.25s;
+    animation-name: 彈出視窗-視窗_顯示;
+    animation-fill-mode: forwards;
+}
+
+.彈出視窗_關閉 #彈出視窗-視窗{
+    animation-duration: 0.25s;
+    animation-name: 彈出視窗-視窗_關閉;
+    animation-fill-mode: forwards;
 }
 
 #彈出視窗-視窗-內容 {
@@ -1031,5 +1127,33 @@ nav {
 
     nav, .側邊欄-內容{
         padding: 0px 16px;
+    }
+    
+    #地圖-控制 {
+        right: 22px;
+        bottom: 200px;
+    }
+    
+    #地圖-控制-縮放 {
+        display: none;
+    }
+    
+    #側邊欄-過濾 {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    #側邊欄-過濾-城市, #側邊欄-過濾-地區 {
+        max-width: 100% !important;
+        padding: 13px 22px;
+        margin-bottom: 14px;
+    }
+    
+   .下拉選單 {
+        position: fixed;
+        bottom: 0px;
+        top: unset;
+        width: 100%;
+        height: 200px;
     }
 }
