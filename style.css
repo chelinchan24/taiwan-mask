@@ -78,6 +78,8 @@ a {
     box-sizing: border-box;
     padding: 24px;
     overflow: hidden;
+    cursor: pointer;
+    user-select: none;
 }
 
 .卡片-數字欄位 {
@@ -136,6 +138,10 @@ a {
     background: #FFF6E0;
 }
 
+.卡片-幾乎售罄:hover{
+    box-shadow: 0 11px 22px -9px #E6C494;
+}
+
 .卡片-幾乎售罄 .卡片-數據_大, .卡片-幾乎售罄 .卡片-數據_小, .卡片-幾乎售罄 .卡片-名稱 {
      color: #C78329;
 }
@@ -175,6 +181,14 @@ a {
     box-sizing: border-box;
     color: #1A2D3E;
     display: flex;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+.選單按鈕:hover {
+    background: #E4ECF7;
+    transition: 0.1s ease;
+/*     box-shadow: 0 11px 20px 0 rgba(194,212,223,0.50); */
 }
 
 .選單按鈕-圖標 {
@@ -319,12 +333,26 @@ a {
     height: 100%;
 }
 
+/* ㄧㄡHOVERS */
+#側邊欄-最近更新, .nav-圖標:hover {
+   cursor: pointer;
+   transition: 0.1
+}
+
+#側邊欄-最近更新:hover, .nav-圖標:hover:hover {
+   opacity: 0.7;
+   transition: 0.1;
+}
+
+
 /* 導覽列 */
 nav {
     width: 100%;
     height: 32px;
     display: flex;
     margin-bottom: 24px;
+    padding: 0px 30px;
+    box-sizing: border-box;
 }
 
 #nav-左, #nav-右 {
@@ -400,26 +428,79 @@ nav {
 #側邊欄 {
     z-index: 1000;
     position: fixed;
-    display: block;
+    display: flex;
     height: auto;
     top: 30px;
     right: 30px;
     bottom: 0px;
     width: 396px;
     box-sizing: border-box;
-    padding: 30px;
-    overflow: scroll;
+    padding: 30px 0px 0px 0px;
+    overflow: hidden;
     background: #FFFFFF;
     box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
     border-radius: 24px 24px 0 0;
+    flex-direction: column;
 }
 
-#側邊欄-內容 {
-    height: auto;
+.側邊欄-頁面 {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    bottom: 0px;
+    overflow: scroll;
+}
+
+@keyframes 側邊欄-頁面_顯示{
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        display: block !important;
+    }
+}
+
+/* 
+
+太拖時間，不用
+
+@keyframes 側邊欄-頁面_隱藏{
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none !important;
+    }
+} */
+
+.側邊欄-頁面_顯示 {
+    animation-duration: 0.2s;
+    animation-name: 側邊欄-頁面_顯示;
+    animation-fill-mode: forwards;
+}
+
+.側邊欄-頁面_隱藏 {
+   display: none;
+}
+
+/* 底部空間 */
+.側邊欄-內容:after {
+    content: '';
+    height: 30px;
+    width: 100%;
+    display: block;
+}
+
+.側邊欄-內容{
     display: block;
     width: 100%;
-    padding-bottom: 30px;
     box-sizing: border-box;
+    overflow: scroll;
+    padding: 0px 30px 0px 30px;
 }
 
 .側邊欄-中標題 {
@@ -447,6 +528,7 @@ nav {
     background: #005DDB;
     display: block;
     margin-bottom: 14px;
+    cursor: inherit;
 }
 
 #側邊欄-區域狀況-標題 {
@@ -640,13 +722,13 @@ nav {
 
 
 #側邊欄-檢視藥局-底部按鈕 {
-    backround: #666666;
     display: flex;
     width: 100%;
     position:  absolute;
-    bottom: 30px;
+    bottom: 0;
     left: 0;
     justify-content: center;
+    padding-bottom: 30px;
 }
 
 .側邊欄-檢視藥局-底部按鈕-按鈕 {
@@ -664,12 +746,83 @@ nav {
 }
 
 #側邊欄-檢視藥局-底部按鈕-在地圖開啟 {
-    
+
 }
 
 #側邊欄-檢視藥局-底部按鈕-分享 {
     background: url('./src/ic_share.png');
     background-size: 100%;
+}
+
+#彈出視窗-分享-社群 {
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: center;
+}
+
+.分享-社群-icon {
+    width: 46px;
+    height: 46px;
+    display: inline-block;
+    margin-right: 20px;
+    background-size: cover!important;
+    transition: 0.1s ease;
+    cursor: pointer;
+}
+
+.分享-社群-icon:hover {
+    opacity: 0.7;
+    transition: 0.1s ease;
+}
+
+.分享-社群-icon:last-child {
+    margin-right: 0px;
+}
+
+#彈出視窗-分享-社群-Facebook {
+    background: url('./src/ic_facebook.png');
+}
+
+#彈出視窗-分享-社群-Messenger {
+    background: url('./src/ic_messenger.png');
+}
+
+#彈出視窗-分享-社群-Twitter {
+    background: url('./src/ic_twitter.png');
+}
+
+#彈出視窗-分享-社群-LINE {
+    background: url('./src/ic_LINE.png');
+}
+
+#彈出視窗-分享-網址 {
+    height: 58px;
+    background: #F4F4F4;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    padding: 0px 22px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#彈出視窗-分享-網址::after {
+    content:'複製';
+    position: absolute;
+    right: 0px;
+    font-size: 14px;
+    background-image: linear-gradient(90deg, rgba(251,251,251,0.00) 0%, #F4F4F4 39%);
+    color: #006CFF;
+    width: 72px;
+    text-align: right;
+    cursor: pointer;
+    padding-right: 22px;
+}
+
+#彈出視窗-分享-網址-網址他自己 {
+    font-size: 15px;
 }
 
 #側邊欄-關於標題 {
@@ -758,13 +911,50 @@ nav {
 }
 
 #彈出視窗 {
-    z-index: 2000;
     width: 100%;
     height: 100%;
     background: #00000040;
     position: absolute;
     top: 0;
     left: 0;
+    /*! display: none; */
+    bottom: 0;
+}
+
+@keyframes 彈出視窗_顯示{
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+        display: block !important;
+    }
+}
+
+@keyframes 彈出視窗_關閉{
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        display: none !important;
+    }
+}
+
+.彈出視窗_顯示 {
+    z-index: 3000;
+    animation-duration: 0.2s;
+    animation-name: 彈出視窗_顯示;
+    animation-fill-mode: forwards;
+}
+
+.彈出視窗_關閉 {
+    z-index: -1;
+    animation-duration: 0.2s;
+    animation-name: 彈出視窗_關閉;
+    animation-fill-mode: forwards;
 }
 
 #彈出視窗-視窗 {
@@ -776,6 +966,7 @@ nav {
     padding: 28px;
     box-sizing: border-box;
     border-radius: 24px 24px 0 0;
+    /*! top: 0; */
 }
 
 #彈出視窗-視窗-內容 {
@@ -799,4 +990,45 @@ nav {
 #彈出視窗-視窗-按鈕:hover {
     transition: 0.15s;
     opacity: 0.7;
+}
+
+@media screen and (max-width: 800px) {
+    #側邊欄 {
+        position: fixed;
+        height: 200px;
+        right: 0px;
+        bottom:0px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 30px 0px 0px 0px;
+        overflow: hidden;
+        box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
+        border-radius: 24px 24px 0 0;
+        flex-direction: column;
+        top: unset;
+        transition: 0.2s ease;
+    }
+
+    .側邊欄-內容{
+        display: block;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        overflow: scroll;
+        padding: 0px 30px 0px 30px;
+    }
+
+    .側邊欄-行動版-展開 {
+        transition: 0.2s ease;
+        height: calc(100% - 30px) !important;
+        bottom: 0 !important;
+    }
+
+    #彈出視窗 {
+        position: fixed;
+    }
+
+    nav, .側邊欄-內容{
+        padding: 0px 16px;
+    }
 }
