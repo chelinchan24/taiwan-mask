@@ -428,7 +428,7 @@ nav {
 #側邊欄 {
     z-index: 1000;
     position: fixed;
-    display: flex;
+    display: block;
     height: auto;
     top: 30px;
     right: 30px;
@@ -440,7 +440,6 @@ nav {
     background: #FFFFFF;
     box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
     border-radius: 24px 24px 0 0;
-    flex-direction: column;
 }
 
 .側邊欄-頁面 {
@@ -448,7 +447,9 @@ nav {
     height: 100%;
     width: 100%;
     bottom: 0px;
-    overflow: scroll;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes 側邊欄-頁面_顯示{
