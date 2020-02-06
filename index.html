@@ -3,6 +3,16 @@
 <head>
     <meta charset='utf-8' />
     <title>口罩地圖</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157978193-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157978193-1');
+    </script>
+
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
@@ -10,6 +20,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 
+    <meta property="og:type"               content="website" />
+    <meta property="og:title"              content="口罩地圖" />
+    <meta property="og:description"        content="輕鬆取得口罩存貨資訊！" />
+    <meta property="og:image"              content="https://mask.chel.in/src/og.png" />
+
+    <link rel="icon" type="image/png" href="./src/favicon.png" />
+
+    <link rel="apple-touch-icon" href="./src/appIcon.png">
 </head>
 <body>
 <section id="地圖容器">
