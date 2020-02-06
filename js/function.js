@@ -7,8 +7,12 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzb
 var map = new mapboxgl.Map({
     container: '地圖',
     style: 'mapbox://styles/chelinchan24/ck68yiap60je81iqtfne3pzvo',
-    attributionControl: false
+    attributionControl: false,
+    logoPosition: "top-left"
 });
+
+//更改版權位置
+map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
 
 getUserLocation();
 
@@ -64,6 +68,9 @@ for(var k in county)
       "features": []
     };
     cardInfoData[k][county[k][i]] = {
+      "totalDrugStore" : 0,
+      "totalMaskAdult" : 0,
+      "totalMaskChild" : 0,
       "locationBunds" : []
     };
   }
@@ -72,22 +79,6 @@ for(var k in county)
 //取得 "?" 後面的字串
 console.log(window.location.search);
 
-// 產 Marker
-// var el = document.createElement('div');
-// el.className = 'marker';
-// el.style.backgroundImage = "url(https://i.imgur.com/MK4NUzI.png)";
-// el.style.width = '32px';
-// el.style.height = '40px';
-//
-// el.addEventListener("click", function(){
-//     history.pushState('', '', "#!奇永藥局")
-// });
-
-// var marker = new mapboxgl.Marker(el)
-//     .setLngLat([121.243634, 24.973393])
-//     .addTo(map);
-// camera
-//CameraOptions, AnimationOptions
 $('#地圖-控制-縮放-放大').click(function(){
     map.flyTo({zoom: map.getZoom()+1,})
 });
@@ -96,8 +87,9 @@ $('#地圖-控制-縮放-縮小').click(function(){
     map.flyTo({zoom: map.getZoom()-1,})
 });
 
-//更改版權位置
-map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
+//*********************************************
+//* 載入資料
+//*********************************************
 var s;
 $(document).ready(function()
 {
@@ -144,9 +136,9 @@ function loadData(item)
           data[k][d]["features"].push(item);
 
           cardInfoData[k][d]["locationBunds"].push(item.geometry.coordinates);
-          cardInfoData[k]["totalDrugStore"] = cardInfoData[k]["totalDrugStore"] + 1;
-          cardInfoData[k]["totalMaskAdult"] = cardInfoData[k]["totalMaskAdult"] + item.properties.mask_adult;
-          cardInfoData[k]["totalMaskChild"] = cardInfoData[k]["totalMaskChild"] + item.properties.mask_child;
+          cardInfoData[k][d]["totalDrugStore"] = cardInfoData[k][d]["totalDrugStore"] + 1;
+          cardInfoData[k][d]["totalMaskAdult"] = cardInfoData[k][d]["totalMaskAdult"] + item.properties.mask_adult;
+          cardInfoData[k][d]["totalMaskChild"] = cardInfoData[k][d]["totalMaskChild"] + item.properties.mask_child;
           return false;
         }
       });
@@ -161,7 +153,6 @@ function loadMapData()
 
   if(map.loaded())
   {
-    // loadMarkerIcon();
     loadMarker();
   }
   else
@@ -169,40 +160,10 @@ function loadMapData()
     map.on("load", function()
     {
       console.log("loadMapData is load");
-      // loadMarkerIcon();
       loadMarker();
     });
   }
 }
-
-// function loadMarkerIcon()
-// {
-//   //
-//   map.loadImage("./src/marker_lotInStock.png", function(error, image){
-//     if (error) throw error;
-//     map.addImage(MARKER_LOT_IN_STOCK, image);
-//     console.log("loadMarkerIcon marker_lotInStock");
-//     //
-//     map.loadImage("./src/marker_nearSellout.png", function(error1, image1){
-//       if (error) throw error;
-//       map.addImage(MARKER_NEAR_SELL_OUT, image1);
-//       console.log("loadMarkerIcon marker_nearSellout");
-//       //
-//       map.loadImage("./src/marker_SellOut.png", function(error2, image2){
-//         if (error) throw error;
-//         map.addImage(MARKER_SELL_OUT, image2);
-//         console.log("loadMarkerIcon marker_alomostSellOut");
-//
-//         map.loadImage("./src/marker_alomostSellOut.png", function(error3, image3){
-//           if (error) throw error;
-//           map.addImage(MARKER_ALMOST_SELL_OUT, image3);
-//           console.log("loadMarkerIcon marker_SellOut");
-//           loadMarker();
-//         });
-//       });
-//     });
-//   })
-// }
 
 function loadMarker()
 {
@@ -262,7 +223,6 @@ function loadMarkerClick()
     console.log(feature);
 
     updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
-    map.flyTo({ center: feature.geometry.coordinates });
     //TODO 顯示藥局詳細資訊
   });
 
@@ -322,7 +282,7 @@ function getUserLocation()
 
 //*********************************************
 //* 更新卡片資訊
-//********************************************
+//*********************************************
 function updateInfoCard()
 {
   if(!navigator.geolocation) return;
@@ -333,22 +293,20 @@ function updateInfoCard()
     {
       //update infoCard
       var city = getLocationDataToCounty(source.address)
-      $("#側邊欄-區域狀況-地區").text(city);
-      $("#側邊欄-區域狀況-內容-販售中藥局-數據").text(cardInfoData[city]["totalDrugStore"]);
-      $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city]["totalMaskAdult"] + cardInfoData[city]["totalMaskChild"]);
+      $("#側邊欄-區域狀況-地區").text(city + getLocationDataToTown(source.address));
+      $("#側邊欄-區域狀況-內容-販售中藥局-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalDrugStore"]);
+      $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskAdult"] + cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskChild"]);
 
       updateNearSellOutCard(source.address);
 
-      var bundles = [];
-      for(k in county[city])
-      {
-        bundles = bundles.concat(cardInfoData[city][county[city][k]]["locationBunds"]);
-      }
-      map.fitBounds(bundles, {
-        padding: {top: 250, bottom:250, left: 250, right: 250}
+      // var bundles = [];
+      // for(k in county[city])
+      // {
+      //   bundles = bundles.concat(cardInfoData[city][county[city][k]]["locationBunds"]);
+      // }
+      map.fitBounds(cardInfoData[city][getLocationDataToTown(source.address)]["locationBunds"], {
+        padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
       });
-
-
     });
   });
 }
@@ -402,7 +360,7 @@ function onClickNearSellOutCard(county, town, id)
   {
     if(item.properties.id == id)
     {
-      map.flyTo({ center: item.geometry.coordinates });
+      map.flyTo({ center: item.geometry.coordinates, zoom:14.5});
       //TODO 顯示藥局詳細資訊
     }
   });
