@@ -12,6 +12,9 @@ var map = new mapboxgl.Map({
 
 getUserLocation();
 
+//time
+$("#側邊欄-最近更新-時間").text(new Date().getHours() + ":" + new Date().getMinutes());
+
 var county = {
           "台北市":["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
           "新北市":["板橋區", "新莊區", "中和區", "永和區", "土城區", "樹林區", "三峽區", "鶯歌區", "三重區", "蘆洲區", "五股區", "泰山區", "林口區", "八里區", "淡水區", "三芝區", "石門區", "金山區", "萬里區"
@@ -317,14 +320,16 @@ function updateInfoCard()
 
   navigator.geolocation.getCurrentPosition(function(position)
   {
-    $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=7&addressdetails=1", function(source)
+    $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=16&addressdetails=1", function(source)
     {
+      //update infoCard
       var city = getLocationDataToCounty(source.address)
       $("#側邊欄-區域狀況-地區").text(city);
       $("#側邊欄-區域狀況-內容-販售中藥局-數據").text(cardInfoData[city]["totalDrugStore"]);
       $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city]["totalMaskAdult"] + cardInfoData[city]["totalMaskChild"]);
 
-      //update infoCard
+      updateNearSellOutCard(source.address);
+
       var bundles = [];
       for(k in county[city])
       {
@@ -337,6 +342,49 @@ function updateInfoCard()
 
     });
   });
+}
+
+function updateNearSellOutCard(address)
+{
+  var nearSellOutCount = 0;
+  var sellOutCount = 0;
+
+  $("#側邊欄-即將售罄-內容").empty();
+  $("#側邊欄-剛售罄-內容").empty();
+
+  data[getLocationDataToCounty(address)][getLocationDataToTown(address)]["features"].forEach(function(item){
+    var totalMask = item.properties.mask_adult + item.properties.mask_child;
+    if(totalMask <= 50)
+    {
+      if(totalMask != 0 && nearSellOutCount < 10)
+      {
+        nearSellOutCount = nearSellOutCount + 1;
+        $("#側邊欄-即將售罄-內容").append(
+          '<div class="側邊欄-即將售罄-卡片 卡片 ' + (totalMask >= 25 ? "卡片-幾乎售罄" : "卡片-即將售罄" ) + ' ">' +
+            '<div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
+              '<div class="卡片-數據_大">' + totalMask + '</div>'+
+              '<div class="卡片-數據_單位">片</div>' +
+            '</div>' +
+            '<div class="卡片-名稱">' + item.properties.name + '</div>' +
+            '<div class="卡片-地址">' + item.properties.address + '</div>' +
+          '</div>'
+        );
+      }
+      else if(totalMask <= 0 && sellOutCount < 10)
+      {
+        sellOutCount = sellOutCount + 1;
+        $("#側邊欄-剛售罄-內容").append(
+          '<div id="側邊欄-剛售罄-1" class="側邊欄-剛售罄-卡片 卡片">' +
+            '<div id="側邊欄-剛售罄-1-名稱" class="卡片-名稱">' + item.properties.name + '</div>' +
+            '<div id="側邊欄-剛售罄-1-地址" class="卡片-地址">' + item.properties.address + '</div>' +
+          '</div>'
+        );
+      }
+    }
+  });
+  console.log("nearSellOutCount = " + nearSellOutCount);
+  console.log("sellOutCount = " + sellOutCount);
+
 }
 
 function getLocationDataToCounty(address)
@@ -352,5 +400,27 @@ function getLocationDataToCounty(address)
   else
   {
     return address.state.replace("臺", "台");
+  }
+}
+
+function getLocationDataToTown(address)
+{
+  var town;
+  if('town' in address)
+  {
+    town = address.town;
+  }
+  else if ('suburb' in address)
+  {
+    town = address.suburb;
+  }
+
+  if(town in data[getLocationDataToCounty(address)])
+  {
+    return town;
+  }
+  else
+  {
+    return Object.keys(data[getLocationDataToCounty(address)])[0];
   }
 }
