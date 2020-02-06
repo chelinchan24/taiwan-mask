@@ -17,6 +17,10 @@ a {
     text-decoration: none;
 }
 
+div {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* 圖標 */
 
 .這是什麼 {
