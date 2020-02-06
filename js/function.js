@@ -1,7 +1,7 @@
 const MARKER_LOT_IN_STOCK = "marker_lotInStock";
 const MARKER_NEAR_SELL_OUT = "ic_nearSellout";
 const MARKER_ALMOST_SELL_OUT = "marker_alomostSellOut";
-const MARKER_SELL_OUT = "marker_SellOut";
+const MARKER_SELL_OUT = "ic_sellOut";
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
 var map = new mapboxgl.Map({
@@ -73,19 +73,19 @@ for(var k in county)
 console.log(window.location.search);
 
 // 產 Marker
-var el = document.createElement('div');
-el.className = 'marker';
-el.style.backgroundImage = "url(https://i.imgur.com/MK4NUzI.png)";
-el.style.width = '32px';
-el.style.height = '40px';
+// var el = document.createElement('div');
+// el.className = 'marker';
+// el.style.backgroundImage = "url(https://i.imgur.com/MK4NUzI.png)";
+// el.style.width = '32px';
+// el.style.height = '40px';
+//
+// el.addEventListener("click", function(){
+//     history.pushState('', '', "#!奇永藥局")
+// });
 
-el.addEventListener("click", function(){
-    history.pushState('', '', "#!奇永藥局")
-});
-
-var marker = new mapboxgl.Marker(el)
-    .setLngLat([121.243634, 24.973393])
-    .addTo(map);
+// var marker = new mapboxgl.Marker(el)
+//     .setLngLat([121.243634, 24.973393])
+//     .addTo(map);
 // camera
 //CameraOptions, AnimationOptions
 $('#地圖-控制-縮放-放大').click(function(){
@@ -260,8 +260,17 @@ function loadMarkerClick()
 
     var feature = features[0];
     console.log(feature);
-    updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
 
+    updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
+    map.flyTo({ center: feature.geometry.coordinates });
+    //TODO 顯示藥局詳細資訊
+  });
+
+  map.on('mouseenter', 'marker', function(){
+    map.getCanvas().style.cursor = "pointer";
+  });
+  map.on('mouseleave', 'marker', function(){
+    map.getCanvas().style.cursor = "";
   });
 }
 
@@ -352,7 +361,8 @@ function updateNearSellOutCard(address)
   $("#側邊欄-即將售罄-內容").empty();
   $("#側邊欄-剛售罄-內容").empty();
 
-  data[getLocationDataToCounty(address)][getLocationDataToTown(address)]["features"].forEach(function(item){
+  data[getLocationDataToCounty(address)][getLocationDataToTown(address)]["features"].forEach(function(item)
+  {
     var totalMask = item.properties.mask_adult + item.properties.mask_child;
     if(totalMask <= 50)
     {
@@ -360,7 +370,7 @@ function updateNearSellOutCard(address)
       {
         nearSellOutCount = nearSellOutCount + 1;
         $("#側邊欄-即將售罄-內容").append(
-          '<div class="側邊欄-即將售罄-卡片 卡片 ' + (totalMask >= 25 ? "卡片-幾乎售罄" : "卡片-即將售罄" ) + ' ">' +
+          '<div class="側邊欄-即將售罄-卡片 卡片 ' + (totalMask >= 25 ? "卡片-幾乎售罄" : "卡片-即將售罄" ) + '" onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\'>' +
             '<div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
               '<div class="卡片-數據_大">' + totalMask + '</div>'+
               '<div class="卡片-數據_單位">片</div>' +
@@ -374,9 +384,9 @@ function updateNearSellOutCard(address)
       {
         sellOutCount = sellOutCount + 1;
         $("#側邊欄-剛售罄-內容").append(
-          '<div id="側邊欄-剛售罄-1" class="側邊欄-剛售罄-卡片 卡片">' +
-            '<div id="側邊欄-剛售罄-1-名稱" class="卡片-名稱">' + item.properties.name + '</div>' +
-            '<div id="側邊欄-剛售罄-1-地址" class="卡片-地址">' + item.properties.address + '</div>' +
+          '<div class="側邊欄-剛售罄-卡片 卡片" onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\' >' +
+            '<div class="卡片-名稱">' + item.properties.name + '</div>' +
+            '<div class="卡片-地址">' + item.properties.address + '</div>' +
           '</div>'
         );
       }
@@ -384,7 +394,18 @@ function updateNearSellOutCard(address)
   });
   console.log("nearSellOutCount = " + nearSellOutCount);
   console.log("sellOutCount = " + sellOutCount);
+}
 
+function onClickNearSellOutCard(county, town, id)
+{
+  data[county][town]["features"].forEach(function(item)
+  {
+    if(item.properties.id == id)
+    {
+      map.flyTo({ center: item.geometry.coordinates });
+      //TODO 顯示藥局詳細資訊
+    }
+  });
 }
 
 function getLocationDataToCounty(address)
