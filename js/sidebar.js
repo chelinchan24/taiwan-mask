@@ -89,7 +89,18 @@ $('#彈出視窗').click(function (){
 
 
 //----- 下拉選單
+var citiesDMenu = $('#側邊欄-過濾-城市');
+var citiesDOption = $('#側邊欄-過濾-城市-下拉選單');
+var DistDMenu = $('#側邊欄-過濾-地區');
+var DistDOption = $('#側邊欄-過濾-地區-下拉選單');
 
+citiesDMenu.click(function (){
+    citiesDOption.addClass('下拉選單_顯示').removeClass('下拉選單_收起')
+})
+
+DistDMenu.click(function (){
+    DistDOption.addClass('下拉選單_顯示').removeClass('下拉選單_收起')
+})
 
 
 //----- 分享與在地圖開啟
