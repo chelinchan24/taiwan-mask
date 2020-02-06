@@ -89,18 +89,38 @@ $('#彈出視窗').click(function (){
 
 
 //----- 下拉選單
-var citiesDMenu = $('#側邊欄-過濾-城市');
-var citiesDOption = $('#側邊欄-過濾-城市-下拉選單');
-var DistDMenu = $('#側邊欄-過濾-地區');
-var DistDOption = $('#側邊欄-過濾-地區-下拉選單');
+$(document).click(function(e) {
+  if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
+  {
+    if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_顯示") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_顯示")){
 
-citiesDMenu.click(function (){
-    citiesDOption.addClass('下拉選單_顯示').removeClass('下拉選單_收起')
-})
+      if($(e.target).closest('.下拉選單_顯示').length == 0){
+        $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+        $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+      }
+    }
+  }
+  else
+  {
+    if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length == 1)
+    {
+      $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+    }
 
-DistDMenu.click(function (){
-    DistDOption.addClass('下拉選單_顯示').removeClass('下拉選單_收起')
-})
+    if($(e.target).closest('.側邊欄-過濾-地區-按鈕').length == 1)
+    {
+      $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+    }
+  }
+});
+
+$('#側邊欄-過濾-城市').click(function (){
+    $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_顯示').removeClass('下拉選單_收起');
+});
+
+$('#側邊欄-過濾-地區').click(function (){
+    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_顯示').removeClass('下拉選單_收起');
+});
 
 
 //----- 分享與在地圖開啟
