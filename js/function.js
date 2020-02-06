@@ -10,6 +10,8 @@ var map = new mapboxgl.Map({
     attributionControl: false
 });
 
+getUserLocation();
+
 var county = {
           "台北市":["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
           "新北市":["板橋區", "新莊區", "中和區", "永和區", "土城區", "樹林區", "三峽區", "鶯歌區", "三重區", "蘆洲區", "五股區", "泰山區", "林口區", "八里區", "淡水區", "三芝區", "石門區", "金山區", "萬里區"
@@ -42,15 +44,24 @@ var county = {
           "連江縣":["南竿鄉", "北竿鄉", "莒光鄉", "東引鄉"]
         };
 var data = {};
+var cardInfoData = {};
 
 for(var k in county)
 {
   data[k] = {};
+  cardInfoData[k] = {
+    "totalDrugStore" : 0,
+    "totalMaskAdult" : 0,
+    "totalMaskChild" : 0
+  };
   for(var i = 0; i < county[k].length; i++)
   {
     data[k][county[k][i]] = {
       "type": "FeatureCollection",
       "features": []
+    };
+    cardInfoData[k][county[k][i]] = {
+      "locationBunds" : []
     };
   }
 }
@@ -107,8 +118,9 @@ $(document).ready(function()
       loadData(item);
     });
     loadMapData();
+    updateInfoCard();
   });
-})
+});
 
 //整理資料
 function loadData(item)
@@ -127,6 +139,11 @@ function loadData(item)
           var totalMask = item.properties.mask_adult + item.properties.mask_child;
           item["properties"]["icon"] = (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
           data[k][d]["features"].push(item);
+
+          cardInfoData[k][d]["locationBunds"].push(item.geometry.coordinates);
+          cardInfoData[k]["totalDrugStore"] = cardInfoData[k]["totalDrugStore"] + 1;
+          cardInfoData[k]["totalMaskAdult"] = cardInfoData[k]["totalMaskAdult"] + item.properties.mask_adult;
+          cardInfoData[k]["totalMaskChild"] = cardInfoData[k]["totalMaskChild"] + item.properties.mask_child;
           return false;
         }
       });
@@ -267,4 +284,73 @@ function updateUrl(name, address)
 
   urlStr += "/" + name ;
   history.pushState('', '', urlStr);
+}
+
+function moveCameraToCountyArea(county, area)
+{
+  map.fitBounds(cardInfoData[county][area]["locationBunds"], {
+    padding: {top: 250, bottom:250, left: 250, right: 250}
+  });
+}
+
+function getUserLocation()
+{
+  if (navigator.geolocation)
+  {
+    navigator.geolocation.getCurrentPosition(function(position)
+    {
+      console.log(position);
+    });
+  }
+  else
+  {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+//*********************************************
+//* 更新卡片資訊
+//********************************************
+function updateInfoCard()
+{
+  if(!navigator.geolocation) return;
+
+  navigator.geolocation.getCurrentPosition(function(position)
+  {
+    $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=7&addressdetails=1", function(source)
+    {
+      var city = getLocationDataToCounty(source.address)
+      $("#側邊欄-區域狀況-地區").text(city);
+      $("#側邊欄-區域狀況-內容-販售中藥局-數據").text(cardInfoData[city]["totalDrugStore"]);
+      $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city]["totalMaskAdult"] + cardInfoData[city]["totalMaskChild"]);
+
+      //update infoCard
+      var bundles = [];
+      for(k in county[city])
+      {
+        bundles = bundles.concat(cardInfoData[city][county[city][k]]["locationBunds"]);
+      }
+      map.fitBounds(bundles, {
+        padding: {top: 250, bottom:250, left: 250, right: 250}
+      });
+
+
+    });
+  });
+}
+
+function getLocationDataToCounty(address)
+{
+  if('city' in address)
+  {
+    return address.city.replace("臺", "台");
+  }
+  else if ('county' in address)
+  {
+    return address.county.replace("臺", "台");
+  }
+  else
+  {
+    return address.state.replace("臺", "台");
+  }
 }
