@@ -18,7 +18,7 @@ navBackBtn.click(function() {
         retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
         dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
         findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-        aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')    
+        aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     } else {
         retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
         dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
@@ -149,11 +149,11 @@ $('#側邊欄-最近更新').click(function () {
     popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
 });
 
-$('#nav-右-最後更新').click(function () {
+$('.側邊欄-最近更新-小-這是什麼').click(function () {
     popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
 });
 
-$('#側邊欄-最近更新-檢視藥局-這是什麼').click(function () {
+$('#側邊欄-檢視藥局-這是什麼').click(function () {
     popWindow('這是這個銷售點最後一次更新資料的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
 });
 
