@@ -146,31 +146,35 @@ var popWinContent = $('#彈出視窗-視窗-內容')
 var popWinDissmiss= $('#彈出視窗-視窗-按鈕')
 
 $('#側邊欄-最近更新').click(function () {
-    popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
+    popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','n');
 });
 
 $('.側邊欄-最近更新-小-這是什麼').click(function () {
-    popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
+    popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
 });
 
 $('#側邊欄-檢視藥局-這是什麼').click(function () {
-    popWindow('這是這個銷售點最後一次更新資料的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
+    popWindow('這是這個銷售點最後一次更新資料的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
 });
 
-function popWindow(content,buttonText) {
+function popWindow(content,buttonText,btnDisplay) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
     popWinContent.text(content)
-    popWinDissmiss.text(buttonText)
+    if (btnDisplay == 'y') {
+        popWinDissmiss.removeClass('隱藏')
+        popWinDissmiss.text(buttonText)
+
+        $('#彈出視窗-視窗-按鈕').click(function (){
+            popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示')
+        })
+
+        $('#彈出視窗').click(function (){
+            popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示')
+        })
+    } else {
+        popWinDissmiss.addClass('隱藏')
+    }
 }
-
-$('#彈出視窗-視窗-按鈕').click(function (){
-    popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示')
-})
-
-$('#彈出視窗').click(function (){
-    popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示')
-})
-
 
 //----- 下拉選單
 $(document).click(function(e) {
