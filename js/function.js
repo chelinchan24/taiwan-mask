@@ -52,8 +52,8 @@ map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
 init();
 
 //time
-$("#側邊欄-最近更新-時間").text(moment(new Date()).format('hh:mm'));
-$("#nav-右-最後更新-時間").text(moment(new Date()).format('hh:mm'));
+$("#側邊欄-最近更新-時間").text(moment(new Date()).format('HH:mm'));
+$("#nav-右-最後更新-時間").text(moment(new Date()).format('HH:mm'));
 
 
 for(var k in county)
@@ -183,10 +183,11 @@ function loadMarker()
       type: "geojson",
       data: s,
       cluster: true,
-      clusterRadius: 5
+      clusterRadius: 15
     },
     layout: {
-      'icon-image': ['get', 'icon']
+      'icon-image': ['get', 'icon'],
+      'icon-allow-overlap':true
       // "icon-image" : MARKER_LOT_IN_STOCK
       // "icon-image": (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)))
     }
@@ -561,7 +562,7 @@ function showDrugStoreDetails(item)
   $("#側邊欄-販售存量-成人").addClass(getMaskType(maskAdult, "卡片-充足", "卡片-幾乎售罄", "卡片-即將售罄", "卡片-售罄"));
   $("#側邊欄-販售存量-兒童").addClass(getMaskType(maskChild, "卡片-充足", "卡片-幾乎售罄", "卡片-即將售罄", "卡片-售罄"));
   $("#側邊欄-頁面-檢視藥局-標題").text(item.properties.name);
-  $("#nav-右-最後更新-時間-檢視藥局").text(item.properties.updated === "" ? "--" : moment(item.properties.updated).format('hh:mm'));
+  $("#nav-右-最後更新-時間-檢視藥局").text(item.properties.updated === "" ? "--" : moment(item.properties.updated).format('HH:mm'));
   $("#側邊欄-販售存量-成人-數據-數字").text(maskAdult);
   $("#側邊欄-販售存量-兒童-數據-數字").text(maskChild);
   $("#側邊欄-商家資訊-地址-地址").text(item.properties.address);
