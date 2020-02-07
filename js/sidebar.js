@@ -41,9 +41,74 @@ aboutBtn.click(function() {
 
 
 //----- 行動版側邊欄
+var supportTouch = $.support.touch,
+    scrollEvent = "touchmove scroll",
+    touchStartEvent = supportTouch ? "touchstart" : "mousedown",
+    touchStopEvent = supportTouch ? "touchend" : "mouseup",
+    touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
+$.event.special.swipeupdown = {
+    setup: function() {
+        var thisObject = this;
+        var $this = $(thisObject);
+        $this.bind(touchStartEvent, function(event) {
+            var data = event.originalEvent.touches ?
+                event.originalEvent.touches[ 0 ] :
+                event,
+                start = {
+                    time: (new Date).getTime(),
+                    coords: [ data.pageX, data.pageY ],
+                    origin: $(event.target)
+                },
+                stop;
+
+            function moveHandler(event) {
+                if (!start) {
+                    return;
+                }
+                var data = event.originalEvent.touches ?
+                    event.originalEvent.touches[ 0 ] :
+                    event;
+                stop = {
+                    time: (new Date).getTime(),
+                    coords: [ data.pageX, data.pageY ]
+                };
+
+                // prevent scrolling
+                if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
+                    event.preventDefault();
+                }
+            }
+            $this
+                .bind(touchMoveEvent, moveHandler)
+                .one(touchStopEvent, function(event) {
+                    $this.unbind(touchMoveEvent, moveHandler);
+                    if (start && stop) {
+                        if (stop.time - start.time < 1000 &&
+                            Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
+                            Math.abs(start.coords[0] - stop.coords[0]) < 75) {
+                            start.origin
+                                .trigger("swipeupdown")
+                                .trigger(start.coords[1] > stop.coords[1] ? "swipeup" : "swipedown");
+                        }
+                    }
+                    start = stop = undefined;
+                });
+        });
+    }
+};
+$.each({
+    swipedown: "swipeupdown",
+    swipeup: "swipeupdown"
+}, function(event, sourceEvent){
+    $.event.special[event] = {
+        setup: function(){
+            $(this).bind(sourceEvent, $.noop);
+        }
+    };
+});
 
 if ($(window).width() <= 800) {
-    if ($('#側邊欄').hasClass ('側邊欄-行動版-展開')) {
+    if ($('#側邊欄').hasClass ('側邊欄-行動版_展開')) {
 
 
         if ($('#側邊欄-內容').scrollTop() <=0) {
@@ -57,8 +122,8 @@ if ($(window).width() <= 800) {
             $('#側邊欄').addClass('側邊欄-行動版_展開');
         });
 
-        $('#側邊欄').on('touchmove', function(){
-            console.log('滑動！')
+        $('#側邊欄').on('swipeup', function(){
+            console.log('往上滑！')
             $('#側邊欄').addClass('側邊欄-行動版_展開');
         });
     };
@@ -96,11 +161,11 @@ $('#彈出視窗').click(function (){
 $(document).click(function(e) {
     if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
     {
-        if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_顯示") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_顯示")){
+        if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_展開") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_展開")){
 
-            if($(e.target).closest('.下拉選單_顯示').length == 0){
-                $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
-                $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+            if($(e.target).closest('.下拉選單_展開').length == 0){
+                $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
+                $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
             }
         }
     }
@@ -108,22 +173,22 @@ $(document).click(function(e) {
     {
         if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length == 1)
         {
-            $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+            $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
         }
 
         if($(e.target).closest('.側邊欄-過濾-地區-按鈕').length == 1)
         {
-            $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_顯示');
+            $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
         }
     }
 });
 
 $('#側邊欄-過濾-城市').click(function (){
-    $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_顯示').removeClass('下拉選單_收起');
+    $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起');
 });
 
 $('#側邊欄-過濾-地區').click(function (){
-    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_顯示').removeClass('下拉選單_收起');
+    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起');
 });
 
 
