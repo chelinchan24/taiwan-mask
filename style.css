@@ -1332,7 +1332,7 @@ nav {
     .側邊欄-行動版_展開 {
         transition: 0.2s ease;
 /*         height: calc(100% - 30px) !important; */
-        height: 100vh !important;
+        height: 100% !important;
         bottom: 0 !important;
         border-radius: 0 !important;
     }
