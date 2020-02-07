@@ -21,6 +21,11 @@ div {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* 狀態 */
+.隱藏 {
+    display: none !important;
+}
+
 /* 圖標 */
 
 .這是什麼 {
@@ -298,6 +303,35 @@ div {
     display: none;
 }
 
+.載入中 {
+    display: flex;
+    width: 100%;
+    height: 30px;
+    margin: 16px 0px;
+    justify-content: center;
+}
+
+.載入中:after {
+    content: '';
+    background: url('./src/ic_loading.gif');
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+}
+
+.空白畫面文字 {
+    width: 100%;
+    display: block;
+    height: 52px;
+    line-height: 52px;
+    background: #F9F9F9;
+    border-radius: 12px;
+    color: #949494;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+}
+
 /* 地圖 */
 #地圖容器 {
     width: 100%;
@@ -527,7 +561,7 @@ nav {
     }
 }
 
-/* 
+/*
 
 太拖時間，不用
 
