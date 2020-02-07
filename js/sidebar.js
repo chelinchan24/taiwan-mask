@@ -202,21 +202,30 @@ var currentUrl = $(location). attr("href");
 // });
 
 //分享
-$('#彈出視窗-分享-社群-Facebook').click(function (){
+$('#分享視窗-分享-社群-Facebook').click(function (){
     window.open("https://www.facebook.com/sharer/sharer.php?u=" + currentUrl, '_blank');
 });
 
-$('#彈出視窗-分享-社群-Twitter').click(function (){
+$('#分享視窗-分享-社群-Twitter').click(function (){
     window.open("https://twitter.com/intent/tweet?text=" + currentUrl, '_blank');
 });
 
-$('#彈出視窗-分享-社群-LINE').click(function (){
+$('#分享視窗-分享-社群-LINE').click(function (){
     window.open("https://social-plugins.line.me/lineit/share?url=" + currentUrl, '_blank');
 });
 
-$('#彈出視窗-分享-網址-網址他自己').text(currentUrl)
+$('#分享視窗-分享-網址-網址他自己').val(currentUrl)
 
-$('#彈出視窗-分享-網址').click(function (){
-    $('#彈出視窗-分享-網址-網址他自己').select();
+$('#分享視窗-分享-網址').click(function (){
+    $('#分享視窗-分享-網址-網址他自己').val(currentUrl)
+    $('#分享視窗-分享-網址-網址他自己').select();
     document.execCommand("copy");
+})
+
+$('#分享視窗-視窗-按鈕').click(function (){
+    $('#分享視窗').addClass('分享視窗_關閉').removeClass('分享視窗_顯示')
+})
+
+$('#分享視窗').click(function (){
+    $('#分享視窗').addClass('分享視窗_關閉').removeClass('分享視窗_顯示')
 })
