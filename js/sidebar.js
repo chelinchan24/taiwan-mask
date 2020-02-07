@@ -1,4 +1,3 @@
-
 //頁面
 var dashboardPage = $('#側邊欄-頁面-總覽');
 var findRetailerPage = $('#側邊欄-頁面-尋找銷售點')
@@ -8,7 +7,8 @@ var retailerPage = $('#側邊欄-頁面-檢視藥局')
 //按鈕
 var findRetailerBtn = $('#側邊欄-尋找銷售點');
 var aboutBtn = $('#nav-右-關於');
-var navBackBtn = $('#nav-左-返回總覽');
+var navBackBtn = $('.nav-左-返回總覽');
+var retailerNavBackBtn = $('#側邊欄-頁面-檢視藥局-nav-返回');
 
 //按鈕
 //導覽列返回
@@ -18,6 +18,23 @@ navBackBtn.click(function() {
     retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
 });
+
+if ($('.nav-左-返回').hasClass('nav-左-返回尋找銷售點')) {
+        retailerNavBackBtn.click(function() {
+            retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+            dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+            findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+            aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        });
+    } else {
+        retailerNavBackBtn.click(function() {
+            retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+            dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+            findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+            aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        });
+
+}
 
 //總覽-尋找銷售點
 findRetailerBtn.click(function() {
@@ -144,6 +161,10 @@ $('#nav-右-最後更新').click(function () {
     popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
 });
 
+$('#側邊欄-最近更新-檢視藥局-這是什麼').click(function () {
+    popWindow('這是這個銷售點最後一次更新資料的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了');
+});
+
 function popWindow(content,buttonText) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
     popWinContent.text(content)
@@ -161,45 +182,45 @@ $('#彈出視窗').click(function (){
 
 //----- 下拉選單
 $(document).click(function(e) {
-  if ($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
-  {
-    if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
+    if ($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
     {
-        if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_展開") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_展開")){
+        if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
+        {
+            if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_展開") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_展開")){
 
-            if($(e.target).closest('.下拉選單_展開').length == 0){
-                $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
+                if($(e.target).closest('.下拉選單_展開').length == 0){
+                    $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
+                    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
+                }
+            }
+        }
+        else
+        {
+            if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length == 1)
+            {
                 $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
+            }
+
+            if($(e.target).closest('.側邊欄-過濾-地區-按鈕').length == 1)
+            {
+                $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
             }
         }
     }
-    else
-    {
-        if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length == 1)
-        {
-            $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
-        }
-
-        if($(e.target).closest('.側邊欄-過濾-地區-按鈕').length == 1)
-        {
-            $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
-        }
-    }
-  }
 });
 
 $('#側邊欄-過濾-城市').click(function (e){
     if($(e.target).hasClass("側邊欄-過濾-城市-按鈕"))
     {
-      $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
+        $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
     }
 });
 
 $('#側邊欄-過濾-地區').click(function (e){
-  if($(e.target).hasClass("側邊欄-過濾-地區-按鈕"))
-  {
-    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
-  }
+    if($(e.target).hasClass("側邊欄-過濾-地區-按鈕"))
+    {
+        $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
+    }
 });
 
 
