@@ -7,34 +7,26 @@ var retailerPage = $('#側邊欄-頁面-檢視藥局')
 //按鈕
 var findRetailerBtn = $('#側邊欄-尋找銷售點');
 var aboutBtn = $('#nav-右-關於');
-var navBackBtn = $('.nav-左-返回總覽');
+var navBackBtn = $('.nav-左-返回');
 var retailerNavBackBtn = $('#側邊欄-頁面-檢視藥局-nav-返回');
 
 //按鈕
 //導覽列返回
 navBackBtn.click(function() {
-    aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-    findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-    retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-    dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
-});
 
-if ($('.nav-左-返回').hasClass('nav-左-返回尋找銷售點')) {
-        retailerNavBackBtn.click(function() {
-            retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-            dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-            findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
-            aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-        });
+    if ($('.nav-左-返回').hasClass('nav-左-返回-尋找銷售點')) {
+        retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+        findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')    
     } else {
-        retailerNavBackBtn.click(function() {
-            retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-            dashboardPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
-            findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-            aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
-        });
+        retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+        aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
 
-}
+    }
+})
 
 //總覽-尋找銷售點
 findRetailerBtn.click(function() {
