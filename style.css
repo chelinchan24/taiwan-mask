@@ -443,6 +443,7 @@ nav {
     padding: 0px 30px;
     box-sizing: border-box;
     justify-content: space-between;
+    margin-top: 30px;
 }
 
 .nav-左, .nav-右 {
