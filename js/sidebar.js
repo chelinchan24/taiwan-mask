@@ -118,27 +118,27 @@ $.each({
     };
 });
 
-if ($(window).width() <= 800) {
-    if ($('#側邊欄').hasClass ('側邊欄-行動版_展開')) {
-
-
-        if ($('#側邊欄-內容').scrollTop() <=0) {
-            $('#側邊欄').removeClass('側邊欄-行動版_展開');
-        };
-
-
-    } else {
+$('#側邊欄').ready(function () {
+    if ($(window).width() <= 800) {
         $('#側邊欄').on('mousedown', function(){
             console.log('滑動！')
             $('#側邊欄').addClass('側邊欄-行動版_展開');
+            $('#側邊欄').removeClass('側邊欄-行動版_收起');
         });
 
         $('#側邊欄').on('swipeup', function(){
             console.log('往上滑！')
             $('#側邊欄').addClass('側邊欄-行動版_展開');
+            $('#側邊欄').removeClass('側邊欄-行動版_收起');
         });
-    };
-}
+
+        $('#側邊欄').on('swipedown', function(){
+            console.log('往下滑！')
+            $('#側邊欄').addClass('側邊欄-行動版_收起');
+            $('#側邊欄').removeClass('側邊欄-行動版_展開');
+        });
+    }
+})
 
 //----- 彈出視窗
 var popWinBox = $('#彈出視窗')
