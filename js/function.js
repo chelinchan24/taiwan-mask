@@ -37,6 +37,7 @@ const county = {
 var data = {};
 var cardInfoData = {};
 var searchSellDrugStoreTimeout;
+var urlLocation;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
 var map = new mapboxgl.Map({
@@ -163,6 +164,13 @@ function loadData(item)
   var cty = item["properties"]["address"].substring(0, 3);
   var dis = item["properties"]["address"].substring(3, item["properties"]["address"].length);
 
+  var urlStr = "";
+
+  if (window.location.search !== "")
+  {
+    urlStr = decodeURI(window.location.search).replace("?=", "").split("/");
+  }
+
   for(var k in county)
   {
     if(cty == k || cty.replace("臺", "台") == k)
@@ -179,6 +187,14 @@ function loadData(item)
           cardInfoData[k][d]["totalDrugStore"] = cardInfoData[k][d]["totalDrugStore"] + 1;
           cardInfoData[k][d]["totalMaskAdult"] = cardInfoData[k][d]["totalMaskAdult"] + item.properties.mask_adult;
           cardInfoData[k][d]["totalMaskChild"] = cardInfoData[k][d]["totalMaskChild"] + item.properties.mask_child;
+
+          if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
+          {
+            showDrugStoreDetails(item);
+            urlLocation = item.geometry.coordinates;
+            urlStr = "";
+          }
+
           return false;
         }
       });
@@ -205,6 +221,14 @@ function loadMapData()
   }
 }
 
+function moveToUrlDrugStore()
+{
+  if (urlLocation != undefined)
+  {
+    map.flyTo({ center: urlLocation, zoom:14});
+  }
+}
+
 function loadMarker()
 {
   console.log("loadMarker");
@@ -225,7 +249,7 @@ function loadMarker()
     }
   });
   loadMarkerClick();
-
+  moveToUrlDrugStore();
 
   // for(var k in data)
   // {
@@ -322,7 +346,10 @@ function updateInfoCard()
   {
     console.log(position);
     //移動、標記使用者位置
-    map.flyTo({ center: [position.coords.longitude, position.coords.latitude], zoom:14});
+    if (window.location.search === "")
+    {
+      map.flyTo({ center: [position.coords.longitude, position.coords.latitude], zoom:14});
+    }
     map.addLayer({
       id: "usrPos",
       type: "symbol",
