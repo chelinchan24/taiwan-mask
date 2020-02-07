@@ -10,6 +10,7 @@ body, html {
     height: 100%;
     min-width: 100%;
     max-width: 100%;
+    overflow: hidden;
 }
 
 a {
@@ -144,7 +145,7 @@ div {
 }
 
 .卡片-充足 .卡片-數據_大, .卡片-充足 .卡片-數據_小, .卡片-充足 .卡片-名稱 {
-    color: #3B64CD;
+     color: #3B64CD;
 }
 
 .卡片-充足 .卡片-數據_單位, .卡片-充足 .卡片-地址, .卡片-充足 .小標題 {
@@ -156,7 +157,7 @@ div {
 }
 
 .卡片-幾乎售罄 .卡片-數據_大, .卡片-幾乎售罄 .卡片-數據_小, .卡片-幾乎售罄 .卡片-名稱 {
-    color: #C78329;
+     color: #C78329;
 }
 
 .卡片-幾乎售罄 .卡片-數據_單位, .卡片-幾乎售罄 .卡片-地址, .卡片-幾乎售罄 .小標題 {
@@ -201,7 +202,7 @@ div {
 .選單按鈕:hover {
     background: #E4ECF7;
     transition: 0.1s ease;
-    /*     box-shadow: 0 11px 20px 0 rgba(194,212,223,0.50); */
+/*     box-shadow: 0 11px 20px 0 rgba(194,212,223,0.50); */
 }
 
 .選單按鈕-圖標 {
@@ -232,7 +233,7 @@ div {
 }
 
 .下拉選單::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .下拉選單-選項_目前, .下拉選單-選項{
@@ -424,13 +425,13 @@ div {
 
 /* ㄧㄡHOVERS */
 #側邊欄-最近更新, .nav-圖標:hover {
-    cursor: pointer;
-    transition: 0.1s ease;
+   cursor: pointer;
+   transition: 0.1s ease;
 }
 
 #側邊欄-最近更新:hover, .nav-圖標:hover {
-    opacity: 0.7;
-    transition: 0.1s ease;
+   opacity: 0.7;
+   transition: 0.1s ease;
 }
 
 
@@ -584,7 +585,7 @@ nav {
 }
 
 .側邊欄-頁面_隱藏 {
-    display: none;
+   display: none;
 }
 
 /* 底部空間 */
@@ -1171,19 +1172,14 @@ nav {
 /*    opacity: 0.7;*/
 /*}*/
 
-#彈出視窗-視窗, #分享視窗-視窗 {
-    width: 396px;
-    height: auto;
-    background: #ffffff;
+#彈出視窗, #分享視窗 {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    bottom: 0px;
-    padding: 28px;
-    box-sizing: border-box;
-    border-radius: 24px 24px 0 0;
-    /*! top: 0; */
-    /* left: 0; */
-    right: 30px;
-    /* margin: auto; */
+    top: 0;
+    left: 0;
+    /*! display: none; */
+    bottom: 0;
 }
 
 @keyframes 彈出視窗_顯示{
@@ -1250,7 +1246,7 @@ nav {
 }
 
 #彈出視窗-視窗, #分享視窗-視窗 {
-    width: 400px;
+    width: 396px;
     height: auto;
     background: #ffffff;
     position: absolute;
@@ -1259,9 +1255,7 @@ nav {
     box-sizing: border-box;
     border-radius: 24px 24px 0 0;
     /*! top: 0; */
-    left: 0;
-    right: 0;
-    margin: auto;
+    right: 30px;
 }
 
 .彈出視窗_顯示 #彈出視窗-視窗, .分享視窗_顯示 #分享視窗-視窗{
@@ -1384,7 +1378,7 @@ nav {
         margin-bottom: 14px;
     }
 
-    .下拉選單 {
+   .下拉選單 {
         position: fixed;
         bottom: 0px;
         top: unset;
