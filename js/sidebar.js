@@ -52,93 +52,82 @@ aboutBtn.click(function() {
 
 
 //----- 行動版側邊欄
-var supportTouch = $.support.touch,
-    scrollEvent = "touchmove scroll",
-    touchStartEvent = supportTouch ? "touchstart" : "mousedown",
-    touchStopEvent = supportTouch ? "touchend" : "mouseup",
-    touchMoveEvent = supportTouch ? "touchmove" : "mousemove";
-$.event.special.swipeupdown = {
-    setup: function() {
-        var thisObject = this;
-        var $this = $(thisObject);
-        $this.bind(touchStartEvent, function(event) {
-            var data = event.originalEvent.touches ?
-                event.originalEvent.touches[ 0 ] :
-                event,
-                start = {
-                    time: (new Date).getTime(),
-                    coords: [ data.pageX, data.pageY ],
-                    origin: $(event.target)
-                },
-                stop;
+function swipedetect(el, callback){
 
-            function moveHandler(event) {
-                if (!start) {
-                    return;
-                }
-                var data = event.originalEvent.touches ?
-                    event.originalEvent.touches[ 0 ] :
-                    event;
-                stop = {
-                    time: (new Date).getTime(),
-                    coords: [ data.pageX, data.pageY ]
-                };
+    var touchsurface = el,
+        swipedir,
+        startX,
+        startY,
+        distX,
+        distY,
+        threshold = 150, //required min distance traveled to be considered swipe
+        restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+        allowedTime = 300, // maximum time allowed to travel that distance
+        elapsedTime,
+        startTime,
+        handleswipe = callback || function(swipedir){}
 
-                // prevent scrolling
-                if (Math.abs(start.coords[1] - stop.coords[1]) > 10) {
-                    event.preventDefault();
-                }
+    touchsurface.addEventListener('touchstart', function(e){
+        var touchobj = e.changedTouches[0]
+        swipedir = 'none'
+        dist = 0
+        startX = touchobj.pageX
+        startY = touchobj.pageY
+        startTime = new Date().getTime() // record time when finger first makes contact with surface
+        e.preventDefault()
+    }, false)
+
+    touchsurface.addEventListener('touchmove', function(e){
+        e.preventDefault() // prevent scrolling when inside DIV
+    }, false)
+
+    touchsurface.addEventListener('touchend', function(e){
+        var touchobj = e.changedTouches[0]
+        distX = touchobj.pageX - startX // get horizontal dist traveled by finger while in contact with surface
+        distY = touchobj.pageY - startY // get vertical dist traveled by finger while in contact with surface
+        elapsedTime = new Date().getTime() - startTime // get time elapsed
+        if (elapsedTime <= allowedTime){ // first condition for awipe met
+            if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+                swipedir = (distX < 0)? 'left' : 'right' // if dist traveled is negative, it indicates left swipe
             }
-            $this
-                .bind(touchMoveEvent, moveHandler)
-                .one(touchStopEvent, function(event) {
-                    $this.unbind(touchMoveEvent, moveHandler);
-                    if (start && stop) {
-                        if (stop.time - start.time < 1000 &&
-                            Math.abs(start.coords[1] - stop.coords[1]) > 30 &&
-                            Math.abs(start.coords[0] - stop.coords[0]) < 75) {
-                            start.origin
-                                .trigger("swipeupdown")
-                                .trigger(start.coords[1] > stop.coords[1] ? "swipeup" : "swipedown");
-                        }
-                    }
-                    start = stop = undefined;
-                });
-        });
-    }
-};
-$.each({
-    swipedown: "swipeupdown",
-    swipeup: "swipeupdown"
-}, function(event, sourceEvent){
-    $.event.special[event] = {
-        setup: function(){
-            $(this).bind(sourceEvent, $.noop);
+            else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+                swipedir = (distY < 0)? 'up' : 'down' // if dist traveled is negative, it indicates up swipe
+            }
         }
-    };
-});
+        handleswipe(swipedir)
+        e.preventDefault()
+    }, false)
+}
 
-$('#側邊欄').ready(function () {
+$('#側邊欄').click(function () {
     if ($(window).width() <= 800) {
         $('#側邊欄').on('mousedown', function(){
-            console.log('滑動！')
             $('#側邊欄').addClass('側邊欄-行動版_展開');
             $('#側邊欄').removeClass('側邊欄-行動版_收起');
         });
-
-        $('#側邊欄').on('swipeup', function(){
-            console.log('往上滑！')
-            $('#側邊欄').addClass('側邊欄-行動版_展開');
-            $('#側邊欄').removeClass('側邊欄-行動版_收起');
-        });
-
-        $('#側邊欄').on('swipedown', function(){
-            console.log('往下滑！')
-            $('#側邊欄').addClass('側邊欄-行動版_收起');
-            $('#側邊欄').removeClass('側邊欄-行動版_展開');
-        });
+    } else {
+        $('#側邊欄').off('mousedown');
     }
 })
+
+$('#nav-左-關閉').click(function () {
+    $('#側邊欄').addClass('側邊欄-行動版_收起');
+    $('#側邊欄').removeClass('側邊欄-行動版_展開');
+    $('#側邊欄-內容').scrollTo(0)
+})
+
+
+// $('.側邊欄-內容').scroll(function () {
+//     console.log($(this).scrollTop());
+//     if ($(this).scrollTop()  <= 0 ){
+//         $('#側邊欄').on('toychmove', function(){
+//             console.log( $('#側邊欄').touches[0].clientY);
+//         });
+//     } else {
+//         $('#側邊欄').off('swipedown');
+//     }
+// });
+
 
 //----- 彈出視窗
 var popWinBox = $('#彈出視窗')
@@ -234,10 +223,9 @@ $('#側邊欄-過濾-地區').click(function (e){
 //在地圖開啟
 var currentUrl = $(location). attr("href");
 
-// $('#側邊欄-檢視藥局-底部按鈕-在地圖開啟').click(function (){
-//     //https://www.google.com.tw/maps/@[經度],[緯度]
-//     //window.open(getUrl +, '_blank');
-// });
+$('#側邊欄-檢視藥局-底部按鈕-在地圖開啟').click(function (){
+    window.open('https://www.google.com.tw/maps/@' + map.getSource('usrPos')._data.features[0].geometry.coordinates, '_blank');
+});
 
 //分享
 $('#側邊欄-檢視藥局-底部按鈕-分享').click(function (){
