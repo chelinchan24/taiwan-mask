@@ -298,10 +298,12 @@ function getUserLocation()
 //*********************************************
 function updateInfoCard()
 {
+  console.log("navigator.geolocation = " + navigator.geolocation);
   if(!navigator.geolocation) return;
 
   navigator.geolocation.getCurrentPosition(function(position)
   {
+    console.log("current position = " + position);
     $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=16&addressdetails=1", function(source)
     {
       //update infoCard
@@ -551,7 +553,12 @@ function updateSearchSellDrugStoreCardList(isClearData)
 //*********************************************
 function showDrugStoreDetails(item)
 {
+  if($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
+  {
+    $('.nav-左-返回').addClass('nav-左-返回-尋找銷售點')
+  }
   $('#側邊欄-頁面-總覽').addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示');
+  $('#側邊欄-頁面-尋找銷售點').addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示');
   $('#側邊欄-頁面-檢視藥局').addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏');
 
   $("#側邊欄-販售存量-成人").removeClass("卡片-充足").removeClass("卡片-即將售罄").removeClass("卡片-幾乎售罄").removeClass("卡片-售罄");
