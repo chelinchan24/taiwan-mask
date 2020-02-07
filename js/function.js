@@ -52,8 +52,8 @@ map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
 init();
 
 //time
-$("#側邊欄-最近更新-時間").text(new Date().getHours() + ":" + new Date().getMinutes());
-$("#nav-右-最後更新-時間").text(new Date().getHours() + ":" + new Date().getMinutes());
+$("#側邊欄-最近更新-時間").text(moment(new Date()).format('hh:mm'));
+$("#nav-右-最後更新-時間").text(moment(new Date()).format('hh:mm'));
 
 
 for(var k in county)
@@ -133,7 +133,7 @@ function loadData(item)
 
   for(var k in county)
   {
-    if(cty == k || cty.replace("台", "臺") == k)
+    if(cty == k || cty.replace("臺", "台") == k)
     {
       county[k].forEach(function(d)
       {
@@ -231,7 +231,7 @@ function loadMarkerClick()
     console.log(feature);
 
     updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
-    //TODO 顯示藥局詳細資訊
+    showDrugStoreDetails(feature);
   });
 
   map.on('mouseenter', 'marker', function(){
@@ -268,9 +268,13 @@ function updateUrl(name, address)
 
 function moveCameraToCountyArea(county, area)
 {
-  map.fitBounds(cardInfoData[county][area]["locationBunds"], {
-    padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
-  });
+  if (cardInfoData[county][area]["locationBunds"].length != 0)
+  {
+    map.fitBounds(cardInfoData[county][area]["locationBunds"],
+    {
+      padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
+    });
+  }
 }
 
 function getUserLocation()
@@ -367,7 +371,8 @@ function onClickNearSellOutCard(county, town, id)
     if(item.properties.id == id)
     {
       map.flyTo({ center: item.geometry.coordinates, zoom:14.5});
-      //TODO 顯示藥局詳細資訊
+      showDrugStoreDetails(item);
+      return;
     }
   });
 }
@@ -524,7 +529,7 @@ function updateSearchSellDrugStoreCardList(isClearData)
     var totalMask = item.properties.mask_adult + item.properties.mask_child;
     $("#側邊欄-結果").append(
       '<div class="側邊欄-結果-項目"  onclick=\'onClickNearSellOutCard("' + $("#側邊欄-過濾-城市-按鈕-文字").text() + '", "' + $("#側邊欄-過濾-地區-按鈕-文字").text() + '", "' + item.properties.id + '")\' >' +
-        '<div class="側邊欄-結果-項目-計數 ' + (totalMask > 50 ? "卡片-充足" : (totalMask >= 25 ? "卡片-即將售罄" : (totalMask > 0 ? "卡片-即將售罄" : "卡片-售罄"))) + '">' +
+        '<div class="側邊欄-結果-項目-計數 ' + (totalMask > 50 ? "卡片-充足" : (totalMask >= 25 ? "卡片-幾乎售罄" : (totalMask > 0 ? "卡片-即將售罄" : "卡片-售罄"))) + '">' +
           '<div class="側邊欄-結果-項目-計數-數據">' +
             '<div class="' + (totalMask >= 10 ? "卡片-數據_小" : "卡片-數據_大") + '">' + (totalMask >= 100 ? "99+" : totalMask) + '</div>' +
             '<div class="卡片-數據_單位">片</div>' +
@@ -538,4 +543,32 @@ function updateSearchSellDrugStoreCardList(isClearData)
     );
   }
   console.log("-----");
+}
+
+//*********************************************
+//* 顯示藥局資訊
+//*********************************************
+function showDrugStoreDetails(item)
+{
+  $('#側邊欄-頁面-總覽').addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示');
+  $('#側邊欄-頁面-檢視藥局').addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏');
+
+  $("#側邊欄-販售存量-成人").removeClass("卡片-充足").removeClass("卡片-即將售罄").removeClass("卡片-幾乎售罄").removeClass("卡片-售罄");
+  $("#側邊欄-販售存量-兒童").removeClass("卡片-充足").removeClass("卡片-即將售罄").removeClass("卡片-幾乎售罄").removeClass("卡片-售罄");
+
+  var maskAdult = item.properties.mask_adult;
+  var maskChild = item.properties.mask_child;
+  $("#側邊欄-販售存量-成人").addClass(getMaskType(maskAdult, "卡片-充足", "卡片-幾乎售罄", "卡片-即將售罄", "卡片-售罄"));
+  $("#側邊欄-販售存量-兒童").addClass(getMaskType(maskChild, "卡片-充足", "卡片-幾乎售罄", "卡片-即將售罄", "卡片-售罄"));
+  $("#側邊欄-頁面-檢視藥局-標題").text(item.properties.name);
+  $("#nav-右-最後更新-時間-檢視藥局").text(item.properties.updated === "" ? "--" : moment(item.properties.updated).format('hh:mm'));
+  $("#側邊欄-販售存量-成人-數據-數字").text(maskAdult);
+  $("#側邊欄-販售存量-兒童-數據-數字").text(maskChild);
+  $("#側邊欄-商家資訊-地址-地址").text(item.properties.address);
+  $("#側邊欄-商家資訊-電話-號碼").text(item.properties.phone);
+}
+
+function getMaskType(count, lotInStock, nearSellOut, almostSellOut, sellOut)
+{
+  return (count > 50 ? lotInStock : (count >= 25 ? nearSellOut : (count > 0 ? almostSellOut : sellOut)));
 }
