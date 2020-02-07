@@ -443,7 +443,7 @@ nav {
     padding: 0px 30px;
     box-sizing: border-box;
     justify-content: space-between;
-    /*margin-top: 30px;*/
+    margin-top: 30px;
 }
 
 .nav-左, .nav-右 {
@@ -1345,6 +1345,7 @@ nav {
         margin-bottom: 0px;
         width: 100%;
         height: unset;
+        margin-top: 0px;
     }
     
     #側邊欄 {
@@ -1392,5 +1393,9 @@ nav {
         border-radius: 8px;
         cursor: pointer;
         display: block;
+    }
+
+    #分享視窗-分享-網址 {
+        display: none;
     }
 }
