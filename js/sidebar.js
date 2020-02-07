@@ -157,23 +157,33 @@ $('#側邊欄-檢視藥局-這是什麼').click(function () {
     popWindow('這是這個銷售點最後一次更新資料的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
 });
 
+$('#彈出視窗-視窗-按鈕').click(function (){
+  popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
+  
+  if(popWinContent.text() == '口罩地圖需要您的位置才能使用。請再試一次。')
+  {
+    location.reload();
+  }
+  else if (popWinContent.text() == '口罩地圖需要您的位置，來提供您最佳的個人化體驗。')
+  {
+    updateInfoCard();
+  }
+});
+
 function popWindow(content,buttonText,btnDisplay) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
     popWinContent.text(content)
     if (btnDisplay == 'y') {
         popWinDissmiss.removeClass('隱藏')
         popWinDissmiss.text(buttonText)
-
-        $('#彈出視窗-視窗-按鈕').click(function (){
-            popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示')
-        })
-
-        $('#彈出視窗').click(function (){
-            popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示')
-        })
     } else {
         popWinDissmiss.addClass('隱藏')
     }
+}
+
+function hidePopWindow()
+{
+  popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
 }
 
 //----- 下拉選單
