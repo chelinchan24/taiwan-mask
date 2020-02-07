@@ -92,6 +92,10 @@ function init()
   $('#地圖-控制-縮放-縮小').click(function(){
       map.flyTo({zoom: map.getZoom()-1,})
   });
+
+  $('#地圖-控制-定位').click(function(){
+    map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14});
+  });
 }
 
 function checkGeoLocationPermissions()
@@ -309,7 +313,37 @@ function updateInfoCard()
   console.log("正在定位");
   navigator.geolocation.getCurrentPosition(function(position)
   {
-    console.log("current position = " + position);
+    console.log(position);
+    //移動、標記使用者位置
+    map.flyTo({ center: [position.coords.longitude, position.coords.latitude], zoom:14});
+    map.addLayer({
+      id: "usrPos",
+      type: "symbol",
+      source:
+      {
+        type: "geojson",
+        data: {
+          'type': 'FeatureCollection',
+          'features': [
+            {
+              'type': 'Feature',
+              'properties': {
+                'icon': 'marker_userPos'
+              },
+              'geometry': {
+                'type': 'Point',
+                'coordinates': [position.coords.longitude, position.coords.latitude]
+              }
+            }
+          ]},
+      },
+      layout: {
+        'icon-image': ['get', 'icon'],
+        'icon-allow-overlap':true
+      }
+    });
+
+    //經緯度轉換定位鄉鎮區
     $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=16&addressdetails=1", function(source)
     {
       console.log("位置取得完成");
@@ -323,8 +357,6 @@ function updateInfoCard()
 
       updateNearSellOutCard(source.address);
       initDropMenu(city, getLocationDataToTown(source.address))
-
-      moveCameraToCountyArea(city, getLocationDataToTown(source.address));
     });
   },
   function(error)
