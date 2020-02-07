@@ -680,9 +680,10 @@ nav {
     box-sizing: border-box;
     border-radius: 12px;
     position: relative;
+    cursor: pointer
 }
 
-#側邊欄-過濾-城市, #側邊欄-過濾-地區:hover {
+#側邊欄-過濾-城市:hover, #側邊欄-過濾-地區:hover {
     background: #DFEDFF;
     transition: 0.1s ease;
 }
