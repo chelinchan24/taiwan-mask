@@ -757,6 +757,7 @@ nav {
     height: 84px;
     border-radius: 12px;
     margin-right: 18px;
+    min-width: 84px;
 }
 
 .側邊欄-結果-項目-計數-數據 {
