@@ -45,56 +45,77 @@ var map = new mapboxgl.Map({
     attributionControl: false,
     logoPosition: "top-left"
 });
-
-//更改版權位置
-map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
-
-init();
-
-//time
-$("#側邊欄-最近更新-時間").text(moment(new Date()).format('HH:mm'));
-$("#nav-右-最後更新-時間").text(moment(new Date()).format('HH:mm'));
-
-
-for(var k in county)
+$(document).ready(function()
 {
-  data[k] = {};
-  cardInfoData[k] = {
-    "totalDrugStore" : 0,
-    "totalMaskAdult" : 0,
-    "totalMaskChild" : 0
-  };
-  for(var i = 0; i < county[k].length; i++)
-  {
-    data[k][county[k][i]] = {
-      "type": "FeatureCollection",
-      "features": []
-    };
-    cardInfoData[k][county[k][i]] = {
-      "totalDrugStore" : 0,
-      "totalMaskAdult" : 0,
-      "totalMaskChild" : 0,
-      "locationBunds" : []
-    };
-  }
-}
-
-//取得 "?" 後面的字串
-console.log(window.location.search);
-
-$('#地圖-控制-縮放-放大').click(function(){
-    map.flyTo({zoom: map.getZoom()+1,})
-});
-
-$('#地圖-控制-縮放-縮小').click(function(){
-    map.flyTo({zoom: map.getZoom()-1,})
+  init();
 });
 
 function init()
 {
-  getUserLocation();
+  //取得 "?" 後面的字串
+  console.log(window.location.search);
+
+  //更改版權位置
+  map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
+
+  //time
+  $("#側邊欄-最近更新-時間").text(moment(new Date()).format('HH:mm'));
+  $("#nav-右-最後更新-時間").text(moment(new Date()).format('HH:mm'));
+
+  for(var k in county)
+  {
+    data[k] = {};
+    cardInfoData[k] = {
+      "totalDrugStore" : 0,
+      "totalMaskAdult" : 0,
+      "totalMaskChild" : 0
+    };
+    for(var i = 0; i < county[k].length; i++)
+    {
+      data[k][county[k][i]] = {
+        "type": "FeatureCollection",
+        "features": []
+      };
+      cardInfoData[k][county[k][i]] = {
+        "totalDrugStore" : 0,
+        "totalMaskAdult" : 0,
+        "totalMaskChild" : 0,
+        "locationBunds" : []
+      };
+    }
+  }
+
+  $('#地圖-控制-縮放-放大').click(function(){
+      map.flyTo({zoom: map.getZoom()+1,})
+  });
+
+  $('#地圖-控制-縮放-縮小').click(function(){
+      map.flyTo({zoom: map.getZoom()-1,})
+  });
 }
 
+function checkGeoLocationPermissions()
+{
+  if (navigator.geolocation)
+  {
+    navigator.permissions.query({name:'geolocation'}).then(function(result)
+    {
+      console.log(result.state);
+      if (result.state == 'granted' || result.state == 'denied')
+      {
+        updateInfoCard()
+      }
+      else if (result.state == 'prompt')
+      {
+        popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+      }
+    });
+  }
+  else
+  {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
 //*********************************************
 //* 載入資料
 //*********************************************
@@ -121,7 +142,7 @@ $(document).ready(function()
       loadData(item);
     });
     loadMapData();
-    updateInfoCard();
+    checkGeoLocationPermissions();
   });
 });
 
@@ -278,34 +299,22 @@ function moveCameraToCountyArea(county, area)
   }
 }
 
-function getUserLocation()
-{
-  if (navigator.geolocation)
-  {
-    navigator.geolocation.getCurrentPosition(function(position)
-    {
-      console.log(position);
-    });
-  }
-  else
-  {
-    console.log("Geolocation is not supported by this browser.");
-  }
-}
-
 //*********************************************
 //* 更新卡片資訊
 //*********************************************
 function updateInfoCard()
 {
   console.log("navigator.geolocation = " + navigator.geolocation);
-  if(!navigator.geolocation) return;
-
+  popWindow('正在定位','ok', 'n');
+  console.log("正在定位");
   navigator.geolocation.getCurrentPosition(function(position)
   {
     console.log("current position = " + position);
     $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=16&addressdetails=1", function(source)
     {
+      console.log("位置取得完成");
+      hidePopWindow();
+
       //update infoCard
       var city = getLocationDataToCounty(source.address)
       $("#側邊欄-區域狀況-地區").text(city + getLocationDataToTown(source.address));
@@ -315,14 +324,13 @@ function updateInfoCard()
       updateNearSellOutCard(source.address);
       initDropMenu(city, getLocationDataToTown(source.address))
 
-      // var bundles = [];
-      // for(k in county[city])
-      // {
-      //   bundles = bundles.concat(cardInfoData[city][county[city][k]]["locationBunds"]);
-      // }
-
       moveCameraToCountyArea(city, getLocationDataToTown(source.address));
     });
+  },
+  function(error)
+  {
+    hidePopWindow();
+    popWindow('口罩地圖需要您的位置才能使用。請再試一次。','好', 'y');
   });
 }
 
