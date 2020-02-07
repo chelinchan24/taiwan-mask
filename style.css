@@ -411,29 +411,29 @@ nav {
     justify-content: space-between;
 }
 
-#nav-左, #nav-右 {
+.nav-左, .nav-右 {
     flex: 1;
     max-width:calc(50% - 6px)
 }
 
-#nav-右 {
+.nav-右 {
     text-align: right;
 }
 
-#nav-左-logo {
+.nav-左-logo {
     width: 120px;
     height: 32px;
     display: block;
 }
 
-#nav-左-返回總覽 {
+.nav-左-返回 {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
     transition: 0.1s ease;
 }
 
-#nav-左-返回總覽:hover {
+.nav-左-返回:hover {
     opacity: 0.6;
     transition: 0.1s ease;
 }
@@ -449,7 +449,7 @@ nav {
     width: 28px;
 }
 
-#nav-右-最後更新 {
+.nav-右-最後更新 {
     display: inline-flex;
     height: 36px;
     padding: 0px 14px;
@@ -460,11 +460,11 @@ nav {
     cursor: pointer;
 }
 
-#nav-右-最後更新:hover {
+.nav-右-最後更新:hover {
     opacity: 0.7;
 }
 
-#nav-右-最後更新-icon {
+.nav-右-最後更新-icon {
     width: 18px;
     height: 18px;
     background: url('./src/ic_lastUpdate.png');
@@ -472,7 +472,7 @@ nav {
     margin-right: 6px;
 }
 
-#nav-右-最後更新-時間 {
+#nav-右-最後更新-時間, #nav-右-最後更新-時間-檢視藥局 {
     font-size: 13px;
     color: #575757;
     margin-right: 6px;
