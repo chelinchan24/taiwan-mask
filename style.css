@@ -1171,14 +1171,19 @@ nav {
 /*    opacity: 0.7;*/
 /*}*/
 
-#彈出視窗, #分享視窗 {
-    width: 100%;
-    height: 100%;
+#彈出視窗-視窗, #分享視窗-視窗 {
+    width: 396px;
+    height: auto;
+    background: #ffffff;
     position: absolute;
-    top: 0;
-    left: 0;
-    /*! display: none; */
-    bottom: 0;
+    bottom: 0px;
+    padding: 28px;
+    box-sizing: border-box;
+    border-radius: 24px 24px 0 0;
+    /*! top: 0; */
+    /* left: 0; */
+    right: 30px;
+    /* margin: auto; */
 }
 
 @keyframes 彈出視窗_顯示{
