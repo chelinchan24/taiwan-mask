@@ -456,7 +456,7 @@ nav {
     text-align: right;
 }
 
-.nav-左-logo {
+#nav-左-logo {
     width: 120px;
     height: 32px;
     display: block;
@@ -472,6 +472,10 @@ nav {
 .nav-左-返回:hover {
     opacity: 0.6;
     transition: 0.1s ease;
+}
+
+#nav-左-關閉 {
+    display: none;
 }
 
 .nav-圖標 {
@@ -1246,7 +1250,7 @@ nav {
 }
 
 #彈出視窗-視窗, #分享視窗-視窗 {
-    width: 100%;
+    width: 396px;
     height: auto;
     background: #ffffff;
     position: absolute;
@@ -1255,7 +1259,7 @@ nav {
     box-sizing: border-box;
     border-radius: 24px 24px 0 0;
     /*! top: 0; */
-    right: 0;
+    right: 30px;
 }
 
 .彈出視窗_顯示 #彈出視窗-視窗, .分享視窗_顯示 #分享視窗-視窗{
@@ -1327,8 +1331,25 @@ nav {
 
     .側邊欄-行動版_展開 {
         transition: 0.2s ease;
-        height: calc(100% - 30px) !important;
+/*         height: calc(100% - 30px) !important; */
+        height: 100vh !important;
         bottom: 0 !important;
+        border-radius: 0 !important;
+    }
+    
+    #nav-左-關閉 {
+        width: 28px;
+        height: 28px;
+        background: url('./src/ic_close.png');
+        background-size: cover;
+    }
+    
+    .側邊欄-行動版_展開 #nav-左-關閉 {
+        display: block;
+    }
+    
+    .側邊欄-行動版_展開 #nav-左-logo {
+        display: none;
     }
 
     .側邊欄-行動版_關閉 {
@@ -1378,6 +1399,14 @@ nav {
         margin-bottom: 14px;
     }
 
+    .側邊欄-行動版_收起 #側邊欄-檢視藥局-底部按鈕 {
+        display: none;
+    }
+
+    .側邊欄-行動版_展開 #側邊欄-檢視藥局-底部按鈕 {
+        display: flex;
+    }
+
    .下拉選單 {
         position: fixed;
         bottom: 0px;
@@ -1396,6 +1425,11 @@ nav {
         border-radius: 8px;
         cursor: pointer;
         display: block;
+    }
+    
+    #彈出視窗-視窗, #分享視窗-視窗 {
+        width: 100%;
+        right: 0;
     }
 
     #分享視窗-分享-網址 {
