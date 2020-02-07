@@ -144,7 +144,7 @@ div {
 }
 
 .卡片-充足 .卡片-數據_大, .卡片-充足 .卡片-數據_小, .卡片-充足 .卡片-名稱 {
-     color: #3B64CD;
+    color: #3B64CD;
 }
 
 .卡片-充足 .卡片-數據_單位, .卡片-充足 .卡片-地址, .卡片-充足 .小標題 {
@@ -156,7 +156,7 @@ div {
 }
 
 .卡片-幾乎售罄 .卡片-數據_大, .卡片-幾乎售罄 .卡片-數據_小, .卡片-幾乎售罄 .卡片-名稱 {
-     color: #C78329;
+    color: #C78329;
 }
 
 .卡片-幾乎售罄 .卡片-數據_單位, .卡片-幾乎售罄 .卡片-地址, .卡片-幾乎售罄 .小標題 {
@@ -201,7 +201,7 @@ div {
 .選單按鈕:hover {
     background: #E4ECF7;
     transition: 0.1s ease;
-/*     box-shadow: 0 11px 20px 0 rgba(194,212,223,0.50); */
+    /*     box-shadow: 0 11px 20px 0 rgba(194,212,223,0.50); */
 }
 
 .選單按鈕-圖標 {
@@ -232,7 +232,7 @@ div {
 }
 
 .下拉選單::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .下拉選單-選項_目前, .下拉選單-選項{
@@ -424,13 +424,13 @@ div {
 
 /* ㄧㄡHOVERS */
 #側邊欄-最近更新, .nav-圖標:hover {
-   cursor: pointer;
-   transition: 0.1s ease;
+    cursor: pointer;
+    transition: 0.1s ease;
 }
 
 #側邊欄-最近更新:hover, .nav-圖標:hover {
-   opacity: 0.7;
-   transition: 0.1s ease;
+    opacity: 0.7;
+    transition: 0.1s ease;
 }
 
 
@@ -584,7 +584,7 @@ nav {
 }
 
 .側邊欄-頁面_隱藏 {
-   display: none;
+    display: none;
 }
 
 /* 底部空間 */
@@ -1245,7 +1245,7 @@ nav {
 }
 
 #彈出視窗-視窗, #分享視窗-視窗 {
-    width: 100%;
+    width: 400px;
     height: auto;
     background: #ffffff;
     position: absolute;
@@ -1254,6 +1254,9 @@ nav {
     box-sizing: border-box;
     border-radius: 24px 24px 0 0;
     /*! top: 0; */
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 
 .彈出視窗_顯示 #彈出視窗-視窗, .分享視窗_顯示 #分享視窗-視窗{
@@ -1336,7 +1339,7 @@ nav {
     #彈出視窗, #分享視窗、 {
         position: fixed;
     }
-    
+
     nav {
         padding: 22px 22px;
         display: flex;
@@ -1347,36 +1350,36 @@ nav {
         height: unset;
         margin-top: 0px;
     }
-    
+
     #側邊欄 {
         padding-top: 0px;
     }
-    
+
     .側邊欄-內容{
         padding: 0px 16px
     }
-    
+
     #地圖-控制 {
         right: 22px;
         bottom: 200px;
     }
-    
+
     #地圖-控制-縮放 {
         display: none;
     }
-    
+
     #側邊欄-過濾 {
         flex-direction: column;
         width: 100%;
     }
-    
+
     #側邊欄-過濾-城市, #側邊欄-過濾-地區 {
         max-width: 100% !important;
         padding: 13px 22px;
         margin-bottom: 14px;
     }
-    
-   .下拉選單 {
+
+    .下拉選單 {
         position: fixed;
         bottom: 0px;
         top: unset;
@@ -1384,7 +1387,7 @@ nav {
         height: 35vh;
         box-shadow: 0 2px 0 2000px rgba(0,0,0,0.50);
     }
-    
+
     .下拉選單-選項_目前, .下拉選單-選項{
         /*! height: 400px !important; */
         line-height: 50px;
