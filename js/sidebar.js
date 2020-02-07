@@ -202,6 +202,10 @@ var currentUrl = $(location). attr("href");
 // });
 
 //分享
+$('#側邊欄-檢視藥局-底部按鈕-分享').click(function (){
+    $('#分享視窗').addClass('分享視窗_顯示').removeClass('分享視窗_關閉','分享視窗_預設');
+})
+
 $('#分享視窗-分享-社群-Facebook').click(function (){
     window.open("https://www.facebook.com/sharer/sharer.php?u=" + currentUrl, '_blank');
 });
