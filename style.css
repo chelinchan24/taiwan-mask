@@ -1252,7 +1252,8 @@ nav {
 
 @media screen and (max-width: 800px) {
     html, body {
-        overscroll-behavior: none;
+        overscroll-behavior-y: none;
+        overflow: hidden;
     }
 
     #側邊欄 {
