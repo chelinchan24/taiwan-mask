@@ -830,6 +830,16 @@ nav {
     margin-right: 16px;
     color: #ffffff;
     font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 21px 27px -20px #006CFF, inset 0 1px 0 42px rgba(0,0,0,0);
+    transition: 0.1s ease;
+}
+
+.側邊欄-檢視藥局-底部按鈕-按鈕:hover {
+    color: #E8E8E8;
+    box-shadow: 0 21px 27px -20px #006CFF, inset 0 1px 0 42px rgba(0,0,0,0.15);
+    border-radius: 30px;
+    transition: 0.1s ease;
 }
 
 #側邊欄-檢視藥局-底部按鈕-在地圖開啟 {
