@@ -23,6 +23,8 @@ navBackBtn.click(function() {
 findRetailerBtn.click(function() {
     dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+    $('#側邊欄-過濾-城市-下拉選單').removeClass('下拉選單_收起').removeClass('下拉選單_展開').addClass("下拉選單_預設");
+    $('#側邊欄-過濾-地區-下拉選單').removeClass('下拉選單_收起').removeClass('下拉選單_展開').addClass("下拉選單_預設");
 });
 
 //總覽-關於
@@ -159,6 +161,8 @@ $('#彈出視窗').click(function (){
 
 //----- 下拉選單
 $(document).click(function(e) {
+  if ($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
+  {
     if($(e.target).closest('.側邊欄-過濾-城市-按鈕').length != 1 && $(e.target).closest('.側邊欄-過濾-地區-按鈕').length != 1)
     {
         if($('#側邊欄-過濾-城市-下拉選單').hasClass("下拉選單_展開") || $('#側邊欄-過濾-地區-下拉選單').hasClass("下拉選單_展開")){
@@ -181,14 +185,21 @@ $(document).click(function(e) {
             $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_收起').removeClass('下拉選單_展開');
         }
     }
+  }
 });
 
-$('#側邊欄-過濾-城市').click(function (){
-    $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起');
+$('#側邊欄-過濾-城市').click(function (e){
+    if($(e.target).hasClass("側邊欄-過濾-城市-按鈕"))
+    {
+      $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
+    }
 });
 
-$('#側邊欄-過濾-地區').click(function (){
-    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起');
+$('#側邊欄-過濾-地區').click(function (e){
+  if($(e.target).hasClass("側邊欄-過濾-地區-按鈕"))
+  {
+    $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
+  }
 });
 
 

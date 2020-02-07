@@ -3,23 +3,7 @@ const MARKER_NEAR_SELL_OUT = "ic_nearSellout";
 const MARKER_ALMOST_SELL_OUT = "marker_alomostSellOut";
 const MARKER_SELL_OUT = "ic_sellOut";
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
-var map = new mapboxgl.Map({
-    container: '地圖',
-    style: 'mapbox://styles/chelinchan24/ck68yiap60je81iqtfne3pzvo',
-    attributionControl: false,
-    logoPosition: "top-left"
-});
-
-//更改版權位置
-map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
-
-getUserLocation();
-
-//time
-$("#側邊欄-最近更新-時間").text(new Date().getHours() + ":" + new Date().getMinutes());
-
-var county = {
+const county = {
           "台北市":["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
           "新北市":["板橋區", "新莊區", "中和區", "永和區", "土城區", "樹林區", "三峽區", "鶯歌區", "三重區", "蘆洲區", "五股區", "泰山區", "林口區", "八里區", "淡水區", "三芝區", "石門區", "金山區", "萬里區"
                     , "汐止區", "瑞芳區", "貢寮區", "平溪區", "雙溪區", "新店區", "深坑區", "石碇區", "坪林區", "烏來區"],
@@ -52,6 +36,25 @@ var county = {
         };
 var data = {};
 var cardInfoData = {};
+var searchSellDrugStoreTimeout;
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
+var map = new mapboxgl.Map({
+    container: '地圖',
+    style: 'mapbox://styles/chelinchan24/ck68yiap60je81iqtfne3pzvo',
+    attributionControl: false,
+    logoPosition: "top-left"
+});
+
+//更改版權位置
+map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
+
+init();
+
+//time
+$("#側邊欄-最近更新-時間").text(new Date().getHours() + ":" + new Date().getMinutes());
+$("#nav-右-最後更新-時間").text(new Date().getHours() + ":" + new Date().getMinutes());
+
 
 for(var k in county)
 {
@@ -86,6 +89,11 @@ $('#地圖-控制-縮放-放大').click(function(){
 $('#地圖-控制-縮放-縮小').click(function(){
     map.flyTo({zoom: map.getZoom()-1,})
 });
+
+function init()
+{
+  getUserLocation();
+}
 
 //*********************************************
 //* 載入資料
@@ -261,7 +269,7 @@ function updateUrl(name, address)
 function moveCameraToCountyArea(county, area)
 {
   map.fitBounds(cardInfoData[county][area]["locationBunds"], {
-    padding: {top: 250, bottom:250, left: 250, right: 250}
+    padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
   });
 }
 
@@ -298,15 +306,15 @@ function updateInfoCard()
       $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskAdult"] + cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskChild"]);
 
       updateNearSellOutCard(source.address);
+      initDropMenu(city, getLocationDataToTown(source.address))
 
       // var bundles = [];
       // for(k in county[city])
       // {
       //   bundles = bundles.concat(cardInfoData[city][county[city][k]]["locationBunds"]);
       // }
-      map.fitBounds(cardInfoData[city][getLocationDataToTown(source.address)]["locationBunds"], {
-        padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
-      });
+
+      moveCameraToCountyArea(city, getLocationDataToTown(source.address));
     });
   });
 }
@@ -350,8 +358,6 @@ function updateNearSellOutCard(address)
       }
     }
   });
-  console.log("nearSellOutCount = " + nearSellOutCount);
-  console.log("sellOutCount = " + sellOutCount);
 }
 
 function onClickNearSellOutCard(county, town, id)
@@ -402,4 +408,134 @@ function getLocationDataToTown(address)
   {
     return Object.keys(data[getLocationDataToCounty(address)])[0];
   }
+}
+
+//*********************************************
+//* 尋找銷售點功能
+//*********************************************
+function initDropMenu(cnty, town)
+{
+  //載入城市下拉選單資訊
+  $("#側邊欄-過濾-城市-下拉選單").empty();
+  $("#側邊欄-過濾-城市-按鈕-文字").text(cnty);
+  for(k in county)
+  {
+    $("#側邊欄-過濾-城市-下拉選單").append("<span class='" + (cnty == k ? "下拉選單-選項_目前" : "下拉選單-選項" ) + "'>" + k + "</span>");
+  }
+
+  //載入地區下拉選單資訊
+  $("#側邊欄-過濾-地區-下拉選單").empty();
+  $("#側邊欄-過濾-地區-按鈕-文字").text(town);
+  county[cnty].forEach(function(item)
+  {
+    $("#側邊欄-過濾-地區-下拉選單").append("<span class='" + (town == item ? "下拉選單-選項_目前" : "下拉選單-選項") + "'>" + item + "</span>");
+  });
+  updateSearchSellDrugStoreCardList(true);
+
+  //城市下拉選單按鈕功能
+  for(var i = 0; i < $("#側邊欄-過濾-城市-下拉選單").children().length; i++)
+  {
+    $($("#側邊欄-過濾-城市-下拉選單").children()[i]).click(function(e)
+    {
+      $("#側邊欄-過濾-城市-下拉選單").removeClass("下拉選單_展開").addClass('下拉選單_收起');
+      $("#側邊欄-過濾-城市-下拉選單").children().removeClass("下拉選單-選項_目前").addClass("下拉選單-選項");
+      $(e.target).removeClass("下拉選單-選項").addClass("下拉選單-選項_目前");
+      $("#側邊欄-過濾-城市-按鈕-文字").text($(e.target).text());
+      updateTownDropMenu($(e.target).text());
+    });
+  }
+
+  //地區下拉選單點選按鈕功能
+  for(var i = 0; i < $("#側邊欄-過濾-地區-下拉選單").children().length; i++)
+  {
+    $($("#側邊欄-過濾-地區-下拉選單").children()[i]).click(function(e)
+    {
+      $("#側邊欄-過濾-地區-下拉選單").removeClass("下拉選單_展開").addClass('下拉選單_收起');
+      $("#側邊欄-過濾-地區-下拉選單").children().removeClass("下拉選單-選項_目前").addClass("下拉選單-選項");
+      $(e.target).removeClass("下拉選單-選項").addClass("下拉選單-選項_目前");
+      $("#側邊欄-過濾-地區-按鈕-文字").text($(e.target).text());
+      moveCameraToCountyArea($("#側邊欄-過濾-城市-按鈕-文字").text(), $("#側邊欄-過濾-地區-按鈕-文字").text());
+      updateSearchSellDrugStoreCardList(true);
+    });
+  }
+
+  //滑動到底部時更新列表
+  $("#側邊欄-尋找銷售點-列表").scroll(function()
+  {
+    clearTimeout(searchSellDrugStoreTimeout);
+    searchSellDrugStoreTimeout = setTimeout(function()
+    {
+      if(($("#側邊欄-尋找銷售點-列表").scrollTop() + $("#側邊欄-尋找銷售點-列表")[0].clientHeight) >= $("#側邊欄-尋找銷售點-列表")[0].scrollHeight * 0.95)
+      {
+        updateSearchSellDrugStoreCardList(false);
+      }
+    }, 1000);
+  });
+}
+
+//更新鄉鎮區下拉選單
+function updateTownDropMenu(ct)
+{
+  //載入下拉選單資訊
+  $("#側邊欄-過濾-地區-下拉選單").empty();
+  $("#側邊欄-過濾-地區-按鈕-文字").text(county[ct][0]);
+  updateSearchSellDrugStoreCardList(true);
+  moveCameraToCountyArea($("#側邊欄-過濾-城市-按鈕-文字").text(), $("#側邊欄-過濾-地區-按鈕-文字").text());
+  county[ct].forEach(function(item)
+  {
+    $("#側邊欄-過濾-地區-下拉選單").append("<span class='" + (county[ct].indexOf(item) == 0 ? "下拉選單-選項_目前" : "下拉選單-選項") + "'>" + item + "</span>");
+  });
+
+  //下拉選單點選按鈕功能
+  for(var i = 0; i < $("#側邊欄-過濾-地區-下拉選單").children().length; i++)
+  {
+    $($("#側邊欄-過濾-地區-下拉選單").children()[i]).click(function(e)
+    {
+      $("#側邊欄-過濾-地區-下拉選單").removeClass("下拉選單_展開").addClass('下拉選單_收起');
+      $("#側邊欄-過濾-地區-下拉選單").children().removeClass("下拉選單-選項_目前").addClass("下拉選單-選項");
+      $(e.target).removeClass("下拉選單-選項").addClass("下拉選單-選項_目前");
+      $("#側邊欄-過濾-地區-按鈕-文字").text($(e.target).text());
+      moveCameraToCountyArea($("#側邊欄-過濾-城市-按鈕-文字").text(), $("#側邊欄-過濾-地區-按鈕-文字").text());
+      updateSearchSellDrugStoreCardList(true);
+    });
+  }
+}
+
+//更新銷售點卡片列表
+function updateSearchSellDrugStoreCardList(isClearData)
+{
+  if(isClearData)
+  {
+    $("#側邊欄-結果").empty();
+  }
+
+  var county = $("#側邊欄-過濾-城市-按鈕-文字").text();
+  var town = $("#側邊欄-過濾-地區-按鈕-文字").text();
+  console.log("結果 length = " + $("#側邊欄-結果").children().length);
+  console.log("data length = " + data[county][town]["features"].length);
+  if ($("#側邊欄-結果").children().length >= data[county][town]["features"].length) return;
+
+  for (var i = 0; i < 10; i++)
+  {
+    var item = data[county][town]["features"][$("#側邊欄-結果").children().length];
+    console.log("count = " + ($("#側邊欄-結果").children().length));
+    if(item == undefined) return;
+
+    var totalMask = item.properties.mask_adult + item.properties.mask_child;
+    $("#側邊欄-結果").append(
+      '<div class="側邊欄-結果-項目"  onclick=\'onClickNearSellOutCard("' + $("#側邊欄-過濾-城市-按鈕-文字").text() + '", "' + $("#側邊欄-過濾-地區-按鈕-文字").text() + '", "' + item.properties.id + '")\' >' +
+        '<div class="側邊欄-結果-項目-計數 ' + (totalMask > 50 ? "卡片-充足" : (totalMask >= 25 ? "卡片-即將售罄" : (totalMask > 0 ? "卡片-即將售罄" : "卡片-售罄"))) + '">' +
+          '<div class="側邊欄-結果-項目-計數-數據">' +
+            '<div class="' + (totalMask >= 10 ? "卡片-數據_小" : "卡片-數據_大") + '">' + (totalMask >= 100 ? "99+" : totalMask) + '</div>' +
+            '<div class="卡片-數據_單位">片</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="側邊欄-結果-項目-資訊">' +
+          '<div class="側邊欄-結果-項目-資訊-名稱">' + item.properties.name + '</div>' +
+          '<div class="側邊欄-結果-項目-資訊-地址">' + item.properties.address + '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+  console.log("-----");
 }
