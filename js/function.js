@@ -102,18 +102,25 @@ function checkGeoLocationPermissions()
 {
   if (navigator.geolocation)
   {
-    navigator.permissions.query({name:'geolocation'}).then(function(result)
+    try
     {
-      console.log(result.state);
-      if (result.state == 'granted' || result.state == 'denied')
+      navigator.permissions.query({name:'geolocation'}).then(function(result)
       {
-        updateInfoCard()
-      }
-      else if (result.state == 'prompt')
-      {
-        popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
-      }
-    });
+        console.log(result.state);
+        if (result.state == 'granted' || result.state == 'denied')
+        {
+          updateInfoCard()
+        }
+        else if (result.state == 'prompt')
+        {
+          popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+        }
+      });
+    }
+    catch(e)
+    {
+      popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+    }
   }
   else
   {
