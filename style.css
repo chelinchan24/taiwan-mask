@@ -1393,4 +1393,8 @@ nav {
         cursor: pointer;
         display: block;
     }
+
+    #分享視窗-分享-網址 {
+        display: none;
+    }
 }
