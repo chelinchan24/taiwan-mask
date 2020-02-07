@@ -130,6 +130,8 @@ div {
 
 .卡片-地址 {
     font-size: 13px;
+    height: 42px;
+    overflow: hidden;
 }
 
 .卡片-充足{
@@ -209,7 +211,7 @@ div {
     width: 100%;
     background: #ffffff;
     position: absolute;
-    top: 0;
+    top: 0px;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -217,10 +219,11 @@ div {
     box-shadow: 0 0 24px 0 rgba(217,217,217,0.50);
     border-radius: 12px;
     padding: 6px;
-    height: 193px;
+    height: 200px;
     overflow: scroll;
-    z-index: 2000;
+    z-index: 20000;
     box-sizing: border-box;
+    padding-top: 7px;
 }
 
 .下拉選單::-webkit-scrollbar {
@@ -228,12 +231,13 @@ div {
 }
 
 .下拉選單-選項_目前, .下拉選單-選項{
-    height: 36px;
-    line-height: 36px;
+    /*! height: 400px !important; */
+    line-height: 37px;
     padding: 0px 16px;
     font-size: 15px;
     border-radius: 8px;
     cursor: pointer;
+    display: block;
 }
 
 .下拉選單-選項_目前 {
@@ -289,6 +293,10 @@ div {
     animation-duration: 0.25s;
     animation-name: 下拉選單_展開;
     animation-fill-mode: forwards;
+}
+
+.下拉選單_預設 {
+    display: none;
 }
 
 /* 地圖 */
@@ -675,6 +683,11 @@ nav {
     position: relative;
 }
 
+#側邊欄-過濾-城市, #側邊欄-過濾-地區:hover {
+    background: #DFEDFF;
+    transition: 0.1s ease;
+}
+
 .側邊欄-結果 {
     width: 100%;
     display: flex;
@@ -691,6 +704,14 @@ nav {
     box-sizing: border-box;
     margin-bottom: 14px;
     border-radius: 12px;
+    opacity: 0.8;
+    transition: 0.15s ease;
+    cursor: pointer;
+}
+
+.側邊欄-結果-項目:hover {
+    background: #F1F1F1;
+    transition: 0.1s ease;
 }
 
 .側邊欄-結果-項目-計數 {
@@ -784,6 +805,7 @@ nav {
     padding: 22px;
     box-sizing: border-box;
     border-radius: 12px;
+    margin-bottom: 120px;
 }
 
 
@@ -991,7 +1013,6 @@ nav {
         opacity: 0;
         visibility: hidden;
         background: 00000000;
-        visibility: ;
     }
 
     to {
@@ -1181,6 +1202,17 @@ nav {
         bottom: 0px;
         top: unset;
         width: 100%;
-        height: 200px;
+        height: 35vh;
+        box-shadow: 0 2px 0 2000px rgba(0,0,0,0.50);
+    }
+    
+    .下拉選單-選項_目前, .下拉選單-選項{
+        /*! height: 400px !important; */
+        line-height: 50px;
+        padding: 0px 16px;
+        font-size: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: block;
     }
 }
