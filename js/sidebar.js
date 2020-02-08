@@ -113,26 +113,26 @@ $('#側邊欄').click(function () {
 $('#nav-左-關閉').click(function () {
     $('#側邊欄').addClass('側邊欄-行動版_收起');
     $('#側邊欄').removeClass('側邊欄-行動版_展開');
-    $('#側邊欄-內容').scrollTo(0)
+    $('.側邊欄-內容').scrollTop(0)
 })
 
 
-// $('.側邊欄-內容').scroll(function () {
-//     console.log($(this).scrollTop());
-//     if ($(this).scrollTop()  <= 0 ){
-//         $('#側邊欄').on('toychmove', function(){
-//             console.log( $('#側邊欄').touches[0].clientY);
-//         });
-//     } else {
-//         $('#側邊欄').off('swipedown');
-//     }
-// });
+$('.側邊欄-內容').scroll(function () {
+    if ($(this).scrollTop()  <= 0 ){
+        $('#側邊欄').on('touchmove', function(){
+            console.log( $('#側邊欄').touches[0].clientY);
+        });
+    } else {
+        $('#側邊欄').off('swipedown');
+    }
+});
 
 
 //----- 彈出視窗
 var popWinBox = $('#彈出視窗')
 var popWinContent = $('#彈出視窗-視窗-內容')
 var popWinDissmiss= $('#彈出視窗-視窗-按鈕')
+var popWinBgDissmiss= $('#彈出視窗-背景')
 
 $('#側邊欄-最近更新').click(function () {
     popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
@@ -159,6 +159,12 @@ $('#彈出視窗-視窗-按鈕').click(function (){
   }
 });
 
+popWinBgDissmiss.on('click', function () {
+    if (!popWinDissmiss.hasClass('隱藏')) {
+            popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
+    }
+})
+
 function popWindow(content,buttonText,btnDisplay) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
     popWinContent.text(content)
@@ -167,6 +173,7 @@ function popWindow(content,buttonText,btnDisplay) {
         popWinDissmiss.text(buttonText)
     } else {
         popWinDissmiss.addClass('隱藏')
+        popWinBgDissmiss.off('click')
     }
 }
 
