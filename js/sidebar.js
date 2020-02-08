@@ -99,16 +99,14 @@ function swipedetect(el, callback){
     }, false)
 }
 
-$('#側邊欄').click(function () {
-    if ($(window).width() <= 800) {
-        $('#側邊欄').on('mousedown', function(){
-            $('#側邊欄').addClass('側邊欄-行動版_展開');
-            $('#側邊欄').removeClass('側邊欄-行動版_收起');
-        });
-    } else {
-        $('#側邊欄').off('mousedown');
+$('#側邊欄').click(function ()
+{
+    if ($(window).width() <= 800)
+    {
+        $('#側邊欄').addClass('側邊欄-行動版_展開');
+        $('#側邊欄').removeClass('側邊欄-行動版_收起');
     }
-})
+});
 
 $('#nav-左-關閉').click(function () {
     $('#側邊欄').addClass('側邊欄-行動版_收起');
@@ -131,20 +129,10 @@ $('.側邊欄-內容').on('touchmove', function(event)
   console.log("touchmove = " + event.changedTouches[0].clientY);
   if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30))
   {
-    $('#側邊欄').addClass('側邊欄-行動版_收起');
-    $('#側邊欄').removeClass('側邊欄-行動版_展開');
+    $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
     $('.側邊欄-內容').scrollTop(0);
   }
 });
-
-// $('.側邊欄-內容').scroll(function () {
-//     if ($(this).scrollTop()  <= 0 ){
-//
-//     } else {
-//         $('#側邊欄').off('swipedown');
-//     }
-// });
-
 
 //----- 彈出視窗
 var popWinBox = $('#彈出視窗')
