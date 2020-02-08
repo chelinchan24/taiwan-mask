@@ -1185,6 +1185,7 @@ nav {
     left: 0;
     /*! display: none; */
     bottom: 0;
+    z-index: 3000;
 }
 
 @keyframes 彈出視窗_顯示{
@@ -1234,7 +1235,6 @@ nav {
 }
 
 .彈出視窗_顯示, .分享視窗_顯示, .行動-銷售點預覽_顯示 {
-    z-index: 3000;
     animation-duration: 0.25s;
     animation-name: 彈出視窗_顯示;
     animation-fill-mode: forwards;
@@ -1431,7 +1431,23 @@ nav {
         overflow: scroll;
     }
 
-   .下拉選單 {
+    .側邊欄-行動版_藥局Marker {
+        height: 250px !important;
+    }
+
+    .側邊欄-行動版_藥局Marker {
+        height: 250px !important;
+    }
+
+    .側邊欄-行動版_藥局Marker .nav-圖標, .側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-這是什麼 {
+        display:none;
+    }
+
+    .側邊欄-行動版_藥局Marker #側邊欄-頁面-檢視藥局-標題 {
+        margin-left: 0;
+    }
+
+    .下拉選單 {
         position: fixed;
         bottom: 0px;
         top: unset;
