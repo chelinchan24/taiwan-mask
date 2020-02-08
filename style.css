@@ -1339,10 +1339,8 @@ nav {
 
     .側邊欄-行動版_展開 {
         transition: 0.2s ease;
-/*         height: calc(100% - 30px) !important; */
-        height: 100% !important;
+        height: calc(100% - 16px) !important;
         bottom: 0 !important;
-        border-radius: 0 !important;
     }
     
     #nav-左-關閉 {
@@ -1433,23 +1431,7 @@ nav {
         overflow: scroll;
     }
 
-    .側邊欄-行動版_藥局Marker {
-        height: 250px !important;
-    }
-
-    .側邊欄-行動版_藥局Marker {
-        height: 250px !important;
-    }
-
-    .側邊欄-行動版_藥局Marker .nav-圖標, .側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-這是什麼 {
-        display:none;
-    }
-
-    .側邊欄-行動版_藥局Marker #側邊欄-頁面-檢視藥局-標題 {
-        margin-left: 0;
-    }
-
-    .下拉選單 {
+   .下拉選單 {
         position: fixed;
         bottom: 0px;
         top: unset;
