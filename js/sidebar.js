@@ -113,19 +113,37 @@ $('#側邊欄').click(function () {
 $('#nav-左-關閉').click(function () {
     $('#側邊欄').addClass('側邊欄-行動版_收起');
     $('#側邊欄').removeClass('側邊欄-行動版_展開');
-    $('.側邊欄-內容').scrollTop(0)
+    $('#側邊欄-內容').scrollTop(0)
 })
 
+var sidebarTouchY = 0;
+$('#側邊欄').on('touchstart', function(event)
+{
+  console.log("touchStart = " + event.changedTouches[0].clientY);
+  if ($('#側邊欄-內容').scrollTop() <= 0)
+  {
+    sidebarTouchY = event.changedTouches[0].clientY;
+  }
 
-$('.側邊欄-內容').scroll(function () {
-    if ($(this).scrollTop()  <= 0 ){
-        $('#側邊欄').on('touchmove', function(){
-            console.log( $('#側邊欄').touches[0].clientY);
-        });
-    } else {
-        $('#側邊欄').off('swipedown');
-    }
 });
+$('#側邊欄').on('touchmove', function(event)
+{
+  console.log("touchmove = " + event.changedTouches[0].clientY);
+  if ($('#側邊欄-內容').scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30))
+  {
+    $('#側邊欄').addClass('側邊欄-行動版_收起');
+    $('#側邊欄').removeClass('側邊欄-行動版_展開');
+    $('#側邊欄-內容').scrollTop(0);
+  }
+});
+
+// $('.側邊欄-內容').scroll(function () {
+//     if ($(this).scrollTop()  <= 0 ){
+//
+//     } else {
+//         $('#側邊欄').off('swipedown');
+//     }
+// });
 
 
 //----- 彈出視窗
@@ -148,7 +166,7 @@ $('#側邊欄-檢視藥局-這是什麼').click(function () {
 
 $('#彈出視窗-視窗-按鈕').click(function (){
   popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
-  
+
   if(popWinContent.text() == '口罩地圖需要您的位置才能使用。請再試一次。')
   {
     location.reload();
