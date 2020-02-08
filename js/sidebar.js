@@ -19,6 +19,8 @@ navBackBtn.click(function() {
         dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
         findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
         aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+        $('#側邊欄-過濾-城市-下拉選單').removeClass('下拉選單_收起').removeClass('下拉選單_展開').addClass("下拉選單_預設");
+        $('#側邊欄-過濾-地區-下拉選單').removeClass('下拉選單_收起').removeClass('下拉選單_展開').addClass("下拉選單_預設");
         $('.nav-左-返回').removeClass('nav-左-返回-尋找銷售點')
     } else {
         retailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
@@ -99,8 +101,10 @@ function swipedetect(el, callback){
     }, false)
 }
 
-$('#側邊欄').click(function ()
+$('#側邊欄').mousedown(function ()
 {
+    console.log("mouse down");
+    $("#側邊欄").removeClass("側邊欄-行動版_藥局Marker");
     if ($(window).width() <= 800)
     {
         $('#側邊欄').addClass('側邊欄-行動版_展開');
@@ -127,7 +131,7 @@ $('.側邊欄-內容').on('touchstart', function(event)
 $('.側邊欄-內容').on('touchmove', function(event)
 {
   console.log("touchmove = " + event.changedTouches[0].clientY);
-  if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30))
+  if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30) && !$('#側邊欄-過濾-城市-下拉選單').hasClass('下拉選單_展開') && !$('#側邊欄-過濾-地區-下拉選單').hasClass('下拉選單_展開'))
   {
     $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
     $('.側邊欄-內容').scrollTop(0);
