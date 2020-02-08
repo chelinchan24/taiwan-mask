@@ -900,6 +900,7 @@ nav {
 #側邊欄-檢視藥局-底部按鈕-分享 {
     background: url('./src/ic_share.png');
     background-size: 100%;
+    display: none;
 }
 
 #分享視窗-視窗 {
