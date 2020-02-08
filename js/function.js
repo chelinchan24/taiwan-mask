@@ -343,10 +343,17 @@ function moveCameraToCountyArea(county, area)
 {
   if (cardInfoData[county][area]["locationBunds"].length != 0)
   {
-    map.fitBounds(cardInfoData[county][area]["locationBunds"],
+    if (cardInfoData[county][area]["locationBunds"].length == 1)
     {
-      padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
-    });
+      map.flyTo({ center: cardInfoData[county][area]["locationBunds"][0], zoom:14});
+    }
+    else
+    {
+      map.fitBounds(cardInfoData[county][area]["locationBunds"],
+          {
+            padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
+          });
+    }
   }
 }
 
@@ -566,13 +573,24 @@ function initDropMenu(cnty, town)
   $("#側邊欄-尋找銷售點-列表").scroll(function()
   {
     clearTimeout(searchSellDrugStoreTimeout);
-    searchSellDrugStoreTimeout = setTimeout(function()
+    if ($("#側邊欄-結果").children().length < data[$("#側邊欄-過濾-城市-按鈕-文字").text()][$("#側邊欄-過濾-地區-按鈕-文字").text()]["features"].length)
     {
-      if(($("#側邊欄-尋找銷售點-列表").scrollTop() + $("#側邊欄-尋找銷售點-列表")[0].clientHeight) >= $("#側邊欄-尋找銷售點-列表")[0].scrollHeight * 0.95)
+      $("#側邊欄-結果-載入中-動畫").removeClass("隱藏");
+      $("#側邊欄-結果-載入中-沒有更多").addClass("隱藏");
+      searchSellDrugStoreTimeout = setTimeout(function()
       {
-        updateSearchSellDrugStoreCardList(false);
-      }
-    }, 1000);
+        if(($("#側邊欄-尋找銷售點-列表").scrollTop() + $("#側邊欄-尋找銷售點-列表")[0].clientHeight) >= $("#側邊欄-尋找銷售點-列表")[0].scrollHeight * 0.95)
+        {
+          updateSearchSellDrugStoreCardList(false);
+          $("#側邊欄-結果-載入中-動畫").addClass("隱藏");
+        }
+      }, 500);
+    }
+    else
+    {
+      $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
+      $("#側邊欄-結果-載入中-動畫").addClass("隱藏");
+    }
   });
 }
 
@@ -622,7 +640,12 @@ function updateSearchSellDrugStoreCardList(isClearData)
   {
     var item = data[county][town]["features"][$("#側邊欄-結果").children().length];
     console.log("count = " + ($("#側邊欄-結果").children().length));
-    if(item == undefined) return;
+    if(item === undefined)
+    {
+      $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
+      $("#側邊欄-結果-載入中-動畫").addClass("隱藏");
+      return;
+    }
 
     var totalMask = item.properties.mask_adult + item.properties.mask_child;
     $("#側邊欄-結果").append(
