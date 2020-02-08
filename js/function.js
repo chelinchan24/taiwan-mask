@@ -95,13 +95,17 @@ function init()
       map.flyTo({zoom: map.getZoom()-1,})
   });
 
-  $('#地圖-控制-定位').click(function(){
-    map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14, padding: {left: 400, right: 100}});
-    map.once('moveend', function()
+  $('#地圖-控制-定位').click(function()
+  {
+    if (map.getSource('usrPos') !== undefined)
     {
-      console.log("map is moveend");
-      $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
-    });
+      map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14, padding: {left: 400, right: 100}});
+      map.once('moveend', function()
+      {
+        console.log("map is moveend");
+        $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
+      });
+    }
   });
 }
 
@@ -120,13 +124,13 @@ function checkGeoLocationPermissions()
         }
         else if (result.state == 'prompt')
         {
-          popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+          popWindow('口罩指南需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
         }
       });
     }
     catch(e)
     {
-      popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+      popWindow('口罩指南需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
     }
   }
   else
@@ -432,9 +436,10 @@ function updateInfoCard()
   },
   function(error)
   {
+    $("#地圖-控制-定位").addClass("隱藏");
     hidePopWindow();
     initDropMenu("台北市", "中正區");
-    popWindow('口罩地圖需要您的位置才能使用。請再試一次。','好', 'y');
+    popWindow('口罩指南需要您的位置才能使用。請再試一次。','好', 'y');
   });
 }
 

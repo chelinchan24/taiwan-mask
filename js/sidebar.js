@@ -133,7 +133,7 @@ $('.側邊欄-內容').on('touchmove', function(event)
     console.log("touchmove = " + event.changedTouches[0].clientY);
     if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30) && !$('#側邊欄-過濾-城市-下拉選單').hasClass('下拉選單_展開') && !$('#側邊欄-過濾-地區-下拉選單').hasClass('下拉選單_展開'))
     {
-        $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
+        $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起').addClass("側邊欄-行動版_藥局Marker");
         $('.側邊欄-內容').scrollTop(0);
     }
 });
@@ -169,12 +169,19 @@ $('#彈出視窗-視窗-按鈕').click(function (){
     }
 });
 
-popWinBgDissmiss.on('click', function () {
-    updateInfoCard();
-    if (!popWinDissmiss.hasClass('隱藏')) {
+$('#彈出視窗-背景').click(function()
+{
+    if (popWinContent.text() == '口罩指南需要您的位置，來提供您最佳的個人化體驗。')
+    {
+        updateInfoCard();
+    }
+
+    console.log("彈出視窗-視窗-按鈕 click");
+    if (!popWinDissmiss.hasClass('隱藏'))
+    {
         popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
     }
-})
+});
 
 function popWindow(content,buttonText,btnDisplay) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
@@ -184,7 +191,6 @@ function popWindow(content,buttonText,btnDisplay) {
         popWinDissmiss.text(buttonText)
     } else {
         popWinDissmiss.addClass('隱藏')
-        popWinBgDissmiss.off('click')
     }
 }
 
