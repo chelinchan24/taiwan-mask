@@ -169,7 +169,7 @@ $('#彈出視窗-視窗-按鈕').click(function (){
 
   if(popWinContent.text() == '口罩地圖需要您的位置才能使用。請再試一次。')
   {
-    location.reload();
+    // location.reload();
   }
   else if (popWinContent.text() == '口罩地圖需要您的位置，來提供您最佳的個人化體驗。')
   {
