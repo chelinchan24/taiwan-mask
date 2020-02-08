@@ -898,6 +898,11 @@ nav {
     background-size: 100%;
 }
 
+#分享視窗-視窗 {
+    right: 0 !important;
+    box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
+}
+
 #分享視窗-分享-社群 {
     margin-bottom: 22px;
     display: flex;
