@@ -196,6 +196,7 @@ function loadData(item)
 
           if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
           {
+            $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
             showDrugStoreDetails(item);
             urlLocation = item.geometry.coordinates;
             urlStr = "";
@@ -288,8 +289,16 @@ function loadMarkerClick()
     var features = map.queryRenderedFeatures(e.point, { layers: ['marker'] });
 
     if(!features.length){
+      $("#側邊欄").removeClass("側邊欄-行動版_藥局Marker");
+      if ($("#側邊欄-頁面-檢視藥局").hasClass("側邊欄-頁面_顯示"))
+      {
+        $("#側邊欄-頁面-檢視藥局-nav-返回").click();
+      }
+
       return;
     }
+
+    $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
 
     var feature = features[0];
     console.log(feature);
@@ -418,12 +427,13 @@ function updateInfoCard()
       $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskAdult"] + cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskChild"]);
 
       updateNearSellOutCard(source.address);
-      initDropMenu(city, getLocationDataToTown(source.address))
+      initDropMenu(city, getLocationDataToTown(source.address));
     });
   },
   function(error)
   {
     hidePopWindow();
+    initDropMenu("台北市", "中正區");
     popWindow('口罩地圖需要您的位置才能使用。請再試一次。','好', 'y');
   });
 }
