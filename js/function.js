@@ -95,8 +95,17 @@ function init()
       map.flyTo({zoom: map.getZoom()-1,})
   });
 
-  $('#地圖-控制-定位').click(function(){
-    map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14});
+  $('#地圖-控制-定位').click(function()
+  {
+    if (map.getSource('usrPos') !== undefined)
+    {
+      map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14, padding: {left: 400, right: 100}});
+      map.once('moveend', function()
+      {
+        console.log("map is moveend");
+        $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
+      });
+    }
   });
 }
 
@@ -115,13 +124,13 @@ function checkGeoLocationPermissions()
         }
         else if (result.state == 'prompt')
         {
-          popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+          popWindow('口罩指南需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
         }
       });
     }
     catch(e)
     {
-      popWindow('口罩地圖需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+      popWindow('口罩指南需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
     }
   }
   else
@@ -192,6 +201,7 @@ function loadData(item)
           if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
           {
             showDrugStoreDetails(item);
+            $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.name + "/@" + item.geometry.coordinates[1] + "," + item.geometry.coordinates[0] + ",15z', '_blank');");
             urlLocation = item.geometry.coordinates;
             urlStr = "";
           }
@@ -250,6 +260,7 @@ function loadMarker()
     }
   });
   loadMarkerClick();
+  loadMapMoveListener();
   moveToUrlDrugStore();
 
   // for(var k in data)
@@ -282,11 +293,19 @@ function loadMarkerClick()
     var features = map.queryRenderedFeatures(e.point, { layers: ['marker'] });
 
     if(!features.length){
+      $("#側邊欄").removeClass("側邊欄-行動版_藥局Marker");
+      if ($("#側邊欄-頁面-檢視藥局").hasClass("側邊欄-頁面_顯示"))
+      {
+        $("#側邊欄-頁面-檢視藥局-nav-返回").click();
+      }
+
       return;
     }
 
     var feature = features[0];
     console.log(feature);
+
+    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.name + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
 
     updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
     showDrugStoreDetails(feature);
@@ -297,6 +316,15 @@ function loadMarkerClick()
   });
   map.on('mouseleave', 'marker', function(){
     map.getCanvas().style.cursor = "";
+  });
+}
+
+function loadMapMoveListener()
+{
+  map.on('move', function()
+  {
+    console.log("map is move");
+    $("#地圖-控制-定位").addClass("地圖-控制-定位_停用").removeClass("地圖-控制-定位_啟用");
   });
 }
 
@@ -328,10 +356,17 @@ function moveCameraToCountyArea(county, area)
 {
   if (cardInfoData[county][area]["locationBunds"].length != 0)
   {
-    map.fitBounds(cardInfoData[county][area]["locationBunds"],
+    if (cardInfoData[county][area]["locationBunds"].length == 1)
     {
-      padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
-    });
+      map.flyTo({ center: cardInfoData[county][area]["locationBunds"][0], zoom:14});
+    }
+    else
+    {
+      map.fitBounds(cardInfoData[county][area]["locationBunds"],
+          {
+            padding: {top: 250, bottom:250, left: 250, right: ($(window).width() > 800 ? 500 : 250)}
+          });
+    }
   }
 }
 
@@ -350,6 +385,11 @@ function updateInfoCard()
     if (window.location.search === "")
     {
       map.flyTo({ center: [position.coords.longitude, position.coords.latitude], zoom:14});
+      map.once('moveend', function()
+      {
+        console.log("map is moveend");
+        $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
+      });
     }
     map.addLayer({
       id: "usrPos",
@@ -391,13 +431,15 @@ function updateInfoCard()
       $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskAdult"] + cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskChild"]);
 
       updateNearSellOutCard(source.address);
-      initDropMenu(city, getLocationDataToTown(source.address))
+      initDropMenu(city, getLocationDataToTown(source.address));
     });
   },
   function(error)
   {
+    $("#地圖-控制-定位").addClass("隱藏");
     hidePopWindow();
-    popWindow('口罩地圖需要您的位置才能使用。請再試一次。','好', 'y');
+    initDropMenu("台北市", "中正區");
+    popWindow('口罩指南需要您的位置才能使用。請再試一次。','好', 'y');
   });
 }
 
@@ -546,13 +588,24 @@ function initDropMenu(cnty, town)
   $("#側邊欄-尋找銷售點-列表").scroll(function()
   {
     clearTimeout(searchSellDrugStoreTimeout);
-    searchSellDrugStoreTimeout = setTimeout(function()
+    if ($("#側邊欄-結果").children().length < data[$("#側邊欄-過濾-城市-按鈕-文字").text()][$("#側邊欄-過濾-地區-按鈕-文字").text()]["features"].length)
     {
-      if(($("#側邊欄-尋找銷售點-列表").scrollTop() + $("#側邊欄-尋找銷售點-列表")[0].clientHeight) >= $("#側邊欄-尋找銷售點-列表")[0].scrollHeight * 0.95)
+      $("#側邊欄-結果-載入中-動畫").removeClass("隱藏");
+      $("#側邊欄-結果-載入中-沒有更多").addClass("隱藏");
+      searchSellDrugStoreTimeout = setTimeout(function()
       {
-        updateSearchSellDrugStoreCardList(false);
-      }
-    }, 1000);
+        if(($("#側邊欄-尋找銷售點-列表").scrollTop() + $("#側邊欄-尋找銷售點-列表")[0].clientHeight) >= $("#側邊欄-尋找銷售點-列表")[0].scrollHeight * 0.95)
+        {
+          updateSearchSellDrugStoreCardList(false);
+          $("#側邊欄-結果-載入中-動畫").addClass("隱藏");
+        }
+      }, 500);
+    }
+    else
+    {
+      $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
+      $("#側邊欄-結果-載入中-動畫").addClass("隱藏");
+    }
   });
 }
 
@@ -602,7 +655,12 @@ function updateSearchSellDrugStoreCardList(isClearData)
   {
     var item = data[county][town]["features"][$("#側邊欄-結果").children().length];
     console.log("count = " + ($("#側邊欄-結果").children().length));
-    if(item == undefined) return;
+    if(item === undefined)
+    {
+      $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
+      $("#側邊欄-結果-載入中-動畫").addClass("隱藏");
+      return;
+    }
 
     var totalMask = item.properties.mask_adult + item.properties.mask_child;
     $("#側邊欄-結果").append(
@@ -628,6 +686,8 @@ function updateSearchSellDrugStoreCardList(isClearData)
 //*********************************************
 function showDrugStoreDetails(item)
 {
+  $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
+
   if($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
   {
     $('.nav-左-返回').addClass('nav-左-返回-尋找銷售點')

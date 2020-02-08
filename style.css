@@ -449,7 +449,12 @@ nav {
 
 .nav-左, .nav-右 {
     flex: 1;
+    height: 32px;
     max-width:calc(50% - 6px);
+}
+
+.nav-左 {
+    overflow: hidden;
 }
 
 .nav-右 {
@@ -890,12 +895,18 @@ nav {
 }
 
 #側邊欄-檢視藥局-底部按鈕-在地圖開啟 {
-
+    margin-right: 0;
 }
 
 #側邊欄-檢視藥局-底部按鈕-分享 {
     background: url('./src/ic_share.png');
     background-size: 100%;
+    display: none;
+}
+
+#分享視窗-視窗 {
+    right: 0 !important;
+    box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
 }
 
 #分享視窗-分享-社群 {
@@ -1185,6 +1196,7 @@ nav {
     left: 0;
     /*! display: none; */
     bottom: 0;
+    z-index: 3000;
 }
 
 @keyframes 彈出視窗_顯示{
@@ -1234,7 +1246,6 @@ nav {
 }
 
 .彈出視窗_顯示, .分享視窗_顯示, .行動-銷售點預覽_顯示 {
-    z-index: 3000;
     animation-duration: 0.25s;
     animation-name: 彈出視窗_顯示;
     animation-fill-mode: forwards;
@@ -1486,5 +1497,5 @@ nav {
     #行動-銷售點預覽-標題 {
         margin-left: 0;
     }
-
 }
+/*1500行！*/
