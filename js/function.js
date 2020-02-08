@@ -96,7 +96,7 @@ function init()
   });
 
   $('#地圖-控制-定位').click(function(){
-    map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14});
+    map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14, padding: {left: 400, right: 100}});
     map.once('moveend', function()
     {
       console.log("map is moveend");
@@ -197,6 +197,7 @@ function loadData(item)
           if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
           {
             showDrugStoreDetails(item);
+            $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.name + "/@" + item.geometry.coordinates[1] + "," + item.geometry.coordinates[0] + ",15z', '_blank');");
             urlLocation = item.geometry.coordinates;
             urlStr = "";
           }
@@ -299,6 +300,8 @@ function loadMarkerClick()
 
     var feature = features[0];
     console.log(feature);
+
+    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.name + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
 
     updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
     showDrugStoreDetails(feature);

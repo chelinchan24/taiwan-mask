@@ -101,7 +101,7 @@ function swipedetect(el, callback){
     }, false)
 }
 
-$('#側邊欄').mousedown(function ()
+$('#側邊欄').on('touchstart',function ()
 {
     console.log("mouse down");
     $("#側邊欄").removeClass("側邊欄-行動版_藥局Marker");
@@ -240,9 +240,9 @@ $('#側邊欄-過濾-地區').click(function (e){
 //在地圖開啟
 var currentUrl = $(location). attr("href");
 
-$('#側邊欄-檢視藥局-底部按鈕-在地圖開啟').click(function (){
-    window.open('https://www.google.com.tw/maps/@' + map.getSource('usrPos')._data.features[0].geometry.coordinates, '_blank');
-});
+// $('#側邊欄-檢視藥局-底部按鈕-在地圖開啟').click(function (){
+//     window.open('https://www.google.com.tw/maps/@' + map.getSource('usrPos')._data.features[0].geometry.coordinates, '_blank');
+// });
 
 //分享
 $('#側邊欄-檢視藥局-底部按鈕-分享').click(function (){
