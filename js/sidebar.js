@@ -121,21 +121,21 @@ $('#nav-左-關閉').click(function () {
 var sidebarTouchY = 0;
 $('.側邊欄-內容').on('touchstart', function(event)
 {
-  console.log("touchStart = " + event.changedTouches[0].clientY);
-  if ($(this).scrollTop() <= 0)
-  {
-    sidebarTouchY = event.changedTouches[0].clientY;
-  }
+    console.log("touchStart = " + event.changedTouches[0].clientY);
+    if ($(this).scrollTop() <= 0)
+    {
+        sidebarTouchY = event.changedTouches[0].clientY;
+    }
 
 });
 $('.側邊欄-內容').on('touchmove', function(event)
 {
-  console.log("touchmove = " + event.changedTouches[0].clientY);
-  if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30) && !$('#側邊欄-過濾-城市-下拉選單').hasClass('下拉選單_展開') && !$('#側邊欄-過濾-地區-下拉選單').hasClass('下拉選單_展開'))
-  {
-    $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
-    $('.側邊欄-內容').scrollTop(0);
-  }
+    console.log("touchmove = " + event.changedTouches[0].clientY);
+    if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30) && !$('#側邊欄-過濾-城市-下拉選單').hasClass('下拉選單_展開') && !$('#側邊欄-過濾-地區-下拉選單').hasClass('下拉選單_展開'))
+    {
+        $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
+        $('.側邊欄-內容').scrollTop(0);
+    }
 });
 
 //----- 彈出視窗
@@ -145,11 +145,11 @@ var popWinDissmiss= $('#彈出視窗-視窗-按鈕')
 var popWinBgDissmiss= $('#彈出視窗-背景')
 
 $('#側邊欄-最近更新').click(function () {
-    popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
+    popWindow('這是您開啟口罩指南時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
 });
 
 $('.側邊欄-最近更新-小-這是什麼').click(function () {
-    popWindow('這是您開啟口罩地圖時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
+    popWindow('這是您開啟口罩指南時，網站檢查口罩存量資訊的時間。網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。','瞭解了','y');
 });
 
 $('#側邊欄-檢視藥局-這是什麼').click(function () {
@@ -157,22 +157,22 @@ $('#側邊欄-檢視藥局-這是什麼').click(function () {
 });
 
 $('#彈出視窗-視窗-按鈕').click(function (){
-  popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
+    popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
 
-  if(popWinContent.text() == '口罩地圖需要您的位置才能使用。請再試一次。')
-  {
-    // location.reload();
-  }
-  else if (popWinContent.text() == '口罩地圖需要您的位置，來提供您最佳的個人化體驗。')
-  {
-    updateInfoCard();
-  }
+    if(popWinContent.text() == '口罩指南需要您的位置才能使用。請再試一次。')
+    {
+        // location.reload();
+    }
+    else if (popWinContent.text() == '口罩指南需要您的位置，來提供您最佳的個人化體驗。')
+    {
+        updateInfoCard();
+    }
 });
 
 popWinBgDissmiss.on('click', function () {
     updateInfoCard();
     if (!popWinDissmiss.hasClass('隱藏')) {
-            popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
+        popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
     }
 })
 
@@ -190,7 +190,7 @@ function popWindow(content,buttonText,btnDisplay) {
 
 function hidePopWindow()
 {
-  popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
+    popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
 }
 
 //----- 下拉選單
