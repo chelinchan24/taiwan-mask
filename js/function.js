@@ -39,6 +39,7 @@ var cardInfoData = {};
 var searchSellDrugStoreTimeout;
 var urlLocation;
 
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
 var map = new mapboxgl.Map({
     container: '地圖',
