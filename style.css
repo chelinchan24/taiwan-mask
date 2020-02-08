@@ -1433,7 +1433,23 @@ nav {
         overflow: scroll;
     }
 
-   .下拉選單 {
+    .側邊欄-行動版_藥局Marker {
+        height: 250px !important;
+    }
+
+    .側邊欄-行動版_藥局Marker {
+        height: 250px !important;
+    }
+
+    .側邊欄-行動版_藥局Marker .nav-圖標, .側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-這是什麼 {
+        display:none;
+    }
+
+    .側邊欄-行動版_藥局Marker #側邊欄-頁面-檢視藥局-標題 {
+        margin-left: 0;
+    }
+
+    .下拉選單 {
         position: fixed;
         bottom: 0px;
         top: unset;
