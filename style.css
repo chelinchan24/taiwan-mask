@@ -452,6 +452,10 @@ nav {
     max-width:calc(50% - 6px);
 }
 
+.nav-左 {
+    overflow: hidden;
+}
+
 .nav-右 {
     text-align: right;
 }
