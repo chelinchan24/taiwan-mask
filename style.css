@@ -449,6 +449,7 @@ nav {
 
 .nav-左, .nav-右 {
     flex: 1;
+    height: 32px;
     max-width:calc(50% - 6px);
 }
 
