@@ -196,7 +196,6 @@ function loadData(item)
 
           if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
           {
-            $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
             showDrugStoreDetails(item);
             urlLocation = item.geometry.coordinates;
             urlStr = "";
@@ -297,8 +296,6 @@ function loadMarkerClick()
 
       return;
     }
-
-    $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
 
     var feature = features[0];
     console.log(feature);
@@ -681,6 +678,8 @@ function updateSearchSellDrugStoreCardList(isClearData)
 //*********************************************
 function showDrugStoreDetails(item)
 {
+  $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
+
   if($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
   {
     $('.nav-左-返回').addClass('nav-左-返回-尋找銷售點')
