@@ -170,6 +170,7 @@ $('#彈出視窗-視窗-按鈕').click(function (){
 });
 
 popWinBgDissmiss.on('click', function () {
+    updateInfoCard();
     if (!popWinDissmiss.hasClass('隱藏')) {
             popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
     }
