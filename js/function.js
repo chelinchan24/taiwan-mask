@@ -97,6 +97,11 @@ function init()
 
   $('#地圖-控制-定位').click(function(){
     map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14});
+    map.once('moveend', function()
+    {
+      console.log("map is moveend");
+      $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
+    });
   });
 }
 
@@ -250,6 +255,7 @@ function loadMarker()
     }
   });
   loadMarkerClick();
+  loadMapMoveListener();
   moveToUrlDrugStore();
 
   // for(var k in data)
@@ -297,6 +303,15 @@ function loadMarkerClick()
   });
   map.on('mouseleave', 'marker', function(){
     map.getCanvas().style.cursor = "";
+  });
+}
+
+function loadMapMoveListener()
+{
+  map.on('move', function()
+  {
+    console.log("map is move");
+    $("#地圖-控制-定位").addClass("地圖-控制-定位_停用").removeClass("地圖-控制-定位_啟用");
   });
 }
 
@@ -350,6 +365,11 @@ function updateInfoCard()
     if (window.location.search === "")
     {
       map.flyTo({ center: [position.coords.longitude, position.coords.latitude], zoom:14});
+      map.once('moveend', function()
+      {
+        console.log("map is moveend");
+        $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
+      });
     }
     map.addLayer({
       id: "usrPos",

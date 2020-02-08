@@ -117,23 +117,23 @@ $('#nav-左-關閉').click(function () {
 })
 
 var sidebarTouchY = 0;
-$('#側邊欄').on('touchstart', function(event)
+$('.側邊欄-內容').on('touchstart', function(event)
 {
   console.log("touchStart = " + event.changedTouches[0].clientY);
-  if ($('#側邊欄-內容').scrollTop() <= 0)
+  if ($(this).scrollTop() <= 0)
   {
     sidebarTouchY = event.changedTouches[0].clientY;
   }
 
 });
-$('#側邊欄').on('touchmove', function(event)
+$('.側邊欄-內容').on('touchmove', function(event)
 {
   console.log("touchmove = " + event.changedTouches[0].clientY);
-  if ($('#側邊欄-內容').scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30))
+  if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30))
   {
     $('#側邊欄').addClass('側邊欄-行動版_收起');
     $('#側邊欄').removeClass('側邊欄-行動版_展開');
-    $('#側邊欄-內容').scrollTop(0);
+    $('.側邊欄-內容').scrollTop(0);
   }
 });
 
