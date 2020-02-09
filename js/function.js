@@ -37,7 +37,7 @@ const county = {
 var data = {};
 var cardInfoData = {};
 var searchSellDrugStoreTimeout;
-var urlLocation;
+var urlDrugStore;
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
@@ -200,9 +200,7 @@ function loadData(item)
 
           if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
           {
-            showDrugStoreDetails(item);
-            $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.name + "/@" + item.geometry.coordinates[1] + "," + item.geometry.coordinates[0] + ",15z', '_blank');");
-            urlLocation = item.geometry.coordinates;
+            urlDrugStore = item;
             urlStr = "";
           }
 
@@ -234,9 +232,11 @@ function loadMapData()
 
 function moveToUrlDrugStore()
 {
-  if (urlLocation != undefined)
+  if (urlDrugStore != undefined)
   {
-    map.flyTo({ center: urlLocation, zoom:14});
+    showDrugStoreDetails(urlDrugStore);
+    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.name + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
+    map.flyTo({ center: urlDrugStore.geometry.coordinates, zoom:14});
   }
 }
 
@@ -259,6 +259,35 @@ function loadMarker()
       // "icon-image": (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)))
     }
   });
+
+  map.addLayer({
+    id: "selectedMarker",
+    type: "symbol",
+    source:
+        {
+          type: "geojson",
+          data: {
+            'type': 'FeatureCollection',
+            'features': [
+              {
+                'type': 'Feature',
+                'properties': {
+                  'icon': 'marker_selected'
+                },
+                'geometry': {
+                  'type': 'Point',
+                  'coordinates': [121.2064853310585, 24.91456778625215]
+                }
+              }
+            ]},
+        },
+    layout: {
+      'icon-image': ['get', 'icon'],
+      'icon-allow-overlap':true
+    }
+  });
+  map.setLayoutProperty('selectedMarker', 'visibility', 'none');
+
   loadMarkerClick();
   loadMapMoveListener();
   moveToUrlDrugStore();
@@ -289,21 +318,25 @@ function loadMarker()
 
 function loadMarkerClick()
 {
-  map.on('click', function(e){
+  map.on('click', function(e)
+  {
     var features = map.queryRenderedFeatures(e.point, { layers: ['marker'] });
 
-    if(!features.length){
+    if(!features.length)
+    {
+      map.setLayoutProperty('selectedMarker', 'visibility', 'none');
       $("#側邊欄").removeClass("側邊欄-行動版_藥局Marker");
       if ($("#側邊欄-頁面-檢視藥局").hasClass("側邊欄-頁面_顯示"))
       {
         $("#側邊欄-頁面-檢視藥局-nav-返回").click();
       }
-
       return;
     }
 
     var feature = features[0];
     console.log(feature);
+
+    updateSelectedMarker(feature.geometry.coordinates);
 
     $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.name + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
 
@@ -350,6 +383,14 @@ function updateUrl(name, address)
 
   urlStr += "/" + name ;
   history.pushState('', '', urlStr);
+}
+
+function updateSelectedMarker(coordinates)
+{
+  map.setLayoutProperty('selectedMarker', 'visibility', 'visible');
+  var selectedMarkerSource = map.getSource('selectedMarker')._data;
+  selectedMarkerSource.features[0].geometry.coordinates = coordinates;
+  map.getSource('selectedMarker').setData(selectedMarkerSource);
 }
 
 function moveCameraToCountyArea(county, area)
@@ -686,6 +727,8 @@ function updateSearchSellDrugStoreCardList(isClearData)
 //*********************************************
 function showDrugStoreDetails(item)
 {
+  updateSelectedMarker(item.geometry.coordinates);
+
   $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
 
   if($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))

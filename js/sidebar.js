@@ -29,7 +29,12 @@ navBackBtn.click(function() {
         findRetailerPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
         aboutPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     }
-})
+});
+
+$("#側邊欄-頁面-檢視藥局-nav-返回").click(function()
+{
+    map.setLayoutProperty('selectedMarker', 'visibility', 'none');
+});
 
 //總覽-尋找銷售點
 findRetailerBtn.click(function() {
