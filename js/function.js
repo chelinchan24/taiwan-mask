@@ -88,18 +88,18 @@ function init()
   }
 
   $('#地圖-控制-縮放-放大').click(function(){
-      map.flyTo({zoom: map.getZoom()+1,})
+      map.flyTo({zoom: map.getZoom()+1})
   });
 
   $('#地圖-控制-縮放-縮小').click(function(){
-      map.flyTo({zoom: map.getZoom()-1,})
+      map.flyTo({zoom: map.getZoom()-1})
   });
 
   $('#地圖-控制-定位').click(function()
   {
     if (map.getSource('usrPos') !== undefined)
     {
-      map.flyTo({ center: map.getSource('usrPos')._data.features[0].geometry.coordinates, zoom:14, padding: {left: 400, right: 100}});
+      moveCameraToLatLng(map.getSource('usrPos')._data.features[0].geometry.coordinates);
       map.once('moveend', function()
       {
         console.log("map is moveend");
@@ -236,7 +236,8 @@ function moveToUrlDrugStore()
   {
     showDrugStoreDetails(urlDrugStore);
     $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.name + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
-    map.flyTo({ center: urlDrugStore.geometry.coordinates, zoom:14});
+
+    moveCameraToLatLng(urlDrugStore.geometry.coordinates);
   }
 }
 
@@ -399,7 +400,7 @@ function moveCameraToCountyArea(county, area)
   {
     if (cardInfoData[county][area]["locationBunds"].length == 1)
     {
-      map.flyTo({ center: cardInfoData[county][area]["locationBunds"][0], zoom:14});
+      moveCameraToLatLng(cardInfoData[county][area]["locationBunds"][0]);
     }
     else
     {
@@ -409,6 +410,15 @@ function moveCameraToCountyArea(county, area)
           });
     }
   }
+}
+
+function moveCameraToLatLng(coordinates)
+{
+  map.fitBounds([coordinates, coordinates],
+      {
+        padding: {top: 0, bottom:($(window).width() > 800 ? 0 : 200), left: 0, right: ($(window).width() > 800 ? 426 : 0)},
+        maxZoom:14.5
+      });
 }
 
 //*********************************************
@@ -425,7 +435,7 @@ function updateInfoCard()
     //移動、標記使用者位置
     if (window.location.search === "")
     {
-      map.flyTo({ center: [position.coords.longitude, position.coords.latitude], zoom:14});
+      moveCameraToLatLng([position.coords.longitude, position.coords.latitude]);
       map.once('moveend', function()
       {
         console.log("map is moveend");
@@ -531,7 +541,7 @@ function onClickNearSellOutCard(county, town, id)
   {
     if(item.properties.id == id)
     {
-      map.flyTo({ center: item.geometry.coordinates, zoom:14.5});
+      moveCameraToLatLng(item.geometry.coordinates);
       showDrugStoreDetails(item);
       return;
     }
