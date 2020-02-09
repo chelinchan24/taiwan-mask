@@ -8,6 +8,7 @@ var retailerPage = $('#側邊欄-頁面-檢視藥局')
 var findRetailerBtn = $('#側邊欄-尋找銷售點');
 var aboutBtn = $('#nav-右-關於');
 var navBackBtn = $('.nav-左-返回');
+var dashboardAboutBtn = $('#側邊欄-關於口罩指南')
 var retailerNavBackBtn = $('#側邊欄-頁面-檢視藥局-nav-返回');
 
 //按鈕
@@ -40,6 +41,11 @@ findRetailerBtn.click(function() {
 
 //總覽-關於
 aboutBtn.click(function() {
+    dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+    aboutPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+});
+
+dashboardAboutBtn.click(function() {
     dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
     aboutPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
 });

@@ -41,6 +41,10 @@ div {
     background: url('./src/ic_search.png');
 }
 
+.關於口罩指南 {
+    background: url('./src/ic_main_about.png');
+}
+
 .logo {
     background: url('./src/logo.png');
     background-size: cover;
@@ -197,7 +201,12 @@ div {
     display: flex;
     transition: 0.1s ease;
     cursor: pointer;
+    margin-bottom: 14px;
 }
+
+/*.選單按鈕:last-child {*/
+/*    margin-bottom: 40px;*/
+/*}*/
 
 .選單按鈕:hover {
     background: #E4ECF7;
@@ -669,7 +678,10 @@ nav {
 }
 
 #側邊欄-尋找銷售點 {
-    margin-bottom: 40px;
+}
+
+#側邊欄-關於口罩指南 {
+    margin-bottom: 40px !important;
 }
 
 .側邊欄_區塊-卡片容器 {
@@ -899,9 +911,15 @@ nav {
 }
 
 #側邊欄-檢視藥局-底部按鈕-分享 {
+    display: none;
     background: url('./src/ic_share.png');
     background-size: 100%;
     display: none;
+}
+
+#分享視窗-視窗 {
+    right: 0 !important;
+    box-shadow: 0 2px 74px 0 rgba(0,0,0,0.13);
 }
 
 #分享視窗-視窗 {
