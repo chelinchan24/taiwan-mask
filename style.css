@@ -885,10 +885,6 @@ nav {
     margin-bottom: 120px;
 }
 
-.側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-底部按鈕 {
-    display: none !important;
-}
-
 #側邊欄-檢視藥局-底部按鈕 {
     display: flex;
     width: 100%;
@@ -1508,6 +1504,10 @@ nav {
         border-radius: 8px;
         cursor: pointer;
         display: block;
+    }
+
+    .側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-底部按鈕 {
+        display: none !important;
     }
 
     #分享視窗-分享-網址 {
