@@ -178,7 +178,8 @@ function loadData(item)
 
   if (window.location.search !== "")
   {
-    urlStr = decodeURI(window.location.search).replace("?=", "").split("/");
+    // urlStr = decodeURI(window.location.search).replace("?=", "").split("/");
+    urlStr = new URLSearchParams(window.location.search);
   }
 
   for(var k in county)
@@ -198,7 +199,7 @@ function loadData(item)
           cardInfoData[k][d]["totalMaskAdult"] = cardInfoData[k][d]["totalMaskAdult"] + item.properties.mask_adult;
           cardInfoData[k][d]["totalMaskChild"] = cardInfoData[k][d]["totalMaskChild"] + item.properties.mask_child;
 
-          if (urlStr !== "" && urlStr[0] == k && urlStr[1] == d && urlStr[2] == item.properties.name)
+          if (urlStr !== "" && urlStr.get("id") == item.properties.id)
           {
             urlDrugStore = item;
             urlStr = "";
@@ -339,9 +340,9 @@ function loadMarkerClick()
 
     updateSelectedMarker(feature.geometry.coordinates);
 
-    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.name + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
+    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
 
-    updateUrl(feature["properties"]["name"], feature["properties"]["address"]);
+    updateUrl(feature["properties"]["id"]);
     showDrugStoreDetails(feature);
   });
 
@@ -362,29 +363,35 @@ function loadMapMoveListener()
   });
 }
 
-function updateUrl(name, address)
+function updateUrl(id)
 {
-  var urlStr = "?=" + address.substring(0, 3) +"/";
-  if(address.indexOf("區") != -1)
-  {
-    urlStr += address.substring(3, (address.indexOf("區") + 1));
-  }
-  else if(address.indexOf("市") != -1)
-  {
-    urlStr += address.substring(3, (address.indexOf("市") + 1));
-  }
-  else if(address.indexOf("鄉") != -1)
-  {
-    urlStr += address.substring(3, (address.indexOf("鄉") + 1));
-  }
-  else if(address.indexOf("鎮") != -1)
-  {
-    urlStr += address.substring(3, (address.indexOf("鎮") + 1));
-  }
-
-  urlStr += "/" + name ;
+  var urlStr = "?id=" + id;
   history.pushState('', '', urlStr);
 }
+
+// function updateUrl(name, address)
+// {
+//   var urlStr = "?=" + address.substring(0, 3) +"/";
+//   if(address.indexOf("區") != -1)
+//   {
+//     urlStr += address.substring(3, (address.indexOf("區") + 1));
+//   }
+//   else if(address.indexOf("市") != -1)
+//   {
+//     urlStr += address.substring(3, (address.indexOf("市") + 1));
+//   }
+//   else if(address.indexOf("鄉") != -1)
+//   {
+//     urlStr += address.substring(3, (address.indexOf("鄉") + 1));
+//   }
+//   else if(address.indexOf("鎮") != -1)
+//   {
+//     urlStr += address.substring(3, (address.indexOf("鎮") + 1));
+//   }
+//
+//   urlStr += "/" + name ;
+//   history.pushState('', '', urlStr);
+// }
 
 function updateSelectedMarker(coordinates)
 {
@@ -416,7 +423,7 @@ function moveCameraToLatLng(coordinates)
 {
   map.fitBounds([coordinates, coordinates],
       {
-        padding: {top: 0, bottom:($(window).width() > 800 ? 0 : 200), left: 0, right: ($(window).width() > 800 ? 426 : 0)},
+        padding: {top: 0, bottom:($(window).width() > 800 ? 0 : 200), left: 0, right: ($(window).width() > 800 ? 361 : 0)},
         maxZoom:14.5
       });
 }
@@ -762,6 +769,12 @@ function showDrugStoreDetails(item)
   $("#側邊欄-販售存量-兒童-數據-數字").text(maskChild);
   $("#側邊欄-商家資訊-地址-地址").text(item.properties.address);
   $("#側邊欄-商家資訊-電話-號碼").text(item.properties.phone);
+
+  if (item.properties.custom_note !== "")
+  {
+    $("#側邊欄-商家的提醒").removeClass("隱藏");
+    $(".側邊欄-店家的提醒-內文").text(item.properties.custom_note);
+  }
 }
 
 function getMaskType(count, lotInStock, nearSellOut, almostSellOut, sellOut)
