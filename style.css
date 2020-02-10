@@ -872,7 +872,7 @@ nav {
 }
 
 .側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-底部按鈕 {
-    display: none;
+    display: none !important;
 }
 
 #側邊欄-檢視藥局-底部按鈕 {
