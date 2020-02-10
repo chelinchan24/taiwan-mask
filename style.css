@@ -863,7 +863,21 @@ nav {
     border-bottom: 1px solid #EDEDED;
 }
 
-#側邊欄-留言 {
+#側邊欄-商家的提醒 {
+    margin-bottom: 14px !important;
+}
+#側邊欄-商家的提醒 .中標題 {
+    color: #000000;
+    margin-bottom: 16px;
+}
+
+#側邊欄-店家的提醒-內文 {
+    font-size: 15px;
+    color: #4D4D4D;
+    line-height: 21px;
+}
+
+#側邊欄-留言, #側邊欄-商家的提醒 {
     background: #F9F9F9;
     padding: 22px;
     box-sizing: border-box;
