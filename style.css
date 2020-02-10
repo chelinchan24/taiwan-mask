@@ -1009,6 +1009,7 @@ nav {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    padding: 0px 15px;
 }
 
 #側邊欄-關於標題-logo {
