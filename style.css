@@ -871,6 +871,9 @@ nav {
     margin-bottom: 120px;
 }
 
+.側邊欄-行動版_藥局Marker #側邊欄-檢視藥局-底部按鈕 {
+    display: none;
+}
 
 #側邊欄-檢視藥局-底部按鈕 {
     display: flex;
@@ -1458,10 +1461,6 @@ nav {
 
     .側邊欄-行動版_展開 .側邊欄-內容 {
         overflow: scroll;
-    }
-
-    .側邊欄-行動版_藥局Marker {
-        height: 250px !important;
     }
 
     .側邊欄-行動版_藥局Marker {
