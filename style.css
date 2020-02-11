@@ -32,7 +32,7 @@ div {
 .這是什麼 {
     width: 18px;
     height: 18px;
-    display: block;
+    display: inline-block;
     background: url('./src/ic_whatisthis.png');
     background-size: cover;
 }
@@ -865,9 +865,21 @@ nav {
 
 #側邊欄-商家的提醒 {
     margin-bottom: 14px !important;
+    cursor: pointer;
 }
+
+#側邊欄-商家的提醒:hover {
+    opacity: 0.75;
+}
+
 #側邊欄-商家的提醒 .中標題 {
     color: #000000;
+}
+
+#側邊欄-商家的提醒-標題 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
 }
 
