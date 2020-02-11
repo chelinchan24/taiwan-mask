@@ -775,6 +775,10 @@ function showDrugStoreDetails(item)
     $("#側邊欄-商家的提醒").removeClass("隱藏");
     $(".側邊欄-店家的提醒-內文").text(item.properties.custom_note);
   }
+  else
+  {
+    $("#側邊欄-商家的提醒").addClass("隱藏");
+  }
 }
 
 function getMaskType(count, lotInStock, nearSellOut, almostSellOut, sellOut)
