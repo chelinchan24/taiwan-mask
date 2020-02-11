@@ -144,7 +144,11 @@ $('.側邊欄-內容').on('touchmove', function(event)
     console.log("touchmove = " + event.changedTouches[0].clientY);
     if ($(this).scrollTop() <= 0 && event.changedTouches[0].clientY >= (sidebarTouchY + 30) && !$('#側邊欄-過濾-城市-下拉選單').hasClass('下拉選單_展開') && !$('#側邊欄-過濾-地區-下拉選單').hasClass('下拉選單_展開'))
     {
-        $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起').addClass("側邊欄-行動版_藥局Marker");
+        $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
+        if ($('#側邊欄-頁面-檢視藥局').hasClass("側邊欄-頁面_顯示"))
+        {
+            $('#側邊欄').addClass("側邊欄-行動版_藥局Marker");
+        }
         $('.側邊欄-內容').scrollTop(0);
     }
 });
