@@ -454,11 +454,11 @@ nav {
     box-sizing: border-box;
     justify-content: space-between;
     margin-top: 30px;
+    align-content: center;
 }
 
 .nav-左, .nav-右 {
     flex: 1;
-    height: 32px;
     max-width:calc(50% - 6px);
 }
 
@@ -871,7 +871,7 @@ nav {
     margin-bottom: 16px;
 }
 
-#側邊欄-店家的提醒-內文 {
+.側邊欄-店家的提醒-內文 {
     font-size: 15px;
     color: #4D4D4D;
     line-height: 21px;
