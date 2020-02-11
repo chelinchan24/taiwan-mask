@@ -236,7 +236,7 @@ function moveToUrlDrugStore()
   if (urlDrugStore != undefined)
   {
     showDrugStoreDetails(urlDrugStore);
-    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.name + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
+    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
 
     moveCameraToLatLng(urlDrugStore.geometry.coordinates);
   }
@@ -773,7 +773,7 @@ function showDrugStoreDetails(item)
   if (item.properties.custom_note !== "")
   {
     $("#側邊欄-商家的提醒").removeClass("隱藏");
-    $(".側邊欄-店家的提醒-內文").text(item.properties.custom_note);
+    $(".側邊欄-店家的提醒-內文").html(item.properties.custom_note.trim().split("\n").join("<br><br>"));
   }
   else
   {
