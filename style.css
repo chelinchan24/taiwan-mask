@@ -863,33 +863,33 @@ nav {
     border-bottom: 1px solid #EDEDED;
 }
 
-#側邊欄-商家的提醒 {
+#側邊欄-商家的提醒, #側邊欄-購買須知 {
     margin-bottom: 14px !important;
     cursor: pointer;
 }
 
-#側邊欄-商家的提醒:hover {
+#側邊欄-商家的提醒:hover, #側邊欄-購買須知:hover {
     opacity: 0.75;
 }
 
-#側邊欄-商家的提醒 .中標題 {
+#側邊欄-商家的提醒 .中標題, #側邊欄-購買須知 .中標題 {
     color: #000000;
 }
 
-#側邊欄-商家的提醒-標題 {
+#側邊欄-商家的提醒-標題, #側邊欄-購買須知-標題 {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
 }
 
-.側邊欄-店家的提醒-內文 {
+.側邊欄-店家的提醒-內文, .側邊欄-購買須知-內文 {
     font-size: 15px;
     color: #4D4D4D;
     line-height: 21px;
 }
 
-#側邊欄-留言, #側邊欄-商家的提醒 {
+#側邊欄-留言, #側邊欄-商家的提醒, #側邊欄-購買須知 {
     background: #F9F9F9;
     padding: 22px;
     box-sizing: border-box;
