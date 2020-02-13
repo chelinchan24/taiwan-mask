@@ -773,11 +773,21 @@ function showDrugStoreDetails(item)
   if (item.properties.custom_note !== "")
   {
     $("#側邊欄-商家的提醒").removeClass("隱藏");
-    $(".側邊欄-店家的提醒-內文").html(item.properties.custom_note.trim().split("\n").join("<br><br>"));
+    $("#側邊欄-商家的提醒-內文").html(item.properties.custom_note.trim().split("\n").join("<br><br>"));
   }
   else
   {
     $("#側邊欄-商家的提醒").addClass("隱藏");
+  }
+
+  if (item.properties.service_note !== "")
+  {
+    $("#側邊欄-購買須知").removeClass("隱藏");
+    $("#側邊欄-購買須知-內文").html(item.properties.service_note.trim().split("\n").join("<br><br>"));
+  }
+  else
+  {
+    $("#側邊欄-購買須知").addClass("隱藏");
   }
 }
 
