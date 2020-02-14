@@ -780,7 +780,7 @@ function showDrugStoreDetails(item)
     $("#側邊欄-商家的提醒").addClass("隱藏");
   }
 
-  if (item.properties.note !== "")
+  if (item.properties.note !== "-")
   {
     $("#側邊欄-購買須知").removeClass("隱藏");
     $("#側邊欄-購買須知-內文").html(item.properties.note.trim().split("\n").join("<br><br>"));
