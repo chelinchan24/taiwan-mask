@@ -1717,5 +1717,9 @@ nav {
         margin-right: -24px;
         margin-left: -24px;
     }
+
+    .側邊欄-行動版_收起 #側邊欄-總覽-過濾 {
+        display: none;
+    }
 }
 /*1500行！*/
