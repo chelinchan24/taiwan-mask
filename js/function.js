@@ -3,6 +3,10 @@ const MARKER_NEAR_SELL_OUT = "ic_nearSellout";
 const MARKER_ALMOST_SELL_OUT = "marker_alomostSellOut";
 const MARKER_SELL_OUT = "ic_sellOut";
 
+const FILTER_MASK_ALL   = "filter_mask_all";
+const FILTER_MASK_ADULT = "filter_mask_adult";
+const FILTER_MASK_CHILD = "filter_mask_child";
+
 const county = {
           "台北市":["中正區", "大同區", "中山區", "松山區", "大安區", "萬華區", "信義區", "士林區", "北投區", "內湖區", "南港區", "文山區"],
           "新北市":["板橋區", "新莊區", "中和區", "永和區", "土城區", "樹林區", "三峽區", "鶯歌區", "三重區", "蘆洲區", "五股區", "泰山區", "林口區", "八里區", "淡水區", "三芝區", "石門區", "金山區", "萬里區"
@@ -38,7 +42,7 @@ var data = {};
 var cardInfoData = {};
 var searchSellDrugStoreTimeout;
 var urlDrugStore;
-
+var userAddress;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
 var map = new mapboxgl.Map({
@@ -155,6 +159,8 @@ $(document).ready(function()
     {
       var totalMask = s["features"][i].properties.mask_adult + s["features"][i].properties.mask_child;
       s["features"][i]["properties"]["icon"] = (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
+      s["features"][i]["properties"]["icon-adult"] = (s["features"][i].properties.mask_adult > 50 ? MARKER_LOT_IN_STOCK : (s["features"][i].properties.mask_adult >= 25 ? MARKER_NEAR_SELL_OUT : (s["features"][i].properties.mask_adult > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
+      s["features"][i]["properties"]["icon-child"] = (s["features"][i].properties.mask_child > 50 ? MARKER_LOT_IN_STOCK : (s["features"][i].properties.mask_child >= 25 ? MARKER_NEAR_SELL_OUT : (s["features"][i].properties.mask_child > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
     }
 
     //分類
@@ -199,7 +205,7 @@ function loadData(item)
           cardInfoData[k][d]["totalMaskAdult"] = cardInfoData[k][d]["totalMaskAdult"] + item.properties.mask_adult;
           cardInfoData[k][d]["totalMaskChild"] = cardInfoData[k][d]["totalMaskChild"] + item.properties.mask_child;
 
-          if (urlStr !== "" && urlStr.get("id") == item.properties.id)
+          if (urlStr !== "" && urlStr.get("id") === item.properties.id)
           {
             urlDrugStore = item;
             urlStr = "";
@@ -401,6 +407,22 @@ function updateSelectedMarker(coordinates)
   map.getSource('selectedMarker').setData(selectedMarkerSource);
 }
 
+function updateAllMarker()
+{
+  if (getDashboardFilterType() === FILTER_MASK_ADULT)
+  {
+    map.setLayoutProperty("marker", "icon-image", ['get', 'icon-adult']);
+  }
+  else if (getDashboardFilterType() === FILTER_MASK_CHILD)
+  {
+    map.setLayoutProperty("marker", "icon-image", ['get', 'icon-child']);
+  }
+  else
+  {
+    map.setLayoutProperty("marker", "icon-image", ['get', 'icon']);
+  }
+}
+
 function moveCameraToCountyArea(county, area)
 {
   if (cardInfoData[county][area]["locationBunds"].length != 0)
@@ -482,11 +504,12 @@ function updateInfoCard()
       console.log("位置取得完成");
       hidePopWindow();
 
+      userAddress = source.address;
+
       //update infoCard
       var city = getLocationDataToCounty(source.address)
       $("#側邊欄-區域狀況-地區").text(city + getLocationDataToTown(source.address));
       $("#側邊欄-區域狀況-內容-販售中藥局-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalDrugStore"]);
-      $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskAdult"] + cardInfoData[city][getLocationDataToTown(source.address)]["totalMaskChild"]);
 
       updateNearSellOutCard(source.address);
       initDropMenu(city, getLocationDataToTown(source.address));
@@ -509,9 +532,11 @@ function updateNearSellOutCard(address)
   $("#側邊欄-即將售罄-內容").empty();
   $("#側邊欄-剛售罄-內容").empty();
 
+  $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(getFilterMaskData(getDashboardFilterType(), cardInfoData[getLocationDataToCounty(address)][getLocationDataToTown(address)]["totalMaskAdult"], cardInfoData[getLocationDataToCounty(address)][getLocationDataToTown(address)]["totalMaskChild"]));
+
   data[getLocationDataToCounty(address)][getLocationDataToTown(address)]["features"].forEach(function(item)
   {
-    var totalMask = item.properties.mask_adult + item.properties.mask_child;
+    var totalMask =  getFilterMaskData(getDashboardFilterType(), item.properties.mask_adult, item.properties.mask_child);
     if(totalMask <= 50)
     {
       if(totalMask != 0 && nearSellOutCount < 10)
@@ -546,7 +571,7 @@ function onClickNearSellOutCard(county, town, id)
 {
   data[county][town]["features"].forEach(function(item)
   {
-    if(item.properties.id == id)
+    if(item.properties.id === id)
     {
       moveCameraToLatLng(item.geometry.coordinates);
       showDrugStoreDetails(item);
@@ -698,21 +723,23 @@ function updateTownDropMenu(ct)
 //更新銷售點卡片列表
 function updateSearchSellDrugStoreCardList(isClearData)
 {
+  var county = $("#側邊欄-過濾-城市-按鈕-文字").text();
+  var town = $("#側邊欄-過濾-地區-按鈕-文字").text();
+
   if(isClearData)
   {
+    sortSearchCardData();
     $("#側邊欄-結果").empty();
   }
 
-  var county = $("#側邊欄-過濾-城市-按鈕-文字").text();
-  var town = $("#側邊欄-過濾-地區-按鈕-文字").text();
-  console.log("結果 length = " + $("#側邊欄-結果").children().length);
-  console.log("data length = " + data[county][town]["features"].length);
+  // console.log("結果 length = " + $("#側邊欄-結果").children().length);
+  // console.log("data length = " + data[county][town]["features"].length);
   if ($("#側邊欄-結果").children().length >= data[county][town]["features"].length) return;
 
   for (var i = 0; i < 10; i++)
   {
     var item = data[county][town]["features"][$("#側邊欄-結果").children().length];
-    console.log("count = " + ($("#側邊欄-結果").children().length));
+    // console.log("count = " + ($("#側邊欄-結果").children().length));
     if(item === undefined)
     {
       $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
@@ -720,7 +747,7 @@ function updateSearchSellDrugStoreCardList(isClearData)
       return;
     }
 
-    var totalMask = item.properties.mask_adult + item.properties.mask_child;
+    var totalMask = getFilterMaskData(getSearchCardFilterType(), item.properties.mask_adult, item.properties.mask_child);
     $("#側邊欄-結果").append(
       '<div class="側邊欄-結果-項目"  onclick=\'onClickNearSellOutCard("' + $("#側邊欄-過濾-城市-按鈕-文字").text() + '", "' + $("#側邊欄-過濾-地區-按鈕-文字").text() + '", "' + item.properties.id + '")\' >' +
         '<div class="側邊欄-結果-項目-計數 ' + (totalMask > 50 ? "卡片-充足" : (totalMask >= 25 ? "卡片-幾乎售罄" : (totalMask > 0 ? "卡片-即將售罄" : "卡片-售罄"))) + '">' +
@@ -736,7 +763,7 @@ function updateSearchSellDrugStoreCardList(isClearData)
       '</div>'
     );
   }
-  console.log("-----");
+  // console.log("-----");
 }
 
 //*********************************************
@@ -794,4 +821,66 @@ function showDrugStoreDetails(item)
 function getMaskType(count, lotInStock, nearSellOut, almostSellOut, sellOut)
 {
   return (count > 50 ? lotInStock : (count >= 25 ? nearSellOut : (count > 0 ? almostSellOut : sellOut)));
+}
+
+function getFilterMaskData(filterType, maskAdult, maskChild)
+{
+  return (filterType === FILTER_MASK_ADULT ? maskAdult : (filterType === FILTER_MASK_CHILD ? maskChild : (maskAdult + maskChild)));
+}
+
+//總覽過濾類型
+function getDashboardFilterType()
+{
+  if ($("#側邊欄-總覽-過濾-僅限成人").hasClass("側邊欄-總覽-過濾_選項_啟用"))
+  {
+    return FILTER_MASK_ADULT;
+  }
+  else if ($("#側邊欄-總覽-過濾-僅限兒童").hasClass("側邊欄-總覽-過濾_選項_啟用"))
+  {
+    return FILTER_MASK_CHILD;
+  }
+  {
+    return FILTER_MASK_ALL;
+  }
+}
+
+//搜尋卡片過濾類型
+function getSearchCardFilterType()
+{
+  if ($("#側邊欄-過濾規格-僅限成人").hasClass("側邊欄-過濾規格_選項_啟用"))
+  {
+    return FILTER_MASK_ADULT;
+  }
+  else if ($("#側邊欄-過濾規格-僅限兒童").hasClass("側邊欄-過濾規格_選項_啟用"))
+  {
+    return FILTER_MASK_CHILD;
+  }
+  {
+    return FILTER_MASK_ALL;
+  }
+}
+
+function sortSearchCardData()
+{
+  var county = $("#側邊欄-過濾-城市-按鈕-文字").text();
+  var town = $("#側邊欄-過濾-地區-按鈕-文字").text();
+
+  if (getSearchCardFilterType() === FILTER_MASK_ADULT)
+  {
+    data[county][town].features.sort(function(a, b){
+      return b.properties.mask_adult < a.properties.mask_adult ? -1 : 1;
+    });
+  }
+  else if (getSearchCardFilterType() === FILTER_MASK_CHILD)
+  {
+    data[county][town].features.sort(function(a, b){
+      return b.properties.mask_child < a.properties.mask_child ? -1 : 1;
+    });
+  }
+  else
+  {
+    data[county][town].features.sort(function(a, b){
+      return (b.properties.mask_adult + b.properties.mask_child) < (a.properties.mask_adult + a.properties.mask_child) ? -1 : 1;
+    });
+  }
 }

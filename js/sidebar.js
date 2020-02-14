@@ -61,6 +61,65 @@ dashboardAboutBtn.click(function() {
 //     retailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
 // });
 
+//-- 過濾功能
+// 過濾功能
+$("#側邊欄-總覽-過濾-全部").click(function()
+{
+    $("#側邊欄-總覽-過濾-全部").addClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+
+    updateNearSellOutCard(userAddress);
+    updateAllMarker();
+});
+
+$("#側邊欄-總覽-過濾-僅限成人").click(function()
+{
+    $("#側邊欄-總覽-過濾-僅限成人").addClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+
+    updateNearSellOutCard(userAddress);
+    updateAllMarker();
+});
+
+$("#側邊欄-總覽-過濾-僅限兒童").click(function()
+{
+    $("#側邊欄-總覽-過濾-僅限兒童").addClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
+
+    updateNearSellOutCard(userAddress);
+    updateAllMarker();
+});
+
+// 尋找銷售點
+$("#側邊欄-過濾規格-全部").click(function()
+{
+    $("#側邊欄-過濾規格-全部").addClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-僅限成人").removeClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
+
+    updateSearchSellDrugStoreCardList(true);
+});
+
+$("#側邊欄-過濾規格-僅限成人").click(function()
+{
+    $("#側邊欄-過濾規格-僅限成人").addClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-全部").removeClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
+
+    updateSearchSellDrugStoreCardList(true);
+});
+
+$("#側邊欄-過濾規格-僅限兒童").click(function()
+{
+    $("#側邊欄-過濾規格-僅限兒童").addClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-全部").removeClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-僅限成人").removeClass("側邊欄-過濾規格_選項_啟用");
+
+    updateSearchSellDrugStoreCardList(true);
+});
 
 
 
