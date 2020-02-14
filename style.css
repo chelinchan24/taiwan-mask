@@ -460,6 +460,9 @@ nav {
 .nav-左, .nav-右 {
     flex: 1;
     max-width:calc(50% - 6px);
+    /*! display: flex; */
+    /*! align-items: center; */
+    /*! text-align: right; */
 }
 
 .nav-左 {
@@ -488,9 +491,9 @@ nav {
     transition: 0.1s ease;
 }
 
-#nav-左-關閉 {
-    display: none;
-}
+/*#nav-左-關閉 {*/
+/*    display: none;*/
+/*}*/
 
 .nav-圖標 {
     width: 28px;
@@ -1411,7 +1414,7 @@ nav {
 #側邊欄-總覽-過濾 {
     display: flex;
     min-height: 60px;
-    height: 60px;
+    height: 40px;
     justify-content: space-around;
     align-items: center;
     background: #FFFFFF;
@@ -1423,6 +1426,7 @@ nav {
     box-shadow: 0 9px 15px 0 rgba(0,0,0,0.04);
     margin-bottom: 32px;
     border-top: 6px solid #F9F9F9;
+    margin-top: -10px;
 }
 
 
@@ -1568,20 +1572,20 @@ nav {
         bottom: 0 !important;
     }
 
-    #nav-左-關閉 {
-        width: 28px;
-        height: 28px;
-        background: url('./src/ic_close.png');
-        background-size: cover;
-    }
+    /*#nav-左-關閉 {*/
+    /*    width: 28px;*/
+    /*    height: 28px;*/
+    /*    background: url('./src/ic_close.png');*/
+    /*    background-size: cover;*/
+    /*}*/
 
-    .側邊欄-行動版_展開 #nav-左-關閉 {
-        display: block;
-    }
+    /*.側邊欄-行動版_展開 #nav-左-關閉 {*/
+    /*    display: block;*/
+    /*}*/
 
-    .側邊欄-行動版_展開 #nav-左-logo {
-        display: none;
-    }
+    /*.側邊欄-行動版_展開 #nav-左-logo {*/
+    /*    display: none;*/
+    /*}*/
 
     .側邊欄-行動版_關閉 {
         overflow: hidden !important;
