@@ -681,8 +681,7 @@ nav {
 }
 
 #側邊欄-關於口罩指南 {
-    /*margin-bottom: 40px !important;*/
-    margin-bottom: 14px !important;
+    margin-bottom: 40px !important;
 }
 
 .側邊欄_區塊-卡片容器 {
@@ -1721,6 +1720,10 @@ nav {
 
     .側邊欄-行動版_收起 #側邊欄-總覽-過濾 {
         display: none;
+    }
+
+    #側邊欄-過濾 {
+        margin-bottom: 0px;
     }
 }
 /*1500行！*/
