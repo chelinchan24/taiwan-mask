@@ -16,24 +16,24 @@ body, html {
 body::after{
     position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
     content:url(./src/ic_child_normal.png)
-            url(./src/ic_all_normal.png)
-            url(./src/ic_all_active.png)
-            url(./src/ic_adult_active.png)
-            url(./src/ic_child_active.png)
-            url(./src/ic_adult_normal.png)
-            url(./src/ic_main_about.png)
-            url(./src/logo.png)
-            url(./src/ic_close.png)
-            url(./src/ic_back.png)
-            url(./src/ic_lastUpdate.png)
-            url(./src/ic_located.png)
-            url(./src/ic_zoomOut_normal.png)
-            url(./src/ic_zoomOut_press.png)
-            url(./src/ic_zoomIn_normal.png)
-            url(./src/ic_zoomIn_press.png)
-            url(./src/ic_about.png)
-            url(./src/ic_search.png)
-            url(./src/ic_whatisthis.png);
+    url(./src/ic_all_normal.png)
+    url(./src/ic_all_active.png)
+    url(./src/ic_adult_active.png)
+    url(./src/ic_child_active.png)
+    url(./src/ic_adult_normal.png)
+    url(./src/ic_main_about.png)
+    url(./src/logo.png)
+    url(./src/ic_close.png)
+    url(./src/ic_back.png)
+    url(./src/ic_lastUpdate.png)
+    url(./src/ic_located.png)
+    url(./src/ic_zoomOut_normal.png)
+    url(./src/ic_zoomOut_press.png)
+    url(./src/ic_zoomIn_normal.png)
+    url(./src/ic_zoomIn_press.png)
+    url(./src/ic_about.png)
+    url(./src/ic_search.png)
+    url(./src/ic_whatisthis.png);
 }
 
 a {
@@ -1447,7 +1447,7 @@ nav {
     margin-left: -30px;
     margin-right: -30px;
     box-shadow: 0 9px 15px 0 rgba(0,0,0,0.04);
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     border-top: 6px solid #F9F9F9;
     margin-top: -10px;
 }
