@@ -13,6 +13,29 @@ body, html {
     overflow: hidden;
 }
 
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+    content:url(./src/ic_child_normal.png)
+            url(./src/ic_all_normal.png)
+            url(./src/ic_all_active.png)
+            url(./src/ic_adult_active.png)
+            url(./src/ic_child_active.png)
+            url(./src/ic_adult_normal.png)
+            url(./src/ic_main_about.png)
+            url(./src/logo.png)
+            url(./src/ic_close.png)
+            url(./src/ic_back.png)
+            url(./src/ic_lastUpdate.png)
+            url(./src/ic_located.png)
+            url(./src/ic_zoomOut_normal.png)
+            url(./src/ic_zoomOut_press.png)
+            url(./src/ic_zoomIn_normal.png)
+            url(./src/ic_zoomIn_press.png)
+            url(./src/ic_about.png)
+            url(./src/ic_search.png)
+            url(./src/ic_whatisthis.png);
+}
+
 a {
     color: #005DDB;
     text-decoration: none;
