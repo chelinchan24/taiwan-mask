@@ -717,7 +717,7 @@ nav {
     line-break: unset;
 }
 
-#側邊欄-即將售罄, .側邊欄_區塊-卡片_剛售罄 {
+#側邊欄-即將售罄, #側邊欄-還有最多庫存, .側邊欄_區塊-卡片_剛售罄 {
     display: block;
     margin-bottom: 40px;
 }
@@ -726,7 +726,7 @@ nav {
     display: none;
 }
 
-.側邊欄-即將售罄-卡片, .側邊欄-剛售罄-卡片 {
+.側邊欄-即將售罄-卡片, .側邊欄-還有最多庫存-卡片, .側邊欄-剛售罄-卡片 {
     min-width: 154px;
     width: 154px;
     margin-right: 8px;
