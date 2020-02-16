@@ -241,6 +241,14 @@ function moveToUrlDrugStore()
 {
   if (urlDrugStore != undefined)
   {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.title = urlDrugStore["properties"]["name"];
+        this.page.identifier = urlDrugStore["properties"]["id"];
+      }
+    });
+
     showDrugStoreDetails(urlDrugStore);
     $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
 
