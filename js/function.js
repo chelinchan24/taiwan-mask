@@ -246,6 +246,7 @@ function moveToUrlDrugStore()
       config: function () {
         this.page.title = urlDrugStore["properties"]["name"];
         this.page.identifier = urlDrugStore["properties"]["id"];
+        this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
       }
     });
 
@@ -357,6 +358,7 @@ function loadMarkerClick()
       config: function () {
         this.page.title = feature["properties"]["name"]
         this.page.identifier = feature["properties"]["id"];
+        this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
       }
     });
 
