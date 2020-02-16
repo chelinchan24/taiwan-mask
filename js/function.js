@@ -347,6 +347,7 @@ function loadMarkerClick()
     DISQUS.reset({
       reload: true,
       config: function () {
+        this.page.title = feature["properties"]["name"]
         this.page.identifier = feature["properties"]["id"];
       }
     });
