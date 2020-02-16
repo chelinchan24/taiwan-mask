@@ -344,6 +344,13 @@ function loadMarkerClick()
     var feature = features[0];
     console.log(feature);
 
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.identifier = feature["properties"]["id"];
+      }
+    });
+
     updateSelectedMarker(feature.geometry.coordinates);
 
     $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
@@ -528,9 +535,11 @@ function updateNearSellOutCard(address)
 {
   var nearSellOutCount = 0;
   var sellOutCount = 0;
+  var lotInStockCount = 0;
 
   $("#側邊欄-即將售罄-內容").empty();
   $("#側邊欄-剛售罄-內容").empty();
+  $("#側邊欄-還有最多庫存-內容").empty();
 
   $("#側邊欄-區域狀況-內容-剩餘口罩-數據").text(getFilterMaskData(getDashboardFilterType(), cardInfoData[getLocationDataToCounty(address)][getLocationDataToTown(address)]["totalMaskAdult"], cardInfoData[getLocationDataToCounty(address)][getLocationDataToTown(address)]["totalMaskChild"]));
 
@@ -563,6 +572,20 @@ function updateNearSellOutCard(address)
           '</div>'
         );
       }
+    }
+    else if (lotInStockCount < 10)
+    {
+      lotInStockCount = lotInStockCount + 1;
+      $("#側邊欄-還有最多庫存-內容").append(
+          '<div class="側邊欄-還有最多庫存-卡片 卡片 卡片-充足 " onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\' >' +
+          '  <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
+          '    <div class="卡片-數據_大">' + totalMask + '</div>'+
+          '    <div class="卡片-數據_單位">片</div>' +
+          '  </div>' +
+          '  <div class="卡片-名稱">' + item.properties.name + '</div>' +
+          '  <div class="卡片-地址">' + item.properties.address + '</div>' +
+          '</div>'
+      );
     }
   });
 }
