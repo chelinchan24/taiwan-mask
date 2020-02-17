@@ -11,7 +11,20 @@ var navBackBtn = $('.nav-左-返回');
 var dashboardAboutBtn = $('#側邊欄-關於口罩指南')
 var retailerNavBackBtn = $('#側邊欄-頁面-檢視藥局-nav-返回');
 
-//按鈕
+//讀取畫面
+$(document).ready(function(){
+    function doneLoading() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        $('#讀取畫面').addClass('讀取畫面-完成');
+        $('#讀取畫面').on('transitionend', function () {
+            $('#讀取畫面').remove();
+        });
+        //$('body').addClass('body-完成');
+    }
+    setTimeout(doneLoading, 1000);
+});
+
 //導覽列返回
 navBackBtn.click(function() {
 

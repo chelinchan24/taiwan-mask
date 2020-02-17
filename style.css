@@ -365,6 +365,35 @@ div {
     text-align: center;
 }
 
+/* 讀取畫面 */
+
+#讀取畫面 {
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    background: #ffffff;
+    justify-content: center;
+    align-items: center;
+}
+
+#讀取畫面:after {
+    content: '';
+    background: url('./src/ic_loading.gif');
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    display: block;
+}
+
+.讀取畫面-完成 {
+    opacity: 0;
+    transition: 0.4s ease-out;
+}
+
 /* 地圖 */
 #地圖容器 {
     width: 100%;
@@ -791,7 +820,7 @@ nav {
     transition: 0.1s ease;
 }
 
-.側邊欄-過濾規格_選項:hover {
+.側邊欄-過濾規格_選項:hover .側邊欄-過濾規格_選項:focus {
     opacity: 0.7;
     transition: 0.1s ease;
 }
@@ -1483,7 +1512,7 @@ nav {
     position: relative;
 }
 
-.側邊欄-總覽-過濾_選項:hover {
+.側邊欄-總覽-過濾_選項:hover, .側邊欄-總覽-過濾_選項:focus {
     /*     background: #F9F9F9; */
     opacity: 0.6;
 }
