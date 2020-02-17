@@ -13,9 +13,10 @@ var retailerNavBackBtn = $('#側邊欄-頁面-檢視藥局-nav-返回');
 
 //讀取畫面
 $(document).ready(function(){
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
     function doneLoading() {
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
         $('#讀取畫面').addClass('讀取畫面-完成');
         $('#讀取畫面').on('transitionend', function () {
             $('#讀取畫面').remove();
