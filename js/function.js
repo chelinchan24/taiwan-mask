@@ -545,6 +545,9 @@ function updateNearSellOutCard(address)
   var sellOutCount = 0;
   var lotInStockCount = 0;
 
+  $("#側邊欄-即將售罄-沒有更多").addClass("隱藏");
+  $("#側邊欄-剛售罄-沒有更多").addClass(("隱藏"));
+
   $("#側邊欄-即將售罄-內容").empty();
   $("#側邊欄-剛售罄-內容").empty();
   $("#側邊欄-還有最多庫存-內容").empty();
@@ -597,12 +600,12 @@ function updateNearSellOutCard(address)
     }
   });
 
-  if (nearSellOutCount === 0)
+  if ($("#側邊欄-即將售罄-內容").children().length === 0)
   {
     $("#側邊欄-即將售罄-沒有更多").removeClass("隱藏");
   }
 
-  if (sellOutCount === 0)
+  if ($("#側邊欄-剛售罄-內容").children().length === 0)
   {
     $("#側邊欄-剛售罄-沒有更多").removeClass(("隱藏"));
   }
