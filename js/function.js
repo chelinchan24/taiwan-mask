@@ -388,6 +388,7 @@ function updateUrl(title, id)
 {
   var urlStr = "?id=" + id;
   history.pushState('', '', urlStr);
+  document.title = title + '| 口罩指南';
 }
 
 // function updateUrl(name, address)
