@@ -58,9 +58,6 @@ $(document).ready(function()
 
 function init()
 {
-  //取得 "?" 後面的字串
-  console.log(window.location.search);
-
   //更改版權位置
   map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
 
@@ -239,7 +236,7 @@ function loadMapData()
 
 function moveToUrlDrugStore()
 {
-  if (urlDrugStore != undefined)
+  if (urlDrugStore !== undefined)
   {
     DISQUS.reset({
       reload: true,
@@ -356,7 +353,7 @@ function loadMarkerClick()
     DISQUS.reset({
       reload: true,
       config: function () {
-        this.page.title = feature["properties"]["name"]
+        this.page.title = feature["properties"]["name"];
         this.page.identifier = feature["properties"]["id"];
         this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
       }
@@ -366,7 +363,7 @@ function loadMarkerClick()
 
     $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
 
-    updateUrl(feature["properties"]["id"]);
+    updateUrl(feature["properties"]["name"], feature["properties"]["id"]);
     showDrugStoreDetails(feature);
   });
 
@@ -387,7 +384,7 @@ function loadMapMoveListener()
   });
 }
 
-function updateUrl(id)
+function updateUrl(title, id)
 {
   var urlStr = "?id=" + id;
   history.pushState('', '', urlStr);
@@ -464,7 +461,7 @@ function moveCameraToLatLng(coordinates)
   map.fitBounds([coordinates, coordinates],
       {
         padding: {top: 0, bottom:($(window).width() > 800 ? 0 : 200), left: 0, right: ($(window).width() > 800 ? 361 : 0)},
-        maxZoom:14.5
+        maxZoom:15
       });
 }
 
@@ -599,6 +596,16 @@ function updateNearSellOutCard(address)
       );
     }
   });
+
+  if (nearSellOutCount === 0)
+  {
+    $("#側邊欄-即將售罄-沒有更多").removeClass("隱藏");
+  }
+
+  if (sellOutCount === 0)
+  {
+    $("#側邊欄-剛售罄-沒有更多").removeClass(("隱藏"));
+  }
 }
 
 function onClickNearSellOutCard(county, town, id)
