@@ -746,6 +746,18 @@ nav {
     line-break: unset;
 }
 
+.側邊欄-卡片-剩餘數量 {
+    height: 57px;
+    position: relative;
+}
+
+.側邊欄-卡片-剩餘數量 .卡片-數據_小 {
+    margin-top: 10px;
+}
+
+.側邊欄-卡片-剩餘數量 .卡片-數據_單位 {
+}
+
 #側邊欄-即將售罄, #側邊欄-還有最多庫存, .側邊欄_區塊-卡片_剛售罄 {
     display: block;
     margin-bottom: 40px;
@@ -922,6 +934,10 @@ nav {
 .側邊欄-販售存量_規格-數據, .行動-銷售點預覽-販售存量_規格-數據 {
     display: flex;
     align-items: baseline;
+}
+
+.側邊欄-販售存量_規格-數據 .卡片-數據_小{
+    margin-top: 15px;
 }
 
 #側邊欄-商家資訊 {
