@@ -591,7 +591,7 @@ function updateNearSellOutCard(address)
       $("#側邊欄-還有最多庫存-內容").append(
           '<div class="側邊欄-還有最多庫存-卡片 卡片 卡片-充足 " onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\' >' +
           '  <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
-          '    <div class="卡片-數據_大">' + totalMask + '</div>'+
+          '    <div class="' + (totalMask > 999 ? "卡片-數據_小" : "卡片-數據_大") + '">' + totalMask + '</div>'+
           '    <div class="卡片-數據_單位">片</div>' +
           '  </div>' +
           '  <div class="卡片-名稱">' + item.properties.name + '</div>' +
@@ -837,6 +837,8 @@ function showDrugStoreDetails(item)
   $("#側邊欄-販售存量-兒童").addClass(getMaskType(maskChild, "卡片-充足", "卡片-幾乎售罄", "卡片-即將售罄", "卡片-售罄"));
   $("#側邊欄-頁面-檢視藥局-標題").text(item.properties.name);
   $("#nav-右-最後更新-時間-檢視藥局").text(item.properties.updated === "" ? "--" : moment(item.properties.updated).format('HH:mm'));
+  $("#側邊欄-販售存量-成人-數據-數字").removeClass("卡片-數據_大").removeClass("卡片-數據_小").addClass((maskAdult > 999 ? "卡片-數據_小" : "卡片-數據_大"));
+  $("#側邊欄-販售存量-兒童-數據-數字").removeClass("卡片-數據_大").removeClass("卡片-數據_小").addClass((maskChild > 999 ? "卡片-數據_小" : "卡片-數據_大"));
   $("#側邊欄-販售存量-成人-數據-數字").text(maskAdult);
   $("#側邊欄-販售存量-兒童-數據-數字").text(maskChild);
   $("#側邊欄-商家資訊-地址-地址").text(item.properties.address);
