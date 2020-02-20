@@ -146,30 +146,30 @@ var s;
 $(document).ready(function()
 {
   console.log("document ready");
-  popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
-  // $.get("https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json", function(source)
-  // {
-  //   console.log("get source");
-  //
-  //   //載入全部
-  //   s = JSON.parse(source);
-  //   for(var i = 0; i < s["features"].length; i++)
-  //   {
-  //     var totalMask = s["features"][i].properties.mask_adult + s["features"][i].properties.mask_child;
-  //     s["features"][i]["properties"]["icon"] = (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
-  //     s["features"][i]["properties"]["icon-adult"] = (s["features"][i].properties.mask_adult > 50 ? MARKER_LOT_IN_STOCK : (s["features"][i].properties.mask_adult >= 25 ? MARKER_NEAR_SELL_OUT : (s["features"][i].properties.mask_adult > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
-  //     s["features"][i]["properties"]["icon-child"] = (s["features"][i].properties.mask_child > 50 ? MARKER_LOT_IN_STOCK : (s["features"][i].properties.mask_child >= 25 ? MARKER_NEAR_SELL_OUT : (s["features"][i].properties.mask_child > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
-  //   }
-  //
-  //   //分類
-  //   source = JSON.parse(source);
-  //   source["features"].forEach(function(item)
-  //   {
-  //     loadData(item);
-  //   });
-  //   loadMapData();
-  //   checkGeoLocationPermissions();
-  // });
+  //popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
+  $.get("https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json", function(source)
+  {
+    console.log("get source");
+
+    //載入全部
+    s = JSON.parse(source);
+    for(var i = 0; i < s["features"].length; i++)
+    {
+      var totalMask = s["features"][i].properties.mask_adult + s["features"][i].properties.mask_child;
+      s["features"][i]["properties"]["icon"] = (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
+      s["features"][i]["properties"]["icon-adult"] = (s["features"][i].properties.mask_adult > 50 ? MARKER_LOT_IN_STOCK : (s["features"][i].properties.mask_adult >= 25 ? MARKER_NEAR_SELL_OUT : (s["features"][i].properties.mask_adult > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
+      s["features"][i]["properties"]["icon-child"] = (s["features"][i].properties.mask_child > 50 ? MARKER_LOT_IN_STOCK : (s["features"][i].properties.mask_child >= 25 ? MARKER_NEAR_SELL_OUT : (s["features"][i].properties.mask_child > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
+    }
+
+    //分類
+    source = JSON.parse(source);
+    source["features"].forEach(function(item)
+    {
+      loadData(item);
+    });
+    loadMapData();
+    checkGeoLocationPermissions();
+  });
 });
 
 //整理資料
