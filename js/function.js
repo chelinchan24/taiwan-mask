@@ -146,7 +146,7 @@ var s;
 $(document).ready(function()
 {
   console.log("document ready");
-  popWindow('很抱歉，口罩指南目前無法提供服務，請稍候再試。','瞭解了','n');
+  popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
   // $.get("https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json", function(source)
   // {
   //   console.log("get source");
