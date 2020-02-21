@@ -1443,7 +1443,7 @@ nav {
     width: 20px;
     height: 20px;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: -4px;
     margin-right: 8px;
     background: url('./src/ic_loading.gif');
     background-size: cover;
