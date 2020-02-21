@@ -234,15 +234,15 @@ var popWinDissmiss= $('#彈出視窗-視窗-按鈕')
 var popWinBgDissmiss= $('#彈出視窗-背景')
 
 $('#側邊欄-最近更新').click(function () {
-    popWindow('這是您開啟口罩指南時，網站檢查口罩存量資訊的時間。這些資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。口罩數量來自銷售點自行回報，與實際存量會有出入。','瞭解了','y');
+    popWindow('這是您開啟口罩指南時，網站檢查口罩存量資訊的時間。<br><br>網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。口罩數量來自銷售點自行回報，與實際存量會有出入。','瞭解了','y');
 });
 
 $('.側邊欄-最近更新-小-這是什麼').click(function () {
-    popWindow('這是您開啟口罩指南時，網站檢查口罩存量資訊的時間。這些資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。口罩數量來自銷售點自行回報，與實際存量會有出入。','瞭解了','y');
+    popWindow('這是您開啟口罩指南時，網站檢查口罩存量資訊的時間。<br><br>網站上的資訊不會自動更新，您必須重新進入網站，才能取得最新資訊。口罩數量來自銷售點自行回報，與實際存量會有出入。','瞭解了','y');
 });
 
 $('#側邊欄-檢視藥局-這是什麼').click(function () {
-    popWindow('這是這個銷售點最後一次更新資料的時間。這些資訊不會自動更新，您必須重新進入網站，才能取得新的口罩數量。口罩數量來自銷售點自行回報，與實際存量會有出入。','瞭解了','y');
+    popWindow('這是這個銷售點最後一次更新資料的時間。<br><br>網站上的資訊不會自動更新，您必須重新進入網站，才能取得新的口罩數量。口罩數量來自銷售點自行回報，與實際存量會有出入。','瞭解了','y');
 });
 
 $('#側邊欄-商家的提醒').click(function () {
@@ -256,7 +256,7 @@ $('#側邊欄-購買須知').click(function () {
 $('#彈出視窗-視窗-按鈕').click(function (){
     popWinBox.addClass('彈出視窗_關閉').removeClass('彈出視窗_顯示');
 
-    if(popWinContent.text() == '口罩指南需要您的位置才能使用。請再試一次。')
+    if(popWinContent.text() == '口罩指南無法取得您的位置。請再試一次，或者直接開始瀏覽。')
     {
         // location.reload();
     }
@@ -282,7 +282,7 @@ $('#彈出視窗-背景').click(function()
 
 function popWindow(content,buttonText,btnDisplay) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
-    popWinContent.text(content);
+    popWinContent.html(content);
     if (btnDisplay === 'y') {
         popWinDissmiss.removeClass('隱藏');
         popWinDissmiss.text(buttonText)
@@ -290,13 +290,13 @@ function popWindow(content,buttonText,btnDisplay) {
         popWinDissmiss.addClass('隱藏')
     }
 
-    if (content === "請稍候")
+    if (content === "請稍候" || content === "正在定位")
     {
-        //TODO show 轉圈圈
+        popWinContent.addClass('彈出視窗-視窗-內容_轉圈');
     }
     else
     {
-        //TODO 關掉轉圈圈
+        popWinContent.removeClass('彈出視窗-視窗-內容_轉圈');
     }
 }
 

@@ -1151,6 +1151,7 @@ nav {
     font-weight: 500;
     line-height: 32px;
     color: #006CFF;
+    font-weight: 600;
 }
 
 .側邊欄-關於-人 {
@@ -1436,6 +1437,18 @@ nav {
     font-size: 15px;
     margin-bottom: 24px;
 }
+
+.彈出視窗-視窗-內容_轉圈:before {
+    content:'';
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 8px;
+    background: url('./src/ic_loading.gif');
+    background-size: cover;
+}
+
 
 #彈出視窗-視窗-按鈕, #分享視窗-視窗-按鈕 {
     height: 42px;

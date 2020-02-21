@@ -556,7 +556,7 @@ function updateInfoCard()
     $("#地圖-控制-定位").addClass("隱藏");
     hidePopWindow();
     initDropMenu("台北市", "中正區");
-    popWindow('口罩指南需要您的位置才能使用。請再試一次。','好', 'y');
+    popWindow('口罩指南無法取得您的位置。請再試一次，或者直接開始瀏覽。','好', 'y');
   });
 }
 
