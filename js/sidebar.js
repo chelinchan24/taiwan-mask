@@ -48,6 +48,7 @@ navBackBtn.click(function() {
 $("#側邊欄-頁面-檢視藥局-nav-返回").click(function()
 {
     map.setLayoutProperty('selectedMarker', 'visibility', 'none');
+    removeUrlParameter();
 });
 
 //總覽-尋找銷售點
@@ -281,12 +282,21 @@ $('#彈出視窗-背景').click(function()
 
 function popWindow(content,buttonText,btnDisplay) {
     popWinBox.addClass('彈出視窗_顯示').removeClass('彈出視窗_關閉')
-    popWinContent.text(content)
-    if (btnDisplay == 'y') {
-        popWinDissmiss.removeClass('隱藏')
+    popWinContent.text(content);
+    if (btnDisplay === 'y') {
+        popWinDissmiss.removeClass('隱藏');
         popWinDissmiss.text(buttonText)
     } else {
         popWinDissmiss.addClass('隱藏')
+    }
+
+    if (content === "請稍候")
+    {
+        //TODO show 轉圈圈
+    }
+    else
+    {
+        //TODO 關掉轉圈圈
     }
 }
 

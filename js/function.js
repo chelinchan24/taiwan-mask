@@ -43,6 +43,7 @@ var cardInfoData = {};
 var searchSellDrugStoreTimeout;
 var urlDrugStore;
 var userAddress;
+var s;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiY2hlbGluY2hhbjI0IiwiYSI6ImNrM2FkdXo1dDAxYWUzbnFlM2o2ZTNudTEifQ.wmEvON86_LuzQUGIvDRslQ';
 var map = new mapboxgl.Map({
@@ -54,6 +55,7 @@ var map = new mapboxgl.Map({
 $(document).ready(function()
 {
   init();
+  loadData();
 });
 
 function init()
@@ -142,17 +144,25 @@ function checkGeoLocationPermissions()
 //*********************************************
 //* 載入資料
 //*********************************************
-var s;
-$(document).ready(function()
+function loadData()
 {
   console.log("document ready");
-  //popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
+  popWindow('請稍候','','n');
   $.get("https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json", function(source)
   {
     console.log("get source");
+    hidePopWindow();
 
     //載入全部
     s = JSON.parse(source);
+
+    if (s.features === undefined || s.features.length === 0)
+    {
+      console.log(source);
+      popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
+      return;
+    }
+
     for(var i = 0; i < s["features"].length; i++)
     {
       var totalMask = s["features"][i].properties.mask_adult + s["features"][i].properties.mask_child;
@@ -165,15 +175,18 @@ $(document).ready(function()
     source = JSON.parse(source);
     source["features"].forEach(function(item)
     {
-      loadData(item);
+      sortData(item);
     });
     loadMapData();
     checkGeoLocationPermissions();
+  }).fail(function()
+  {
+    popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
   });
-});
+}
 
 //整理資料
-function loadData(item)
+function sortData(item)
 {
   var cty = item["properties"]["address"].substring(0, 3);
   var dis = item["properties"]["address"].substring(3, item["properties"]["address"].length);
@@ -340,6 +353,7 @@ function loadMarkerClick()
     if(!features.length)
     {
       map.setLayoutProperty('selectedMarker', 'visibility', 'none');
+      removeUrlParameter();
       $("#側邊欄").removeClass("側邊欄-行動版_藥局Marker");
       if ($("#側邊欄-頁面-檢視藥局").hasClass("側邊欄-頁面_顯示"))
       {
@@ -364,7 +378,6 @@ function loadMarkerClick()
 
     $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
 
-    updateUrl(feature["properties"]["name"], feature["properties"]["id"]);
     showDrugStoreDetails(feature);
   });
 
@@ -390,6 +403,12 @@ function updateUrl(title, id)
   var urlStr = "?id=" + id;
   history.pushState('', '', urlStr);
   document.title = title + ' | 口罩指南';
+}
+
+function removeUrlParameter()
+{
+  history.pushState('', '', './index.html');
+  document.title = '口罩指南';
 }
 
 // function updateUrl(name, address)
@@ -817,6 +836,7 @@ function updateSearchSellDrugStoreCardList(isClearData)
 //*********************************************
 function showDrugStoreDetails(item)
 {
+  updateUrl(item["properties"]["name"], item["properties"]["id"]);
   updateSelectedMarker(item.geometry.coordinates);
 
   $("#側邊欄").addClass("側邊欄-行動版_藥局Marker");
