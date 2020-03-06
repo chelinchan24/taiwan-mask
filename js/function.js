@@ -195,17 +195,17 @@ function sortData(item)
 
   if (window.location.search !== "")
   {
-    // urlStr = decodeURI(window.location.search).replace("?=", "").split("/");
     urlStr = new URLSearchParams(window.location.search);
   }
 
   for(var k in county)
   {
-    if(cty == k || cty.replace("臺", "台") == k)
+    if(cty.replace("臺", "台") == k)
     {
       county[k].forEach(function(d)
       {
-        if(dis.startsWith(d))
+        //台南市中區和西區合併成中西區
+        if(dis.startsWith(d) || (cty.replace("臺", "台") === "台南市" && d === "中西區" && (dis.startsWith("西區") || dis.startsWith("中區"))))
         {
           var totalMask = item.properties.mask_adult + item.properties.mask_child;
           item["properties"]["icon"] = (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)));
@@ -282,9 +282,8 @@ function loadMarker()
     },
     layout: {
       'icon-image': ['get', 'icon'],
-      'icon-allow-overlap':true
-      // "icon-image" : MARKER_LOT_IN_STOCK
-      // "icon-image": (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)))
+      'icon-allow-overlap':true,
+      "icon-ignore-placement": true
     }
   });
 
@@ -319,29 +318,6 @@ function loadMarker()
   loadMarkerClick();
   loadMapMoveListener();
   moveToUrlDrugStore();
-
-  // for(var k in data)
-  // {
-  //   console.log("loadMarker " + k);
-  //   for(var k2 in data[k])
-  //   {
-  //     console.log("loadMarker " + k2);
-  //
-  //     map.addLayer({
-  //       id: k + k2,
-  //       type: "symbol",
-  //       source: {
-  //         type: "geojson",
-  //         data: data[k][k2],
-  //       },
-  //       layout: {
-  //         'icon-image': ['get', 'icon']
-  //         // "icon-image" : MARKER_LOT_IN_STOCK
-  //         // "icon-image": (totalMask > 50 ? MARKER_LOT_IN_STOCK : (totalMask >= 25 ? MARKER_NEAR_SELL_OUT : (totalMask > 0 ? MARKER_ALMOST_SELL_OUT : MARKER_SELL_OUT)))
-  //       }
-  //     });
-  //   }
-  // }
 }
 
 function loadMarkerClick()
@@ -797,8 +773,6 @@ function updateSearchSellDrugStoreCardList(isClearData)
     $("#側邊欄-結果").empty();
   }
 
-  // console.log("結果 length = " + $("#側邊欄-結果").children().length);
-  // console.log("data length = " + data[county][town]["features"].length);
   if ($("#側邊欄-結果").children().length >= data[county][town]["features"].length) return;
 
   for (var i = 0; i < 10; i++)
@@ -828,7 +802,6 @@ function updateSearchSellDrugStoreCardList(isClearData)
       '</div>'
     );
   }
-  // console.log("-----");
 }
 
 //*********************************************
