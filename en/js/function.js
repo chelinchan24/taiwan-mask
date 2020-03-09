@@ -127,13 +127,13 @@ function checkGeoLocationPermissions()
         }
         else if (result.state == 'prompt')
         {
-          popWindow('Mask Guide need to know your location to provide personalized information.','瞭解了', 'y');
+          popWindow('Mask Guide need to know your location to provide personalized information.','Got it', 'y');
         }
       });
     }
     catch(e)
     {
-      popWindow('Mask Guide need to know your location to provide personalized information.','瞭解了', 'y');
+      popWindow('Mask Guide need to know your location to provide personalized information.','Got it', 'y');
     }
   }
   else
