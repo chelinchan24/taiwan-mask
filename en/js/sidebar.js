@@ -246,11 +246,11 @@ $('#側邊欄-檢視藥局-這是什麼').click(function () {
 });
 
 $('#側邊欄-商家的提醒').click(function () {
-    popWindow('This is note from store owner. Please contact store if you need any help.','瞭解了','y');
+    popWindow('This is note from store owner. Please contact store if you need any help.','Got it','y');
 });
 
 $('#側邊欄-購買須知').click(function () {
-    popWindow('This is note from store owner. Please contact store if you need any help.','瞭解了','y');
+    popWindow('This is note from store owner. Please contact store if you need any help.','Got it','y');
 });
 
 $('#彈出視窗-視窗-按鈕').click(function (){
