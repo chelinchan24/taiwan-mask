@@ -225,6 +225,7 @@ div {
     transition: 0.1s ease;
     cursor: pointer;
     margin-bottom: 14px;
+    align-items: center;
 }
 
 /*.選單按鈕:last-child {*/
@@ -821,7 +822,7 @@ nav {
 
 .側邊欄-過濾規格_選項 {
     font-size: 13px;
-    height: 32px;
+    /*     height: 32px; */
     background: #F5F5F5;
     padding: 6px 12px;
     box-sizing: border-box;
