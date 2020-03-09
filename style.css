@@ -23,6 +23,7 @@ body::after{
     url(./src/ic_adult_normal.png)
     url(./src/ic_main_about.png)
     url(./src/logo.png)
+    url(./src/logo-en.png)
     url(./src/ic_close.png)
     url(./src/ic_back.png)
     url(./src/ic_lastUpdate.png)
@@ -70,6 +71,11 @@ div {
 
 .logo {
     background: url('./src/logo.png');
+    background-size: cover;
+}
+
+.logo-en {
+    background: url('./src/logo-en.png');
     background-size: cover;
 }
 
