@@ -127,13 +127,13 @@ function checkGeoLocationPermissions()
         }
         else if (result.state == 'prompt')
         {
-          popWindow('口罩指南需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+          popWindow('Mask Guide need to know your location to provide personalized information.','瞭解了', 'y');
         }
       });
     }
     catch(e)
     {
-      popWindow('口罩指南需要您的位置，來提供您最佳的個人化體驗。','瞭解了', 'y');
+      popWindow('Mask Guide need to know your location to provide personalized information.','瞭解了', 'y');
     }
   }
   else
@@ -532,7 +532,7 @@ function updateInfoCard()
     $("#地圖-控制-定位").addClass("隱藏");
     hidePopWindow();
     initDropMenu("台北市", "中正區");
-    popWindow('口罩指南無法取得您的位置。請再試一次，或者直接開始瀏覽。','好', 'y');
+    popWindow('Mask Guide having trouble while getting your location. Please try again or start browse without getting local status.','好', 'y');
   });
 }
 

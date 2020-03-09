@@ -260,7 +260,7 @@ $('#彈出視窗-視窗-按鈕').click(function (){
     {
         // location.reload();
     }
-    else if (popWinContent.text() == 'Mask Guide request to know your location to provide personalized information.')
+    else if (popWinContent.text() == 'Mask Guide need to know your location to provide personalized information.')
     {
         updateInfoCard();
     }
@@ -268,7 +268,7 @@ $('#彈出視窗-視窗-按鈕').click(function (){
 
 $('#彈出視窗-背景').click(function()
 {
-    if (popWinContent.text() == 'Mask Guide request to know your location to provide personalized information.')
+    if (popWinContent.text() == 'Mask Guide need to know your location to provide personalized information.')
     {
         updateInfoCard();
     }
