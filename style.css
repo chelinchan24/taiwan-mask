@@ -1641,6 +1641,47 @@ nav {
     background: url('./src/ic_child_active.png')
 }
 
+#無法服務 {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#無法服務-內容 {
+    width: 100%;
+    max-width: 486px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 30px;
+    box-sizing: border-box;
+}
+
+#無法服務-內容-logo {
+    height: 32px;
+    width: 120px;
+    margin-bottom: 20px;
+}
+
+#無法服務-內容-說明 {
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 36px;
+    margin-bottom: 110px;
+}
+
+#無法服務-內容-版權{
+    font-size: 13px;
+    color: #868686 !important;
+}
+
+#無法服務-內容-版權 a {
+    color: #868686 !important;
+    border-bottom: 1px solid #868686;
+ }
+
+
 @media screen and (max-width: 800px) {
     html, body {
         overscroll-behavior-y: none;

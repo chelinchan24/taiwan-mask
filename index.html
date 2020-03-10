@@ -34,10 +34,17 @@
     <link rel="apple-touch-icon" href="./src/appIcon.png">
 </head>
 <body>
+<div id="無法服務">
+    <div id="無法服務-內容">
+        <div id="無法服務-內容-logo" class="logo"></div>
+        <div id="無法服務-內容-說明">很抱歉，口罩指南目前暫時無法提供服務。請於數個小時後再試一次。</div>
+        <div id="無法服務-內容-版權">口罩指南 2020 © <a href="http://chelinchan.com" target="_blank">詹喆麟</a>、<a href="https://chiyung.dev" target="_blank">楊奇永</div>
+    </div>
+</div>
 <div id="讀取畫面">
     <div id="讀取畫面-轉圈圈"></div>
 </div>
-<section id="地圖容器">
+<section id="地圖容器" class="隱藏">
     <div id="地圖-控制">
         <div id="地圖-控制-定位" class="地圖-控制-定位_停用 地圖-控制-定位"></div>
         <div id="地圖-控制-縮放">
@@ -47,7 +54,7 @@
     </div>
     <div id="地圖"></div>
 </section>
-<article id="側邊欄" class="側邊欄-行動版_收起">
+<article id="側邊欄" class="側邊欄-行動版_收起 隱藏">
     <div id="側邊欄-頁面-總覽" class="側邊欄-頁面">
         <nav>
             <div class="nav-左">
@@ -407,7 +414,7 @@
         </section>
     </div>
 </article>
-<div id="彈出視窗" class="彈出視窗_關閉">
+<div id="彈出視窗" class="彈出視窗_關閉 隱藏">
     <div id="彈出視窗-視窗">
         <div id="彈出視窗-視窗-內容">
         </div>
