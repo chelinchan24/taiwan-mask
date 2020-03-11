@@ -1662,7 +1662,7 @@ nav {
     background: url('./src/ic_child_active.png')
 }
 
-#無法服務 {
+#無法服務, #線上預約 {
     height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
     display: flex;
@@ -1670,26 +1670,27 @@ nav {
     align-items: center;
 }
 
-#無法服務-內容 {
+#無法服務-內容, #線上預約-內容 {
     width: 100%;
     max-width: 486px;
     display: flex;
     flex-direction: column;
     padding: 0px 30px;
     box-sizing: border-box;
+    align-items: flex-start;
 }
 
-#無法服務-內容-logo {
+#無法服務-內容-logo, #線上預約-內容-logo {
     height: 32px;
     width: 120px;
     margin-bottom: 24px;
 }
 
-#無法服務-內容-說明 {
+#無法服務-內容-說明, #線上預約-內容-標題 {
     font-size: 32px;
     font-weight: bold;
     line-height: 36px;
-    margin-bottom: 110px;
+    /*margin-bottom: 110px;*/
 }
 
 #無法服務-內容-版權{
@@ -1701,6 +1702,32 @@ nav {
     color: #868686 !important;
     border-bottom: 1px solid #868686;
  }
+
+#線上預約-內容-說明 {
+    margin-top: 32px;
+    font-size: 16px;
+    color: #363636;
+    margin-bottom: 64px;
+}
+
+#線上預約-內容-按鈕 {
+    color: #ffffff;
+    font-size: 16px;
+    background: #005EDD;
+    padding: 14px 24px;
+    border-radius: 8px;
+    display: block;
+    width: auto;
+    flex: 1;
+    cursor: pointer;
+    transition: 0.1s ease;
+    box-sizing: border-box;
+}
+
+#線上預約-內容-按鈕:hover {
+    opacity: 0.8;
+    transition: 0.1s ease;
+}
 
 
 @media screen and (max-width: 800px) {
@@ -1897,6 +1924,11 @@ nav {
 
     #側邊欄-過濾 {
         margin-bottom: 0px;
+    }
+
+    #線上預約-內容-按鈕 {
+        width: 100%;
+        text-align: center !important;
     }
 }
 /*1500行！*/
