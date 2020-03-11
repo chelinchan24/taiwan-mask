@@ -264,13 +264,15 @@ div {
 .選單按鈕-新{
     background: #3D5569;
     padding: 4px 5px;
+    padding-top: 5px;
     display: inline-block;
-    font-size: 11px;
-    line-height: 11px;
+    font-size: 12px;
+    line-height: 12px;
     color: #F2F7FF;
     box-sizing: border-box;
     border-radius: 4px;
     margin-left: 5px;
+    font-weight: 500;
 }
 
 .下拉選單 {
