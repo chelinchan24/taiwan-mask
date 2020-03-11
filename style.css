@@ -69,6 +69,10 @@ div {
     background: url('./src/ic_main_about.png');
 }
 
+.口罩線上預購 {
+    background: url('./src/ic_preorder.png');
+}
+
 .logo {
     background: url('./src/logo.png');
     background-size: cover;
@@ -234,6 +238,11 @@ div {
     align-items: center;
 }
 
+.選單按鈕-標題 {
+    font-size: 16px;
+    line-height: 16px;
+    padding-top: 1px;
+}
 /*.選單按鈕:last-child {*/
 /*    margin-bottom: 40px;*/
 /*}*/
@@ -250,6 +259,18 @@ div {
     display: inline-block;
     margin-right: 16px;
     background-size: cover !important;
+}
+
+.選單按鈕-新{
+    background: #3D5569;
+    padding: 4px 5px;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 11px;
+    color: #F2F7FF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    margin-left: 5px;
 }
 
 .下拉選單 {
