@@ -247,7 +247,7 @@ div {
 /*    margin-bottom: 40px;*/
 /*}*/
 
-.選單按鈕:hover {
+.選單按鈕:hover, .選單按鈕:focus {
     background: #E4ECF7;
     transition: 0.1s ease;
     /*     box-shadow: 0 11px 20px 0 rgba(194,212,223,0.50); */
