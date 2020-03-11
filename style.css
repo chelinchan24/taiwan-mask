@@ -99,6 +99,14 @@ div {
     background: url('./src/ic_phoneNumber.png');
 }
 
+.分隔線 {
+    height: 2px;
+    width: 100%;
+    display: block;
+    margin-bottom: 14px;
+    background: #F0F0F0;
+}
+
 /* 文字 */
 .小標題 {
     font-size: 14px;
