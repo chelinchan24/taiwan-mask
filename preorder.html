@@ -17,6 +17,12 @@
     <link rel="icon" type="image/png" href="./src/favicon.png" />
 </head>
 <body>
+<script>
+    $(document).ready(function(){
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+</script>
 <div id="線上預約">
     <div id="線上預約-內容">
         <div id="線上預約-內容-logo" class="logo"></div>
