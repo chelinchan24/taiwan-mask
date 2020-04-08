@@ -80,61 +80,109 @@ dashboardAboutBtn.click(function() {
 // 過濾功能
 $("#側邊欄-總覽-過濾-全部").click(function()
 {
-    $("#側邊欄-總覽-過濾-全部").addClass("側邊欄-總覽-過濾_選項_啟用");
-    $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
-    $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-全部").addClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    //
+    // updateNearSellOutCard(userAddress);
+    // updateAllMarker();
 
-    updateNearSellOutCard(userAddress);
-    updateAllMarker();
+    updateFilterData(FILTER_MASK_ALL);
 });
 
 $("#側邊欄-總覽-過濾-僅限成人").click(function()
 {
-    $("#側邊欄-總覽-過濾-僅限成人").addClass("側邊欄-總覽-過濾_選項_啟用");
-    $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
-    $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-僅限成人").addClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    //
+    // updateNearSellOutCard(userAddress);
+    // updateAllMarker();
 
-    updateNearSellOutCard(userAddress);
-    updateAllMarker();
+    updateFilterData(FILTER_MASK_ADULT);
 });
 
 $("#側邊欄-總覽-過濾-僅限兒童").click(function()
 {
-    $("#側邊欄-總覽-過濾-僅限兒童").addClass("側邊欄-總覽-過濾_選項_啟用");
-    $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
-    $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-僅限兒童").addClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    // $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    //
+    // updateNearSellOutCard(userAddress);
+    // updateAllMarker();
 
-    updateNearSellOutCard(userAddress);
-    updateAllMarker();
+    updateFilterData(FILTER_MASK_CHILD);
 });
 
 // 尋找銷售點
 $("#側邊欄-過濾規格-全部").click(function()
 {
-    $("#側邊欄-過濾規格-全部").addClass("側邊欄-過濾規格_選項_啟用");
-    $("#側邊欄-過濾規格-僅限成人").removeClass("側邊欄-過濾規格_選項_啟用");
-    $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-全部").addClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-僅限成人").removeClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
+    //
+    // updateSearchSellDrugStoreCardList(true);
 
-    updateSearchSellDrugStoreCardList(true);
+    updateFilterData(FILTER_MASK_ALL);
 });
 
 $("#側邊欄-過濾規格-僅限成人").click(function()
 {
-    $("#側邊欄-過濾規格-僅限成人").addClass("側邊欄-過濾規格_選項_啟用");
-    $("#側邊欄-過濾規格-全部").removeClass("側邊欄-過濾規格_選項_啟用");
-    $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-僅限成人").addClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-全部").removeClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
+    //
+    // updateSearchSellDrugStoreCardList(true);
 
-    updateSearchSellDrugStoreCardList(true);
+    updateFilterData(FILTER_MASK_ADULT);
 });
 
 $("#側邊欄-過濾規格-僅限兒童").click(function()
 {
-    $("#側邊欄-過濾規格-僅限兒童").addClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-僅限兒童").addClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-全部").removeClass("側邊欄-過濾規格_選項_啟用");
+    // $("#側邊欄-過濾規格-僅限成人").removeClass("側邊欄-過濾規格_選項_啟用");
+    //
+    // updateSearchSellDrugStoreCardList(true);
+
+    updateFilterData(FILTER_MASK_CHILD);
+});
+
+function updateFilterData(FILTER)
+{
+    //總覽
+    $("#側邊欄-總覽-過濾-全部").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-僅限成人").removeClass("側邊欄-總覽-過濾_選項_啟用");
+    $("#側邊欄-總覽-過濾-僅限兒童").removeClass("側邊欄-總覽-過濾_選項_啟用");
+
+    //尋找銷售點
     $("#側邊欄-過濾規格-全部").removeClass("側邊欄-過濾規格_選項_啟用");
     $("#側邊欄-過濾規格-僅限成人").removeClass("側邊欄-過濾規格_選項_啟用");
+    $("#側邊欄-過濾規格-僅限兒童").removeClass("側邊欄-過濾規格_選項_啟用");
 
+    switch (FILTER)
+    {
+        case FILTER_MASK_ALL:
+            $("#側邊欄-總覽-過濾-全部").addClass("側邊欄-總覽-過濾_選項_啟用");
+            $("#側邊欄-過濾規格-全部").addClass("側邊欄-過濾規格_選項_啟用");
+            break;
+        case FILTER_MASK_ADULT:
+            $("#側邊欄-總覽-過濾-僅限成人").addClass("側邊欄-總覽-過濾_選項_啟用");
+            $("#側邊欄-過濾規格-僅限成人").addClass("側邊欄-過濾規格_選項_啟用");
+            break;
+        case FILTER_MASK_CHILD:
+            $("#側邊欄-總覽-過濾-僅限兒童").addClass("側邊欄-總覽-過濾_選項_啟用");
+            $("#側邊欄-過濾規格-僅限兒童").addClass("側邊欄-過濾規格_選項_啟用");
+            break;
+    }
+
+    //總覽
+    updateNearSellOutCard(userAddress);
+    updateAllMarker();
+
+    //尋找銷售點
     updateSearchSellDrugStoreCardList(true);
-});
+}
 
 
 
