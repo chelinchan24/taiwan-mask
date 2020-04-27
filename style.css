@@ -777,6 +777,45 @@ nav {
     margin-bottom: 40px !important;
 }
 
+#側邊欄-問卷調查 {
+    background: #F5F5F5;
+    padding: 32px;
+    margin-left: -30px;
+    margin-right: -30px;
+    margin-bottom: 40px;
+}
+
+#側邊欄-問卷調查-說明 {
+    font-size: 18px;
+    color: #37393D;
+    font-weight: bold;
+}
+
+#側邊欄-問卷調查-前往 {
+    margin-top: 24px;
+    line-height: 16px;
+    font-size: 16px;
+    height: 16px;
+    display: block;
+    vertical-align: middle;
+    font-weight: 500;
+}
+
+#側邊欄-問卷調查-前往:hover {
+    opacity: 0.7;
+}
+
+#側邊欄-問卷調查-前往:after {
+    content: '';
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    background: url('./src/ic_go.png');
+    background-size: cover;
+    vertical-align: -23%;
+    margin-left: 4px;
+}
+
 .側邊欄_區塊-卡片容器 {
     overflow-x: scroll;
     overflow-y: hidden;
