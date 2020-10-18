@@ -16,5 +16,5 @@
 
 感謝「kiang」的「[藥局+衛生所即時庫存 geojson](https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json)」，作為本站的資料來源。  
   
-口罩指南  2020 © 詹喆麟、楊奇永  
+口罩指南 © 2020
 任何相關問題，歡迎隨時與我們聯絡。
