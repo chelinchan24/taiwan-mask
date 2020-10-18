@@ -1993,5 +1993,9 @@ nav {
         width: 100%;
         text-align: center !important;
     }
+    #側邊欄-關於標題 {
+        padding: 0px 22px;
+    }
+
 }
 /*1500行！*/
