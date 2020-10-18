@@ -511,7 +511,7 @@ function updateInfoCard()
     });
 
     //經緯度轉換定位鄉鎮區
-    $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=16&addressdetails=1", function(source)
+    $.get("https://nominatim.openstreetmap.org/reverse?format=json&lat=" + position.coords.latitude + "&lon=" + position.coords.longitude +"&zoom=16&addressdetails=1&accept-language=zh_tw", function(source)
     {
       console.log("位置取得完成");
       hidePopWindow();
@@ -623,13 +623,16 @@ function onClickNearSellOutCard(county, town, id)
 
 function getLocationDataToCounty(address)
 {
+  if (address.suburb === '淡水區') {
+    return '新北市'
+  }
   if('city' in address)
   {
     return address.city.replace("臺", "台");
   }
   else if ('country' in address)
   {
-    return address.county.replace("臺", "台");
+    return address.country.replace("臺", "台");
   }
   else
   {
@@ -648,7 +651,7 @@ function getLocationDataToTown(address)
   {
     town = address.suburb;
   }
-
+  
   if(town in data[getLocationDataToCounty(address)])
   {
     return town;
