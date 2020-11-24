@@ -914,7 +914,7 @@ nav {
     background: #00000020;
     color: #ffffff;
     font-size: 13px;
-    padding: 9px 14px;
+    padding: 12px 14px;
     border-radius: 100px;
     font-weight: 500;
     display: flex;
@@ -928,6 +928,7 @@ nav {
 
 #側邊欄-區域狀況-內容-販售中藥局-右-瀏覽店家 span {
     opacity: 0.9;
+    line-height: 13px;
 }
 
 #側邊欄-區域狀況-內容-販售中藥局-右-瀏覽店家:after {
@@ -2059,7 +2060,7 @@ nav {
         height: auto;
         box-sizing: border-box;
         overflow: scroll;
-        /*! padding: 0px 30px 0px 30px; */
+        padding-top: 0px;
         flex: 1;
     }
 
