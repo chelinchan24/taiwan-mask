@@ -1072,7 +1072,7 @@ nav {
     display: block;
     width: 10px;
     height: 10px;
-    background: url('./src/ic_dropdown_down.png');
+    background: url('./src/ic_dropDown_down.png');
     background-size: cover;
 }
 
