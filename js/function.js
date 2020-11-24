@@ -572,7 +572,7 @@ function updateNearSellOutCard(address)
           '<div class="側邊欄-即將售罄-卡片 卡片 ' + (totalMask >= 25 ? "卡片-幾乎售罄" : "卡片-即將售罄" ) + '" onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\'>' +
             '<div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
               '<div class="卡片-數據_大">' + totalMask + '</div>'+
-              '<div class="卡片-數據_單位">片</div>' +
+              '<div class="卡片-數據_單位">份</div>' +
             '</div>' +
             '<div class="卡片-名稱">' + item.properties.name + '</div>' +
             '<div class="卡片-地址">' + item.properties.address + '</div>' +
@@ -597,7 +597,7 @@ function updateNearSellOutCard(address)
           '<div class="側邊欄-還有最多庫存-卡片 卡片 卡片-充足 " onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\' >' +
           '  <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
           '    <div class="' + (totalMask > 999 ? "卡片-數據_小" : "卡片-數據_大") + '">' + totalMask + '</div>'+
-          '    <div class="卡片-數據_單位">片</div>' +
+          '    <div class="卡片-數據_單位">份</div>' +
           '  </div>' +
           '  <div class="卡片-名稱">' + item.properties.name + '</div>' +
           '  <div class="卡片-地址">' + item.properties.address + '</div>' +
@@ -804,7 +804,7 @@ function updateSearchSellDrugStoreCardList(isClearData)
         '<div class="側邊欄-結果-項目-計數 ' + (totalMask > 50 ? "卡片-充足" : (totalMask >= 25 ? "卡片-幾乎售罄" : (totalMask > 0 ? "卡片-即將售罄" : "卡片-售罄"))) + '">' +
           '<div class="側邊欄-結果-項目-計數-數據">' +
             '<div class="' + (totalMask >= 10 ? "卡片-數據_小" : "卡片-數據_大") + '">' + (totalMask >= 100 ? "99+" : totalMask) + '</div>' +
-            '<div class="卡片-數據_單位">片</div>' +
+            '<div class="卡片-數據_單位">份</div>' +
           '</div>' +
         '</div>' +
         '<div class="側邊欄-結果-項目-資訊">' +

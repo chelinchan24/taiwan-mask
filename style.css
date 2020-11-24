@@ -767,7 +767,6 @@ nav {
     overflow: scroll;
     padding: 22px 22px 0px 22px;
     height: 100%;
-    padding-bottom: 120px;
 }
 
 .側邊欄-內容-頂端 {
@@ -2108,8 +2107,8 @@ nav {
         padding-top: 0px;
     }
 
-    .側邊欄-內容{
-        /*! padding: 0px 16px; */
+    #側邊欄-頁面-總覽 .側邊欄-內容{
+        padding-top: 0px;
     }
 
     #地圖-控制 {

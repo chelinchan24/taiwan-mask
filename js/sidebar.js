@@ -363,6 +363,8 @@ function hidePopWindow()
 }
 
 //----- 下拉選單
+var dropDownSelected = $('.下拉選單-選項_目前');
+
 $(document).click(function(e) {
     if ($('#側邊欄-頁面-尋找銷售點').hasClass("側邊欄-頁面_顯示"))
     {
@@ -395,6 +397,9 @@ $('#側邊欄-過濾-城市').click(function (e){
     if($(e.target).hasClass("側邊欄-過濾-城市-按鈕"))
     {
         $('#側邊欄-過濾-城市-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
+
+        //選中選項置中
+        dropDownSelected.scrollTop($('#側邊欄-過濾-程式-下拉選單').height());
     }
 });
 
@@ -402,6 +407,9 @@ $('#側邊欄-過濾-地區').click(function (e){
     if($(e.target).hasClass("側邊欄-過濾-地區-按鈕"))
     {
         $('#側邊欄-過濾-地區-下拉選單').addClass('下拉選單_展開').removeClass('下拉選單_收起').removeClass("下拉選單_預設");
+
+        //選中選項置中
+        dropDownSelected.scrollTop($('#側邊欄-過濾-地區-下拉選單').height());
     }
 });
 
@@ -446,3 +454,5 @@ $('#分享視窗-視窗-按鈕').click(function (){
 $('#分享視窗').click(function (){
     $('#分享視窗').addClass('分享視窗_關閉').removeClass('分享視窗_顯示')
 })
+
+
