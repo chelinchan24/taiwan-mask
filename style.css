@@ -298,6 +298,7 @@ div {
     font-size: 15px;
     line-height: 15px;
     flex: 1;
+    padding-top: 2px;
 }
 /*.選單按鈕:last-child {*/
 /*    margin-bottom: 40px;*/
