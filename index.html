@@ -16,7 +16,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
-    <link href='style.css' rel='stylesheet' />
+    <link href='style.css?v=2021_1' rel='stylesheet' />
 
 
     <script src="./js/jquery-3.4.1.min.js" type="text/javascript"></script>
@@ -80,50 +80,71 @@
                     <div class="側邊欄-總覽-過濾_選項-名稱">兒童</div>
                 </div>
             </div>
-            <div id="側邊欄-最近更新">
-                <div>最後更新&nbsp;<span id="側邊欄-最近更新-時間">22:30</span>，不是即時資訊
-                </div>
-                <div class="這是什麼" id="側邊欄-最近更新-這是什麼"></div>
-            </div>
-            <div id="側邊欄-區域狀況" class="卡片">
+            <div id="側邊欄-區域狀況-2021">
                 <div class="中標題" id="側邊欄-區域狀況-標題">
                     <!-- 選擇器加入到這裡 -->
-                    <span id="側邊欄-區域狀況-地區">區域</span>狀況</div>
-                <div id="側邊欄-區域狀況-內容">
-                    <div id="側邊欄-區域狀況-內容-販售中藥局">
-                        <div id="側邊欄-區域狀況-內容-販售中藥局-數據" class="卡片-數據_大 側邊欄-區域狀況-內容_主題-數據">0</div>
-                        <div class="卡片-描述 側邊欄-區域狀況-內容_主題-名稱">販售中藥局</div>
+                    <span id="側邊欄-區域狀況-地區">區域</span>總覽
+                </div>
+                <div id="側邊欄-最近更新">
+                    <div>最後更新&nbsp;<span id="側邊欄-最近更新-時間">22:30</span>，不是即時資訊
                     </div>
-                    <div id="側邊欄-區域狀況-內容-剩餘口罩">
-                        <div id="側邊欄-區域狀況-內容-剩餘口罩-數據" class="卡片-數據_大 側邊欄-區域狀況-內容_主題-數據">0</div>
-                        <div class="卡片-描述 側邊欄-區域狀況-內容_主題-名稱">剩餘口罩</div>
+                    <div class="這是什麼" id="側邊欄-最近更新-這是什麼"></div>
+                </div>
+                <div id="側邊欄-區域狀況" class="卡片">
+                    <div id="側邊欄-區域狀況-內容">
+                        <div id="側邊欄-區域狀況-內容-剩餘口罩">
+                            <div id="側邊欄-區域狀況-內容-剩餘口罩-資訊">
+                                <div id="側邊欄-區域狀況-內容-剩餘口罩-數據">0</div>
+                                <div class="側邊欄-區域狀況-內容-剩餘口罩-數據-單位">份</div>
+                            </div>
+                            <div class="側邊欄-區域狀況-內容_主題-名稱">剩餘口罩</div>
+                        </div>
+                        <div id="側邊欄-區域狀況-內容-販售中藥局">
+                            <div id="側邊欄-區域狀況-內容-販售中藥局-左">
+                                <div id="側邊欄-區域狀況-內容-販售中藥局-左-圖標"></div>
+                                <div id="側邊欄-區域狀況-內容-販售中藥局-左-資訊">
+                                    <div id="側邊欄-區域狀況-內容-販售中藥局-左-資訊-統計">
+                                        <div id="側邊欄-區域狀況-內容-販售中藥局-數據">0</div><span>間</span>
+                                    </div>
+                                    <div class="側邊欄-區域狀況-內容-販售中藥局-左-資訊-說明">銷售點販售中</div>
+                                </div>
+                            </div>
+                            <div id="側邊欄-區域狀況-內容-販售中藥局-右">
+                                <div id="側邊欄-區域狀況-內容-販售中藥局-右-瀏覽店家">
+                                    <span>瀏覽店家</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="側邊欄-尋找銷售點" class="選單按鈕">
-                <div class="選單按鈕-圖標 尋找銷售點"></div>
-                <div class="選單按鈕-標題">尋找銷售點</div>
+            <div id="側邊欄-選單">
+                <div id="側邊欄-尋找銷售點" class="選單按鈕">
+                    <div class="選單按鈕-圖標 尋找銷售點"></div>
+                    <div class="選單按鈕-標題">尋找銷售點</div>
+                    <div class="進入"></div>
+                </div>
+                <a href="./preorder.html" target="_blank" id="側邊欄-口罩線上預購" class="選單按鈕">
+                    <div class="選單按鈕-圖標 口罩線上預購"></div>
+                    <div class="選單按鈕-標題">口罩線上預約</div>
+                    <div class="進入"></div>
+                </a>
             </div>
-            <a href="./preorder.html" target="_blank" id="側邊欄-口罩線上預購" class="選單按鈕" style="margin-bottom: 40px !important;">
-                <div class="選單按鈕-圖標 口罩線上預購"></div>
-                <div class="選單按鈕-標題">口罩線上預約</div>
-                <div class="選單按鈕-新">新開放</div>
-            </a>
             <!--<div id="側邊欄-關於口罩指南" class="選單按鈕">
                 <div class="選單按鈕-圖標 關於口罩指南"></div>
                 <div class="選單按鈕-標題">關於口罩指南</div>
             </div>-->
-            <div id="側邊欄-問卷調查">
-                <div id="側邊欄-問卷調查-說明">懇請您撥冗參與問卷調查，協助我們持續改善口罩指南。</div>
-                <a href="https://forms.gle/XapM9zcq8pWcKxFc6"><div id="側邊欄-問卷調查-前往">參與問卷調查</div></a>
-            </div>
+<!--            <div id="側邊欄-問卷調查">-->
+<!--                <div id="側邊欄-問卷調查-說明">懇請您撥冗參與問卷調查，協助我們持續改善口罩指南。</div>-->
+<!--                <a href="https://forms.gle/XapM9zcq8pWcKxFc6"><div id="側邊欄-問卷調查-前往">參與問卷調查</div></a>-->
+<!--            </div>-->
             <div id="側邊欄-還有最多庫存">
                 <div class="中標題 側邊欄-中標題">還有最多庫存</div>
                 <div id="側邊欄-還有最多庫存-內容" class="側邊欄_區塊-卡片容器">
                     <div id="側邊欄-還有最多庫存-1" class="側邊欄-還有最多庫存-卡片 卡片 卡片-售罄 ">
                         <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
                             <div id="側邊欄-還有最多庫存-1-數據" class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                         <div id="側邊欄-還有最多庫存-1-名稱" class="卡片-名稱">--</div>
                         <div id="側邊欄-還有最多庫存-1-地址" class="卡片-地址">--</div>
@@ -131,7 +152,7 @@
                     <div id="側邊欄-還有最多庫存-2" class="側邊欄-還有最多庫存-卡片 卡片 卡片-售罄 ">
                         <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
                             <div id="側邊欄-還有最多庫存-2-數據" class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                         <div id="側邊欄-還有最多庫存-2-名稱" class="卡片-名稱">--</div>
                         <div id="側邊欄-還有最多庫存-2-地址" class="卡片-地址">--</div>
@@ -139,7 +160,7 @@
                     <div id="側邊欄-還有最多庫存-3" class="側邊欄-還有最多庫存-卡片 卡片 卡片-售罄 ">
                         <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
                             <div id="側邊欄-還有最多庫存-3-數據" class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                         <div id="側邊欄-還有最多庫存-3-名稱" class="卡片-名稱">--</div>
                         <div id="側邊欄-還有最多庫存-3-地址" class="卡片-地址">--</div>
@@ -152,7 +173,7 @@
                     <div id="側邊欄-幾乎售罄-1" class="側邊欄-即將售罄-卡片 卡片 卡片-售罄 ">
                         <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
                             <div id="側邊欄-幾乎售罄-1-數據" class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                         <div id="側邊欄-幾乎售罄-1-名稱" class="卡片-名稱">--</div>
                         <div id="側邊欄-幾乎售罄-1-地址" class="卡片-地址">--</div>
@@ -160,7 +181,7 @@
                     <div id="側邊欄-即將售罄-2" class="側邊欄-即將售罄-卡片 卡片 卡片-售罄 ">
                         <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
                             <div id="側邊欄-即將售罄-2-數據" class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                         <div id="側邊欄-即將售罄-2-名稱" class="卡片-名稱">--</div>
                         <div id="側邊欄-即將售罄-2-地址" class="卡片-地址">--</div>
@@ -168,7 +189,7 @@
                     <div id="側邊欄-幾乎售罄-3" class="側邊欄-即將售罄-卡片 卡片 卡片-售罄 ">
                         <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
                             <div id="側邊欄-幾乎售罄-3-數據" class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                         <div id="側邊欄-幾乎售罄-3-名稱" class="卡片-名稱">--</div>
                         <div id="側邊欄-幾乎售罄-3-地址" class="卡片-地址">--</div>
@@ -213,29 +234,31 @@
             </div>
         </nav>
         <section id="側邊欄-尋找銷售點-列表" class="側邊欄-內容">
-            <div id="側邊欄-過濾">
-                <div id="側邊欄-過濾-城市" class="側邊欄-過濾-城市-按鈕">
-                    <span id="側邊欄-過濾-城市-按鈕-文字" class="側邊欄-過濾-城市-按鈕">縣市</span>
-                    <span id="側邊欄-過濾-城市-下拉選單" class="下拉選單 下拉選單_預設">
-                    </span>
+            <div class="側邊欄-內容-頂端">
+                <div id="側邊欄-過濾">
+                    <div id="側邊欄-過濾-城市" class="側邊欄-過濾-城市-按鈕">
+                        <span id="側邊欄-過濾-城市-按鈕-文字" class="側邊欄-過濾-城市-按鈕">縣市</span>
+                        <span id="側邊欄-過濾-城市-下拉選單" class="下拉選單 下拉選單_預設">
+                        </span>
+                    </div>
+                    <div id="側邊欄-過濾-地區" class="側邊欄-過濾-地區-按鈕">
+                        <span id="側邊欄-過濾-地區-按鈕-文字" class="側邊欄-過濾-地區-按鈕">鄉鎮地區</span>
+                        <span id="側邊欄-過濾-地區-下拉選單" class="下拉選單 下拉選單_預設">
+                        </span>
+                    </div>
                 </div>
-                <div id="側邊欄-過濾-地區" class="側邊欄-過濾-地區-按鈕">
-                    <span id="側邊欄-過濾-地區-按鈕-文字" class="側邊欄-過濾-地區-按鈕">鄉鎮地區</span>
-                    <span id="側邊欄-過濾-地區-下拉選單" class="下拉選單 下拉選單_預設">
-                    </span>
+                <div id="側邊欄-過濾規格" class="">
+                    <div id="側邊欄-過濾規格-全部" class="側邊欄-過濾規格_選項 側邊欄-過濾規格_選項_啟用">全部</div>
+                    <div id="側邊欄-過濾規格-僅限兒童" class="側邊欄-過濾規格_選項">僅限兒童</div>
+                    <div id="側邊欄-過濾規格-僅限成人" class="側邊欄-過濾規格_選項">僅限成人</div>
                 </div>
-            </div>
-            <div id="側邊欄-過濾規格" class="">
-                <div id="側邊欄-過濾規格-全部" class="側邊欄-過濾規格_選項 側邊欄-過濾規格_選項_啟用">全部</div>
-                <div id="側邊欄-過濾規格-僅限兒童" class="側邊欄-過濾規格_選項">僅限兒童</div>
-                <div id="側邊欄-過濾規格-僅限成人" class="側邊欄-過濾規格_選項">僅限成人</div>
             </div>
             <div id="側邊欄-結果">
                 <div class="側邊欄-結果-項目">
                     <div class="側邊欄-結果-項目-計數 卡片-售罄">
                         <div class="側邊欄-結果-項目-計數-數據">
                             <div class="卡片-數據_小">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                     </div>
                     <div class="側邊欄-結果-項目-資訊">
@@ -247,7 +270,7 @@
                     <div class="側邊欄-結果-項目-計數 卡片-售罄">
                         <div class="側邊欄-結果-項目-計數-數據">
                             <div class="卡片-數據_大">0</div>
-                            <div class="卡片-數據_單位">片</div>
+                            <div class="卡片-數據_單位">份</div>
                         </div>
                     </div>
                     <div class="側邊欄-結果-項目-資訊">
@@ -284,25 +307,33 @@
                     <div class="小標題">成人口罩</div>
                     <div class="側邊欄-販售存量_規格-數據">
                         <div id="側邊欄-販售存量-成人-數據-數字" class="卡片-數據_大">--</div>
-                        <div class="卡片-數據_單位">片</div>
+                        <div class="卡片-數據_單位">份</div>
                     </div>
                 </div>
                 <div id="側邊欄-販售存量-兒童" class="卡片 卡片-售罄">
                     <div class="小標題">兒童口罩</div>
                     <div class="側邊欄-販售存量_規格-數據">
                         <div id="側邊欄-販售存量-兒童-數據-數字" class="卡片-數據_大">--</div>
-                        <div class="卡片-數據_單位">片</div>
+                        <div class="卡片-數據_單位">份</div>
                     </div>
                 </div>
             </div>
             <div id="側邊欄-商家資訊">
-                <div id="側邊欄-商家資訊-地址">
-                    <div class="商家資訊圖標 地址"></div>
-                    <div id="側邊欄-商家資訊-地址-地址">--</div>
-                </div>
                 <div id="側邊欄-商家資訊-電話">
                     <div class="商家資訊圖標 電話"></div>
-                    <div id="側邊欄-商家資訊-電話-號碼">--</div>
+                    <div class="側邊欄-商家資訊_資訊_內容">
+                        <div class="側邊欄-商家資訊_資訊_內容-標題">致電商家</div>
+                        <div id="側邊欄-商家資訊-電話-號碼">--</div>
+                    </div>
+                    <div class="進入"></div>
+                </div>
+                <div id="側邊欄-商家資訊-地址">
+                    <div class="商家資訊圖標 地址"></div>
+                    <div class="側邊欄-商家資訊_資訊_內容">
+                        <div class="側邊欄-商家資訊_資訊_內容-標題">開啟 Google 地圖</div>
+                        <div id="側邊欄-商家資訊-地址-地址">--</div>
+                    </div>
+                    <div class="進入"></div>
                 </div>
             </div>
             <div id="側邊欄-購買須知" class="隱藏">
@@ -319,35 +350,7 @@
                     </div>
                     <div id="側邊欄-商家的提醒-內文" class="側邊欄-店家的提醒-內文"></div>
             </div>
-            <div id="側邊欄-留言" class="隱藏">
-                <div id="disqus_thread"></div>
-                <script>
-
-                    /**
-                     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-                    /*
-                    var disqus_config = function () {
-                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                    };
-                    */
-                    (function() { // DON'T EDIT BELOW THIS LINE
-                        var d = document, s = d.createElement('script');
-                        s.src = 'https://maskmaps.disqus.com/embed.js';
-                        s.setAttribute('data-timestamp', +new Date());
-                        (d.head || d.body).appendChild(s);
-                    })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-            </div>
         </section>
-        <div id="側邊欄-檢視藥局-底部按鈕">
-            <div id="側邊欄-檢視藥局-底部按鈕-在地圖開啟" class="側邊欄-檢視藥局-底部按鈕-按鈕">
-                <span>在 Google 地圖開啟</span>
-            </div>
-            <div id="側邊欄-檢視藥局-底部按鈕-分享" class="側邊欄-檢視藥局-底部按鈕-按鈕"></div>
-        </div>
         <!--<div id="分享視窗" class="分享視窗_關閉">
             <div id="分享視窗-視窗">
                 <div id="分享視窗-視窗-內容">
@@ -474,14 +477,14 @@
 <!--                    <div class="小標題">成人口罩</div>-->
 <!--                    <div class="行動-銷售點預覽-販售存量_規格-數據">-->
 <!--                        <div id="行動-銷售點預覽-販售存量-成人-數據-數字" class="卡片-數據_大">&#45;&#45;</div>-->
-<!--                        <div class="卡片-數據_單位">片</div>-->
+<!--                        <div class="卡片-數據_單位">份</div>-->
 <!--                    </div>-->
 <!--                </div>-->
 <!--                <div id="行動-銷售點預覽-販售存量-兒童" class="卡片 卡片-售罄">-->
 <!--                    <div class="小標題">兒童口罩</div>-->
 <!--                    <div class="行動-銷售點預覽-販售存量_規格-數據">-->
 <!--                        <div id="行動-銷售點預覽-販售存量-兒童-數據-數字" class="卡片-數據_大">&#45;&#45;</div>-->
-<!--                        <div class="卡片-數據_單位">片</div>-->
+<!--                        <div class="卡片-數據_單位">份</div>-->
 <!--                    </div>-->
 <!--                </div>-->
 <!--            </div>-->
@@ -489,7 +492,7 @@
 <!--    </div>-->
 <!--</div>-->
 
-<script src="js/function.js"></script>
-<script src="js/sidebar.js"></script>
+<script src="js/function.js?v=2021_1"></script>
+<script src="js/sidebar.js?v=2021_1"></script>
 </body>
 </html>

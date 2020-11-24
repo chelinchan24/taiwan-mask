@@ -252,18 +252,22 @@ function moveToUrlDrugStore()
 {
   if (urlDrugStore !== undefined)
   {
-    DISQUS.reset({
-      reload: true,
-      config: function () {
-        this.page.title = urlDrugStore["properties"]["name"];
-        this.page.identifier = urlDrugStore["properties"]["id"];
-        this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
-      }
-    });
+    // DISQUS.reset({
+    //   reload: true,
+    //   config: function () {
+    //     this.page.title = urlDrugStore["properties"]["name"];
+    //     this.page.identifier = urlDrugStore["properties"]["id"];
+    //     this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
+    //   }
+    // });
 
     showDrugStoreDetails(urlDrugStore);
-    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
-
+    $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
+    $("#側邊欄-商家資訊-電話").click(function () {
+      console.log('hello');
+      var telephone = urlDrugStore.properties.phone;
+      window.location.href = 'tel://' + telephone;
+    })
     moveCameraToLatLng(urlDrugStore.geometry.coordinates);
   }
 }
@@ -341,18 +345,23 @@ function loadMarkerClick()
     var feature = features[0];
     console.log(feature);
 
-    DISQUS.reset({
-      reload: true,
-      config: function () {
-        this.page.title = feature["properties"]["name"];
-        this.page.identifier = feature["properties"]["id"];
-        this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
-      }
-    });
+    // DISQUS.reset({
+    //   reload: true,
+    //   config: function () {
+    //     this.page.title = feature["properties"]["name"];
+    //     this.page.identifier = feature["properties"]["id"];
+    //     this.page.url = 'https://mask.chel.in/?=' + feature["properties"]["id"];
+    //   }
+    // });
 
     updateSelectedMarker(feature.geometry.coordinates);
 
-    $("#側邊欄-檢視藥局-底部按鈕-在地圖開啟").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
+    $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
+    $("#側邊欄-商家資訊-電話").click(function () {
+      console.log('hello');
+      var telephone = feature.properties.phone;
+      window.location.href = 'tel://' + telephone;
+    })
 
     showDrugStoreDetails(feature);
   });

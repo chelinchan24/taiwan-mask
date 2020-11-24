@@ -6,6 +6,7 @@ var retailerPage = $('#側邊欄-頁面-檢視藥局')
 
 //按鈕
 var findRetailerBtn = $('#側邊欄-尋找銷售點');
+var overhaulRetailerBtn = $('#側邊欄-區域狀況-內容-販售中藥局-右-瀏覽店家');
 var aboutBtn = $('#nav-右-關於');
 var navBackBtn = $('.nav-左-返回');
 var dashboardAboutBtn = $('#側邊欄-關於口罩指南')
@@ -49,6 +50,14 @@ $("#側邊欄-頁面-檢視藥局-nav-返回").click(function()
 {
     map.setLayoutProperty('selectedMarker', 'visibility', 'none');
     removeUrlParameter();
+});
+
+//總覽-瀏覽店家
+overhaulRetailerBtn.click(function() {
+    dashboardPage.addClass('側邊欄-頁面_隱藏').removeClass('側邊欄-頁面_顯示')
+    findRetailerPage.addClass('側邊欄-頁面_顯示').removeClass('側邊欄-頁面_隱藏')
+    $('#側邊欄-過濾-城市-下拉選單').removeClass('下拉選單_收起').removeClass('下拉選單_展開').addClass("下拉選單_預設");
+    $('#側邊欄-過濾-地區-下拉選單').removeClass('下拉選單_收起').removeClass('下拉選單_展開').addClass("下拉選單_預設");
 });
 
 //總覽-尋找銷售點
