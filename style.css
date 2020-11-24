@@ -1982,7 +1982,7 @@ nav {
 
 #無法服務-內容-logo, #線上預約-內容-logo {
     height: 32px;
-    width: 120px;
+    width: 133px;
     margin-bottom: 24px;
 }
 
@@ -2011,11 +2011,11 @@ nav {
 }
 
 #線上預約-內容-按鈕 {
-    color: #ffffff;
+    color: #006CFF;
     font-size: 16px;
-    background: #005EDD;
+    background: #E0ECFF;
+    border-radius: 12px;
     padding: 14px 24px;
-    border-radius: 8px;
     display: block;
     width: auto;
     flex: 1;
@@ -2058,7 +2058,7 @@ nav {
         height: auto;
         box-sizing: border-box;
         overflow: scroll;
-        padding: 0px 30px 0px 30px;
+        /*! padding: 0px 30px 0px 30px; */
         flex: 1;
     }
 
@@ -2101,7 +2101,6 @@ nav {
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: none !important;
     }
 
     #側邊欄 {
@@ -2109,7 +2108,7 @@ nav {
     }
 
     .側邊欄-內容{
-        padding: 0px 16px
+        /*! padding: 0px 16px; */
     }
 
     #地圖-控制 {
