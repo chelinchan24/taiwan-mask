@@ -2060,7 +2060,6 @@ nav {
         height: auto;
         box-sizing: border-box;
         overflow: scroll;
-        padding-top: 0px;
         flex: 1;
     }
 
