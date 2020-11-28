@@ -487,6 +487,8 @@ div {
 #地圖容器 {
     width: 100%;
     height: 100%;
+    padding-right: 396px;
+    box-sizing: border-box;
 }
 
 #地圖-控制 {
