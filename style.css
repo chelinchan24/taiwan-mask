@@ -959,13 +959,14 @@ nav {
 }
 
 #側邊欄-問卷調查 {
-    margin-top: 32px;
+    margin-top: 40px;
     background: #F2F2F2;
     padding: 22px;
     box-sizing: border-box;
     margin-left: -22px;
     margin-right: -22px;
     transition: 0.2s ease;
+    border-top: 1px solid #ececec;
 }
 
 #側邊欄-問卷調查-內容 {
