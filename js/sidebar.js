@@ -456,3 +456,51 @@ $('#分享視窗').click(function (){
 })
 
 
+//----- 問卷調查
+
+$(window).on('load',function() {
+    feedbackNewUiCookie = Cookies.get('feedback-new_ui');
+    if (typeof(feedbackNewUiCookie) === "undefined") {
+    } else {
+        $('#側邊欄-問卷調查').addClass('隱藏');
+    }
+})
+
+$('#問卷調查_滿意視覺設計-滿意度_不滿意').click(function() {
+    gtag('event', 'dislike', {
+        'event_category': 'feedback',
+        'event_label': 'new_ui',
+    });
+    $('#問卷調查_滿意視覺設計-滿意度_不滿意').addClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    $('#問卷調查_滿意視覺設計-滿意度_還可以').removeClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    $('#問卷調查_滿意視覺設計-滿意度_滿意').removeClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+
+    doneQuestion();
+})
+
+$('#問卷調查_滿意視覺設計-滿意度_滿意').click(function() {
+    gtag('event', 'like', {
+        'event_category': 'feedback',
+        'event_label': 'new_ui',
+    });
+    $('#問卷調查_滿意視覺設計-滿意度_不滿意').removeClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    $('#問卷調查_滿意視覺設計-滿意度_還可以').removeClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    $('#問卷調查_滿意視覺設計-滿意度_滿意').addClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    doneQuestion();
+})
+
+$('#問卷調查_滿意視覺設計-滿意度_還可以').click(function() {
+    gtag('event', 'normal', {
+        'event_category': 'feedback',
+        'event_label': 'new_ui',
+    });
+    $('#問卷調查_滿意視覺設計-滿意度_不滿意').removeClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    $('#問卷調查_滿意視覺設計-滿意度_還可以').addClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    $('#問卷調查_滿意視覺設計-滿意度_滿意').removeClass('側邊欄-問卷調查-內容-選項_選項_被選擇');
+    doneQuestion();
+})
+
+function doneQuestion() {
+    $('#側邊欄-問卷調查-內容-問題-結果').removeClass('隱藏');
+    Cookies.set('feedback-new_ui', 'answered', { expires: 365 });
+}

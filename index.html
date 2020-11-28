@@ -16,7 +16,7 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
-    <link href='style.css?v=2021_1_6' rel='stylesheet' />
+    <link href='style.css?v=2021_1_7' rel='stylesheet' />
 
 
     <script src="./js/jquery-3.4.1.min.js" type="text/javascript"></script>
@@ -350,6 +350,30 @@
                     </div>
                     <div id="側邊欄-商家的提醒-內文" class="側邊欄-店家的提醒-內文"></div>
             </div>
+            <div id="側邊欄-問卷調查">
+                <div id="側邊欄-問卷調查-內容">
+                    <div class="側邊欄-問卷調查-內容-問題">
+                        <div class="側邊欄-問卷調查-內容_段落-標題">問卷調查</div>
+                        <div class="側邊欄-問卷調查-內容_段落-內文">您是否滿意新的口罩指南視覺設計？</div>
+                    </div>
+                    <div class="側邊欄-問卷調查-內容-選項">
+                        <div class="側邊欄-問卷調查-內容-選項_滿意度">
+                            <div id="問卷調查_滿意視覺設計-滿意度_不滿意" class="側邊欄-問卷調查-內容-選項_滿意度_不滿意 側邊欄-問卷調查-內容-選項_選項">
+                                <span class="material-icons">sentiment_very_dissatisfied</span><p>不滿意</p>
+                            </div>
+                            <div id="問卷調查_滿意視覺設計-滿意度_還可以" class="側邊欄-問卷調查-內容-選項_滿意度_還可以 側邊欄-問卷調查-內容-選項_選項">
+                                <span class="material-icons">sentiment_satisfied</span><p>還可以</p>
+                            </div>
+                            <div id="問卷調查_滿意視覺設計-滿意度_滿意" class="側邊欄-問卷調查-內容-選項_滿意度_滿意 側邊欄-問卷調查-內容-選項_選項">
+                                <span class="material-icons">sentiment_very_satisfied</span><p>滿意</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="側邊欄-問卷調查-內容-問題-結果" class="隱藏">
+                        謝謝您的意見。<br>如果您願意，您也可以<a href="https://forms.gle/QpNNSvLXq4hiWBpL7" target="_blank">回答更多問題</a>。
+                    </div>
+                </div>
+            </div>
         </section>
         <!--<div id="分享視窗" class="分享視窗_關閉">
             <div id="分享視窗-視窗">
@@ -491,8 +515,8 @@
 <!--        </div>-->
 <!--    </div>-->
 <!--</div>-->
-
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 <script src="js/function.js?v=2021_1_1"></script>
-<script src="js/sidebar.js?v=2021_1"></script>
+<script src="js/sidebar.js?v=2021_1_2"></script>
 </body>
 </html>

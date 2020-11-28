@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/earlyaccess/notosanstc.css');
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 body, html {
     font-family: 'Roboto', 'Noto Sans TC', sans-serif;
@@ -27,8 +28,8 @@ body::after{
     url(./src/ic_close.png)
     url(./src/ic_back.png)
     url(./src/ic_lastUpdate.png)
-    url(./src/ic_located.png)
-    url(./src/ic_located_press.png)
+    url(./src/ic_locate.png)
+    url(./src/ic_locate_press.png)
     url(./src/ic_zoomOut_normal.png)
     url(./src/ic_zoomOut_press.png)
     url(./src/ic_zoomIn_normal.png)
@@ -685,6 +686,7 @@ nav {
     text-overflow: ellipsis;
     display: block;
     width: 100%;
+    margin-right: 12px;
 }
 
 /* 側邊欄 */
@@ -957,43 +959,94 @@ nav {
 }
 
 #側邊欄-問卷調查 {
-    background: #F5F5F5;
-    padding: 32px;
-    margin-left: -30px;
-    margin-right: -30px;
-    margin-bottom: 40px;
+    margin-top: 32px;
+    background: #F2F2F2;
+    padding: 22px;
+    box-sizing: border-box;
+    margin-left: -22px;
+    margin-right: -22px;
+    transition: 0.2s ease;
 }
 
-#側邊欄-問卷調查-說明 {
-    font-size: 18px;
-    color: #37393D;
-    font-weight: bold;
-}
-
-#側邊欄-問卷調查-前往 {
-    margin-top: 24px;
-    line-height: 16px;
-    font-size: 16px;
-    height: 16px;
+#側邊欄-問卷調查-內容 {
     display: block;
-    vertical-align: middle;
+    width: 100%;
+    height: auto;
+    background: #FFFFFF;
+    box-shadow: 0 6px 19px 0 rgba(0,0,0,0.12);
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-sizing: border-box;
+    transition: 0.2s ease;
+}
+
+.側邊欄-問卷調查-內容-問題 {
+    margin-bottom: 16px;
+}
+
+.側邊欄-問卷調查-內容_段落-標題 {
     font-weight: 500;
+    font-size: 13px;
+    color: #006CFF;
+    margin-bottom: 2px;
 }
 
-#側邊欄-問卷調查-前往:hover {
-    opacity: 0.7;
+.側邊欄-問卷調查-內容_段落-內文 {
+    font-size: 15px;
+    color: #000000;
 }
 
-#側邊欄-問卷調查-前往:after {
-    content: '';
-    display: inline-block;
-    height: 18px;
-    width: 18px;
-    background: url('./src/ic_go.png');
-    background-size: cover;
-    vertical-align: -23%;
-    margin-left: 4px;
+.側邊欄-問卷調查-內容-選項_滿意度 {
+    display: flex;
+    justify-content: space-between;
 }
+
+.側邊欄-問卷調查-內容-選項_選項 {
+    font-size: 13px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: inset 0 0 0 2px rgba(215,215,215,0.50);
+}
+
+.側邊欄-問卷調查-內容-選項_選項 p{
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.側邊欄-問卷調查-內容-選項_選項 .material-icons {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.側邊欄-問卷調查-內容-選項_選項:last-child {
+    margin-right: 0px;
+}
+
+.側邊欄-問卷調查-內容-選項_選項:hover {
+    background: #F6F6F6;
+}
+
+.側邊欄-問卷調查-內容-選項_選項_被選擇, .側邊欄-問卷調查-內容-選項_選項_被選擇:hover {
+    background: #E0ECFF;
+    color: #006CFF;
+    box-shadow: none;
+}
+
+#側邊欄-問卷調查-內容-問題-結果 {
+    margin-top: 16px;
+    background: #F2F2F2;
+    font-size: 13px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
+
 
 .側邊欄_區塊-卡片容器 {
     overflow-x: scroll;
