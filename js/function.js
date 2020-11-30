@@ -639,9 +639,9 @@ function getLocationDataToCounty(address)
   {
     return address.city.replace("臺", "台");
   }
-  else if ('country' in address)
+  else if ('county' in address)
   {
-    return address.country.replace("臺", "台");
+    return address.county.replace("臺", "台");
   }
   else
   {
