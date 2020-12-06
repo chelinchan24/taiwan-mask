@@ -2176,7 +2176,6 @@ nav {
         transition: 0.2s ease;
         height: calc(100% - 16px) !important;
         bottom: 0 !important;
-        box-shadow: 0 -30px 0px 30px rgba(0,0,0,0.30) !important;;
     }
 
     /*#nav-左-關閉 {*/
