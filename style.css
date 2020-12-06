@@ -2099,10 +2099,11 @@ nav {
 }
 
 #側邊欄-週日-內容-說明 {
-    font-size: 12px;
+    font-size: 13px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-weight: 500;
 }
 
 #側邊欄-週日-內容-標題 {
