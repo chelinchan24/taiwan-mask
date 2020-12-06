@@ -2172,6 +2172,11 @@ nav {
         flex: 1;
     }
 
+    .側邊欄-內容 {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
     .側邊欄-行動版_展開 {
         transition: 0.2s ease;
         height: calc(100% - 16px) !important;
