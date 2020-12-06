@@ -945,19 +945,19 @@ function sortSearchCardData()
   }
 }
 
-// //DOGE TRACKER
-// function dogeTrackerStoreListDone() {
-//   if ($("#側邊欄-結果").children().length === 0)
-//   {
-//     $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
-//   }
-// }
-//
-// //DOGE WEEKDAY
-// dogeWeekDay()
-// function dogeWeekDay() {
-//   var today = new Date().getDay();
-//   if (today === 0) {
-//     $('#側邊欄-週日').removeClass('隱藏');
-//   }
-// }
+//DOGE TRACKER
+function dogeTrackerStoreListDone() {
+  if ($("#側邊欄-結果").children().length === 0)
+  {
+    $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
+  }
+}
+
+//DOGE WEEKDAY
+dogeWeekDay()
+function dogeWeekDay() {
+  var today = new Date().getDay();
+  if (today === 0) {
+    $('#側邊欄-週日').removeClass('隱藏');
+  }
+}
