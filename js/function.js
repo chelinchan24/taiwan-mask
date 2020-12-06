@@ -597,7 +597,7 @@ function updateNearSellOutCard(address)
       $("#側邊欄-還有最多庫存-內容").append(
           '<div class="側邊欄-還有最多庫存-卡片 卡片 卡片-充足 " onclick=\'onClickNearSellOutCard("' + getLocationDataToCounty(address) + '", "' + getLocationDataToTown(address) + '", "' + item.properties.id + '")\' >' +
           '  <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">' +
-          '    <div class="' + (totalMask > 999 ? "卡片-數據_小" : "卡片-數據_大") + '">' + totalMask + '</div>'+
+          '    <div class="卡片-數據_大">' + (totalMask >= 100 ? "99+" : totalMask) + '</div>'+
           '    <div class="卡片-數據_單位">份</div>' +
           '  </div>' +
           '  <div class="卡片-名稱">' + item.properties.name + '</div>' +
