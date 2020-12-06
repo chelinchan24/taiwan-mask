@@ -553,6 +553,7 @@ function updateNearSellOutCard(address)
 
   $("#側邊欄-即將售罄-沒有更多").addClass("隱藏");
   $("#側邊欄-剛售罄-沒有更多").addClass(("隱藏"));
+  $("#側邊欄-還有最多庫存-沒有更多").addClass(("隱藏"));
 
   $("#側邊欄-即將售罄-內容").empty();
   $("#側邊欄-剛售罄-內容").empty();
@@ -605,6 +606,11 @@ function updateNearSellOutCard(address)
       );
     }
   });
+
+  if ($("#側邊欄-還有最多庫存-內容").children().length === 0)
+  {
+    $("#側邊欄-還有最多庫存-沒有更多").removeClass("隱藏");
+  }
 
   if ($("#側邊欄-即將售罄-內容").children().length === 0)
   {
@@ -783,6 +789,7 @@ function updateSearchSellDrugStoreCardList(isClearData)
   {
     sortSearchCardData();
     $("#側邊欄-結果").empty();
+    dogeTrackerStoreListDone()
   }
 
   if ($("#側邊欄-結果").children().length >= data[county][town]["features"].length) return;
@@ -935,5 +942,22 @@ function sortSearchCardData()
     data[county][town].features.sort(function(a, b){
       return (b.properties.mask_adult + b.properties.mask_child) < (a.properties.mask_adult + a.properties.mask_child) ? -1 : 1;
     });
+  }
+}
+
+//DOGE TRACKER
+function dogeTrackerStoreListDone() {
+  if ($("#側邊欄-結果").children().length === 0)
+  {
+    $("#側邊欄-結果-載入中-沒有更多").removeClass("隱藏");
+  }
+}
+
+//DOGE WEEKDAY
+dogeWeekDay()
+function dogeWeekDay() {
+  var today = new Date().getDay();
+  if (today === 0) {
+    $('#側邊欄-週日').removeClass('隱藏');
   }
 }

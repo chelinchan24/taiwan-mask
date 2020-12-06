@@ -2084,6 +2084,45 @@ nav {
     transition: 0.1s ease;
 }
 
+#側邊欄-週日 {
+    padding: 22px 0px;
+    box-sizing: border-box;
+}
+
+#側邊欄-週日-內容 {
+    background: #F4F4F4;
+    border-radius: 8px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+#側邊欄-週日-內容-說明 {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#側邊欄-週日-內容-標題 {
+    color: #858585;
+}
+
+#側邊欄-週日-內容-內文 {
+    color: #292929;
+}
+
+#側邊欄-週日-內容-圖標 {
+    display: block;
+    width: 48px;
+    height: 48px;
+    background: url('src/ic_sunday.png');
+    background-size: cover;
+}
+
+
+
 
 @media screen and (max-width: 800px) {
     html, body {
