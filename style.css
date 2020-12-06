@@ -37,9 +37,9 @@ body::after{
     url(./src/ic_about.png)
     url(./src/ic_search.png)
     url(./src/ic_whatisthis.png);
-    url(./src/ic_overhaul_browser.png);
-    url(./src/ic_overhaul_store.png);
-    url(./src/ic_dropDown_down.png);
+url(./src/ic_overhaul_browser.png);
+url(./src/ic_overhaul_store.png);
+url(./src/ic_dropDown_down.png);
 }
 
 a {
@@ -2148,6 +2148,21 @@ nav {
         transition: 0.2s ease;
     }
 
+    #側邊欄:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 32px;
+        height: 4px;
+        background: #e6e6e6;
+        z-index: 3000000;
+        top: 6px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        border-radius: 4px;
+    }
+
     .側邊欄-內容{
         display: block;
         width: 100%;
@@ -2161,6 +2176,7 @@ nav {
         transition: 0.2s ease;
         height: calc(100% - 16px) !important;
         bottom: 0 !important;
+        box-shadow: 0 -30px 0px 30px rgba(0,0,0,0.30) !important;;
     }
 
     /*#nav-左-關閉 {*/
