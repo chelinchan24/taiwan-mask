@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width' />
+    <title>您即將前往線上預約</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157978193-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157978193-1');
+    </script>
+    <script src="./js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <link href='style.css' rel='stylesheet' />
+    <link rel="icon" type="image/png" href="./src/favicon.png" />
+</head>
+<body>
+<script>
+    $(document).ready(function(){
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+</script>
+<div id="線上預約">
+    <div id="線上預約-內容">
+        <div id="線上預約-內容-logo" class="logo"></div>
+        <div id="線上預約-內容-標題">您即將離開口罩指南，前往本國政府提供的線上口罩預約購買服務。</div>
+        <div id="線上預約-內容-說明">口罩指南與您所要造訪的網站並無任何關係，我們不負擔任何相關責任，也不為其背書。</div>
+        <a id="線上預約-內容-按鈕" href="https://emask.taiwan.gov.tw/msk/index.jsp">前往線上預約</a>
+    </div>
+</div>
+</body>
+</html>
