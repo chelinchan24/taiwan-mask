@@ -284,6 +284,17 @@ $('.側邊欄-內容').on('touchmove', function(event)
     }
 });
 
+$('.導覽列').on('touchmove', function(event) {
+    $('#側邊欄').removeClass('側邊欄-行動版_展開').addClass('側邊欄-行動版_收起');
+
+    if ($('#側邊欄-頁面-檢視藥局').hasClass("側邊欄-頁面_顯示"))
+    {
+        $('#側邊欄').addClass("側邊欄-行動版_藥局Marker");
+    }
+
+    $('.側邊欄-內容').scrollTop(0);
+});
+
 //----- 彈出視窗
 var popWinBox = $('#彈出視窗')
 var popWinContent = $('#彈出視窗-視窗-內容')
