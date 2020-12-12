@@ -37,9 +37,9 @@ body::after{
     url(./src/ic_about.png)
     url(./src/ic_search.png)
     url(./src/ic_whatisthis.png);
-    url(./src/ic_overhaul_browser.png);
-    url(./src/ic_overhaul_store.png);
-    url(./src/ic_dropDown_down.png);
+url(./src/ic_overhaul_browser.png);
+url(./src/ic_overhaul_store.png);
+url(./src/ic_dropDown_down.png);
 }
 
 a {
@@ -1043,9 +1043,9 @@ nav {
 
 #側邊欄-問卷調查-內容-問題-結果 {
     margin-top: 16px;
-    background: #F2F2F2;
+    background: #e2e2e2;
     font-size: 13px;
-    padding: 8px 12px;
+    padding: 14px 22px;
     box-sizing: border-box;
     border-radius: 8px;
 }
