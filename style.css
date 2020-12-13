@@ -597,7 +597,7 @@ nav {
     padding: 26px 22px;
     box-sizing: border-box;
     justify-content: space-between;
-    align-content: center;
+    align-items: center;
     box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.10);
 }
 
@@ -640,7 +640,7 @@ nav {
 .nav-圖標 {
     width: 28px;
     height: 28px;
-    display: inline-block;
+    /*! display: inline-block; */
     background-size: cover !important;
 }
 
