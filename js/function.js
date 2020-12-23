@@ -262,12 +262,6 @@ function moveToUrlDrugStore()
     // });
 
     showDrugStoreDetails(urlDrugStore);
-    $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + urlDrugStore.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
-    $("#側邊欄-商家資訊-電話").click(function () {
-      console.log('hello');
-      var telephone = urlDrugStore.properties.phone;
-      window.location.href = 'tel://' + telephone;
-    })
     moveCameraToLatLng(urlDrugStore.geometry.coordinates);
   }
 }
@@ -356,12 +350,12 @@ function loadMarkerClick()
 
     updateSelectedMarker(feature.geometry.coordinates);
 
-    $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
-    $("#側邊欄-商家資訊-電話").click(function () {
-      console.log('hello');
-      var telephone = feature.properties.phone;
-      window.location.href = 'tel://' + telephone;
-    })
+    // $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + feature.properties.address + "/@" + feature.geometry.coordinates[1] + "," + feature.geometry.coordinates[0] + ",15z', '_blank');");
+    // $("#側邊欄-商家資訊-電話").click(function () {
+    //   console.log('hello');
+    //   var telephone = feature.properties.phone;
+    //   window.location.href = 'tel://' + telephone;
+    // })
 
     showDrugStoreDetails(feature);
   });
@@ -876,6 +870,14 @@ function showDrugStoreDetails(item)
   {
     $("#側邊欄-購買須知").addClass("隱藏");
   }
+
+  $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
+  $("#側邊欄-商家資訊-電話").click(function () {
+    console.log('hello');
+    var telephone = item.properties.phone;
+    window.location.href = 'tel://' + telephone;
+  })
+
 }
 
 function getMaskType(count, lotInStock, nearSellOut, almostSellOut, sellOut)
