@@ -362,7 +362,7 @@ div {
 .下拉選單-選項_目前, .下拉選單-選項{
     /*! height: 400px !important; */
     line-height: 37px;
-    padding: 0px 16px;
+    padding: 0px 9px;
     font-size: 15px;
     border-radius: 4px;
     cursor: pointer;
@@ -639,7 +639,7 @@ nav {
 
 .nav-圖標 {
     width: 28px;
-    height: 28px;
+    height: 28px;display: block;
     /*! display: inline-block; */
     background-size: cover !important;
 }
@@ -686,7 +686,7 @@ nav {
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    width: 100%;
+    /* width: 100%; */
     margin-right: 12px;
 }
 
