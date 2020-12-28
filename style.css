@@ -1285,10 +1285,15 @@ nav {
 }
 
 .商家資訊圖標 {
-    display: block;
-    width: 24px !important;
-    height: 24px !important;
-    margin-right: 18px;
+    /*     display: block;
+        width: 24px !important;
+        height: 24px !important;
+        margin-right: 18px;
+        background-size: cover !important; */
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    margin-right: 16px;
     background-size: cover !important;
 }
 
@@ -1302,7 +1307,8 @@ nav {
     font-size: 13px;
     font-weight: 400;
     color: #8E8E8E;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+    line-height: 13px;
 }
 
 #側邊欄-商家資訊-地址, #側邊欄-商家資訊-電話 {
@@ -2071,7 +2077,7 @@ nav {
     color: #006CFF;
     font-size: 16px;
     background: #E0ECFF;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 14px 24px;
     display: block;
     width: auto;
