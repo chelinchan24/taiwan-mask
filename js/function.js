@@ -871,7 +871,7 @@ function showDrugStoreDetails(item)
     $("#側邊欄-購買須知").addClass("隱藏");
   }
 
-  $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.address + "/@" + urlDrugStore.geometry.coordinates[1] + "," + urlDrugStore.geometry.coordinates[0] + ",15z', '_blank');");
+  $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.address + "/@" + item.geometry.coordinates[1] + "," + item.geometry.coordinates[0] + ",15z', '_blank');");
   $("#側邊欄-商家資訊-電話").click(function () {
     console.log('hello');
     var telephone = item.properties.phone;
