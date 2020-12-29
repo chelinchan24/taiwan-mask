@@ -37,9 +37,11 @@ body::after{
     url(./src/ic_about.png)
     url(./src/ic_search.png)
     url(./src/ic_whatisthis.png)
-url(./src/ic_overhaul_browser.png)
-url(./src/ic_overhaul_store.png)
-url(./src/ic_dropDown_down.png);
+    url(./src/ic_overhaul_browser.png)
+    url(./src/ic_overhaul_store.png)
+    url(./src/ic_overhaul_store.png)
+    url(./src/ic_phoneNumber.png)
+    url(./src/ic_address.png);
 }
 
 a {
