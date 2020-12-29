@@ -592,9 +592,9 @@ div {
 /* 導覽列 */
 nav {
     width: 100%;
-    height: auto;
+    height: 80px;
     display: flex;
-    padding: 26px 22px;
+    padding: 0px 22px;
     box-sizing: border-box;
     justify-content: space-between;
     align-items: center;
@@ -768,8 +768,8 @@ nav {
     width: 100%;
     box-sizing: border-box;
     overflow: scroll;
-    padding: 22px 22px 0px 22px;
-    height: 100%;
+    padding: 22px 22px 0px 22px;flex: 1;
+
 }
 
 .側邊欄-內容-頂端 {
