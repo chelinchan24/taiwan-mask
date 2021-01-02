@@ -56,7 +56,17 @@ $(document).ready(function()
 {
   init();
   loadData();
+  isThirdParty ();
 });
+
+console.log(
+    "%c請注意",
+    "color:red;font-family:system-ui;font-size:24px;font-weight:bold"
+)
+console.log(
+    "%c口罩指南非開源專案，所有代碼皆受本國著作權法保護。您不應在未經授權情況下，擅自進行再製、再發布等用途。",
+    "font-family:system-ui;font-size:16px;font-weight:bold"
+)
 
 function init()
 {
@@ -105,7 +115,7 @@ function init()
       moveCameraToLatLng(map.getSource('usrPos')._data.features[0].geometry.coordinates);
       map.once('moveend', function()
       {
-        console.log("map is moveend");
+        // console.log("map is moveend");
         $("#地圖-控制-定位").removeClass("地圖-控制-定位_停用").addClass("地圖-控制-定位_啟用");
       });
     }
@@ -120,7 +130,7 @@ function checkGeoLocationPermissions()
     {
       navigator.permissions.query({name:'geolocation'}).then(function(result)
       {
-        console.log(result.state);
+        // console.log(result.state);
         if (result.state == 'granted' || result.state == 'denied')
         {
           updateInfoCard()
@@ -138,7 +148,7 @@ function checkGeoLocationPermissions()
   }
   else
   {
-    console.log("Geolocation is not supported by this browser.");
+    // console.log("Geolocation is not supported by this browser.");
   }
 }
 //*********************************************
@@ -146,11 +156,11 @@ function checkGeoLocationPermissions()
 //*********************************************
 function loadData()
 {
-  console.log("document ready");
+  // console.log("document ready");
   popWindow('請稍候','','n');
   $.get("https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json", function(source)
   {
-    console.log("get source");
+    // console.log("get source");
     hidePopWindow();
 
     //載入全部
@@ -158,7 +168,7 @@ function loadData()
 
     if (s.features === undefined || s.features.length === 0)
     {
-      console.log(source);
+      // console.log(source);
       popWindow('很抱歉，口罩指南目前暫時無法提供服務，請稍候再試一次。','瞭解了','n');
       return;
     }
@@ -232,7 +242,7 @@ function sortData(item)
 
 function loadMapData()
 {
-  console.log("loadMapData = " + map.loaded());
+  // console.log("loadMapData = " + map.loaded());
 
   if(map.loaded())
   {
@@ -242,7 +252,7 @@ function loadMapData()
   {
     map.on("load", function()
     {
-      console.log("loadMapData is load");
+      // console.log("loadMapData is load");
       loadMarker();
     });
   }
@@ -268,7 +278,7 @@ function moveToUrlDrugStore()
 
 function loadMarker()
 {
-  console.log("loadMarker");
+  // console.log("loadMarker");
   map.addLayer({
     id: "marker",
     type: "symbol",
@@ -337,7 +347,7 @@ function loadMarkerClick()
     }
 
     var feature = features[0];
-    console.log(feature);
+    // console.log(feature);
 
     // DISQUS.reset({
     //   reload: true,
@@ -366,6 +376,23 @@ function loadMarkerClick()
   map.on('mouseleave', 'marker', function(){
     map.getCanvas().style.cursor = "";
   });
+}
+
+function isThirdParty (){
+  if (window.location.origin === 'https://mask.chel.in') {
+  } else {
+    console.warn(
+        "%c️已偵測到您正在非正確網域存取口罩指南。您的 IP 位置已被回傳作為紀錄。",
+        "font-family:system-ui;font-size:16px;font-weight:bold"
+    )
+    $.getJSON("https://api.ipify.org/?format=json", function(e) {
+      thirdpartuser = e.ip + new Date() + window.location.href;
+      gtag('event', thirdpartuser, {
+        'event_category': 'waring',
+        'event_label': 'isThirdParty',
+      });
+    });
+  }
 }
 
 function loadMapMoveListener()
@@ -873,7 +900,7 @@ function showDrugStoreDetails(item)
 
   $("#側邊欄-商家資訊-地址").attr("onclick", "window.open('https://www.google.com.tw/maps/search/" + item.properties.address + "/@" + item.geometry.coordinates[1] + "," + item.geometry.coordinates[0] + ",15z', '_blank');");
   $("#側邊欄-商家資訊-電話").click(function () {
-    console.log('hello');
+    // console.log('hello');
     var telephone = item.properties.phone;
     window.location.href = 'tel://' + telephone;
   })
