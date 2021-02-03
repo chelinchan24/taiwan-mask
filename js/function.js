@@ -982,11 +982,11 @@ function dogeTrackerStoreListDone() {
   }
 }
 
-//DOGE WEEKDAY
-dogeWeekDay()
-function dogeWeekDay() {
-  var today = new Date().getDay();
-  if (today === 0) {
-    $('#側邊欄-週日').removeClass('隱藏');
-  }
-}
+// //DOGE WEEKDAY
+// dogeWeekDay()
+// function dogeWeekDay() {
+//   var today = new Date().getDay();
+//   if (today === 0) {
+//     $('#側邊欄-週日').removeClass('隱藏');
+//   }
+// }
