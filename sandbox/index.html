@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>口罩指南－台灣口罩地圖</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157978193-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-157978193-1');
+    </script>
+
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='style.css?v=1y' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <script src="./js/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="https://momentjs.com/downloads/moment.js" type="text/javascript"></script>
+
+    <meta property="og:type"               content="website" />
+    <meta property="og:title"              content="口罩指南" />
+    <meta property="og:description"        content="台灣口罩地圖－輕鬆探索口罩銷售地點和供應資訊！" />
+    <meta property="og:image"              content="https://mask.chel.in/src/og-n.png" />
+
+    <link rel="icon" type="image/png" href="./src/favicon.png" />
+
+    <meta name="description" content="台灣口罩地圖－輕鬆探索口罩銷售地點和供應資訊！" />
+
+    <link rel="apple-touch-icon" href="./src/appIcon.png">
+</head>
+<body>
+<!--<div id="無法服務">
+    <div id="無法服務-內容">
+        <div id="無法服務-內容-logo" class="logo"></div>
+        <div id="無法服務-內容-說明">很抱歉，口罩指南目前暫時無法提供服務。請於數個小時後再試一次。</div>
+        <div id="無法服務-內容-版權">口罩指南 2020 © <a href="http://chelinchan.com" target="_blank">詹喆麟</a>、<a href="https://chiyung.dev" target="_blank">楊奇永</div>
+    </div>
+</div>-->
+<div id="讀取畫面">
+    <div id="讀取畫面-轉圈圈"></div>
+</div>
+<div id="沙盒控制台" style="display: none">
+    <div class="中標題" style="margin-bottom: 16px;">時光機</div>
+    <div>
+<!--        <div class="小標題" style="margin-bottom: 8px;">時間點</div>-->
+        <div id="沙盒控制台-時間點">
+            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(31)">
+                2020 年 3 月 1 日
+            </div>
+            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(315)">
+                2020 年 3 月 15 日
+            </div>
+            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(41)">
+                2020 年 4 月 1 日
+            </div>
+            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(415)">
+                2020 年 4 月 15 日
+            </div>
+<!--            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(423)">-->
+<!--                2020 年 4 月 23 日-->
+<!--            </div>-->
+            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(51)">
+                2020 年 5 月 1 日
+            </div>
+            <div class="沙盒控制台-選項" onclick="sandBoxDateOverride(515)">
+                2020 年 5 月 15 日
+            </div>
+        </div>
+    </div>
+<!--    <div>-->
+<!--        <div class="小標題">標籤複寫</div>-->
+<!--        <div id="沙盒控制台-標籤複寫">-->
+<!--            <div class="沙盒控制台-選項">-->
+<!--                全部-->
+<!--            </div>-->
+<!--            <div class="沙盒控制台-時間點-選項">-->
+<!--                成人-->
+<!--            </div>-->
+<!--            <div class="沙盒控制台-時間點-選項">-->
+<!--                兒童-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <div id="沙盒控制台-關閉">關閉</div>
+</div>
+<section id="地圖容器">
+    <div id="地圖-控制">
+        <div id="地圖-控制-定位" class="地圖-控制-定位_停用 地圖-控制-定位"></div>
+        <div id="地圖-控制-縮放">
+            <div id="地圖-控制-縮放-放大"></div>
+            <div id="地圖-控制-縮放-縮小"></div>
+        </div>
+    </div>
+    <div id="地圖"></div>
+</section>
+<article id="側邊欄" class="側邊欄-行動版_收起">
+    <div id="側邊欄-頁面-總覽" class="側邊欄-頁面">
+        <nav class="導覽列">
+            <div class="nav-左">
+                <div id="nav-左-logo" class="logo"></div>
+<!--                <div id="nav-左-關閉"></div>-->
+            </div>
+            <div class="nav-右">
+                <div id="nav-右-關於" class="關於 nav-圖標"></div>
+            </div>
+        </nav>
+        <section class="側邊欄-內容">
+            <div id="側邊欄-總覽-過濾" class="">
+                <div id="側邊欄-總覽-過濾-全部" class="側邊欄-總覽-過濾_選項 側邊欄-總覽-過濾_選項_啟用">
+                    <div id="側邊欄-總覽-過濾-全部-圖標" class="側邊欄-總覽-過濾_選項-圖標"></div>
+                    <div class="側邊欄-總覽-過濾_選項-名稱">全部</div>
+                </div>
+                <div id="側邊欄-總覽-過濾-僅限成人" class="側邊欄-總覽-過濾_選項">
+                    <div id="側邊欄-總覽-過濾-僅限成人-圖標" class="側邊欄-總覽-過濾_選項-圖標"></div>
+                    <div class="側邊欄-總覽-過濾_選項-名稱">成人</div>
+                </div>
+                <div id="側邊欄-總覽-過濾-僅限兒童" class="側邊欄-總覽-過濾_選項">
+                    <div id="側邊欄-總覽-過濾-僅限兒童-圖標" class="側邊欄-總覽-過濾_選項-圖標"></div>
+                    <div class="側邊欄-總覽-過濾_選項-名稱">兒童</div>
+                </div>
+            </div>
+            <div id="側邊欄-週日" class="隱藏">
+                <div id="側邊欄-週日-內容">
+                    <div id="側邊欄-週日-內容-說明">
+                        <div id="側邊欄-週日-內容-標題">
+                        今天是星期日
+                        </div>
+                        <div id="側邊欄-週日-內容-內文">
+                        大部分的銷售點今天不會販售。
+                        </div>
+                    </div>
+                    <div id="側邊欄-週日-內容-圖標"></div>
+                </div>
+            </div>
+            <div id="側邊欄-區域狀況-2021">
+                <div class="中標題" id="側邊欄-區域狀況-標題">
+                    <!-- 選擇器加入到這裡 -->
+                    <span id="側邊欄-區域狀況-地區">區域</span>總覽
+                </div>
+                <div id="側邊欄-最近更新">
+                    <div>最後更新&nbsp;<span id="側邊欄-最近更新-時間">22:30</span>，不是即時資訊
+                    </div>
+                    <div class="這是什麼" id="側邊欄-最近更新-這是什麼"></div>
+                </div>
+                <div id="側邊欄-區域狀況" class="卡片">
+                    <div id="側邊欄-區域狀況-內容">
+                        <div id="側邊欄-區域狀況-內容-剩餘口罩">
+                            <div id="側邊欄-區域狀況-內容-剩餘口罩-資訊">
+                                <div id="側邊欄-區域狀況-內容-剩餘口罩-數據">0</div>
+                                <div class="側邊欄-區域狀況-內容-剩餘口罩-數據-單位">份</div>
+                            </div>
+                            <div class="側邊欄-區域狀況-內容_主題-名稱">剩餘口罩</div>
+                        </div>
+                        <div id="側邊欄-區域狀況-內容-販售中藥局">
+                            <div id="側邊欄-區域狀況-內容-販售中藥局-左">
+                                <div id="側邊欄-區域狀況-內容-販售中藥局-左-圖標"></div>
+                                <div id="側邊欄-區域狀況-內容-販售中藥局-左-資訊">
+                                    <div id="側邊欄-區域狀況-內容-販售中藥局-左-資訊-統計">
+                                        <div id="側邊欄-區域狀況-內容-販售中藥局-數據">0</div><span>間</span>
+                                    </div>
+                                    <div class="側邊欄-區域狀況-內容-販售中藥局-左-資訊-說明">銷售點販售中</div>
+                                </div>
+                            </div>
+                            <div id="側邊欄-區域狀況-內容-販售中藥局-右">
+                                <div id="側邊欄-區域狀況-內容-販售中藥局-右-瀏覽店家">
+                                    <span>瀏覽店家</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="側邊欄-選單">
+                <div id="側邊欄-尋找銷售點" class="選單按鈕">
+                    <div class="選單按鈕-圖標 尋找銷售點"></div>
+                    <div class="選單按鈕-標題">尋找銷售點</div>
+                    <div class="進入"></div>
+                </div>
+                <a href="./preorder.html" target="_blank" id="側邊欄-口罩線上預購" class="選單按鈕">
+                    <div class="選單按鈕-圖標 口罩線上預購"></div>
+                    <div class="選單按鈕-標題">口罩線上預約</div>
+                    <div class="進入"></div>
+                </a>
+            </div>
+            <!--<div id="側邊欄-關於口罩指南" class="選單按鈕">
+                <div class="選單按鈕-圖標 關於口罩指南"></div>
+                <div class="選單按鈕-標題">關於口罩指南</div>
+            </div>-->
+<!--            <div id="側邊欄-問卷調查">-->
+<!--                <div id="側邊欄-問卷調查-說明">懇請您撥冗參與問卷調查，協助我們持續改善口罩指南。</div>-->
+<!--                <a href="https://forms.gle/XapM9zcq8pWcKxFc6"><div id="側邊欄-問卷調查-前往">參與問卷調查</div></a>-->
+<!--            </div>-->
+            <div id="側邊欄-還有最多庫存">
+                <div class="中標題 側邊欄-中標題">還有最多庫存</div>
+                <div id="側邊欄-還有最多庫存-內容" class="側邊欄_區塊-卡片容器">
+                    <div id="側邊欄-還有最多庫存-1" class="側邊欄-還有最多庫存-卡片 卡片 卡片-售罄 ">
+                        <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                            <div id="側邊欄-還有最多庫存-1-數據" class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                        <div id="側邊欄-還有最多庫存-1-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-還有最多庫存-1-地址" class="卡片-地址">--</div>
+                    </div>
+                    <div id="側邊欄-還有最多庫存-2" class="側邊欄-還有最多庫存-卡片 卡片 卡片-售罄 ">
+                        <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                            <div id="側邊欄-還有最多庫存-2-數據" class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                        <div id="側邊欄-還有最多庫存-2-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-還有最多庫存-2-地址" class="卡片-地址">--</div>
+                    </div>
+                    <div id="側邊欄-還有最多庫存-3" class="側邊欄-還有最多庫存-卡片 卡片 卡片-售罄 ">
+                        <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                            <div id="側邊欄-還有最多庫存-3-數據" class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                        <div id="側邊欄-還有最多庫存-3-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-還有最多庫存-3-地址" class="卡片-地址">--</div>
+                    </div>
+                </div>
+                <div id="側邊欄-還有最多庫存-沒有更多" class="空白畫面文字 隱藏">沒有銷售點在販售</div>
+            </div>
+            <div id="側邊欄-即將售罄">
+                <div class="中標題 側邊欄-中標題">即將售罄</div>
+                <div id="側邊欄-即將售罄-內容" class="側邊欄_區塊-卡片容器">
+                    <div id="側邊欄-幾乎售罄-1" class="側邊欄-即將售罄-卡片 卡片 卡片-售罄 ">
+                        <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                            <div id="側邊欄-幾乎售罄-1-數據" class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                        <div id="側邊欄-幾乎售罄-1-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-幾乎售罄-1-地址" class="卡片-地址">--</div>
+                    </div>
+                    <div id="側邊欄-即將售罄-2" class="側邊欄-即將售罄-卡片 卡片 卡片-售罄 ">
+                        <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                            <div id="側邊欄-即將售罄-2-數據" class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                        <div id="側邊欄-即將售罄-2-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-即將售罄-2-地址" class="卡片-地址">--</div>
+                    </div>
+                    <div id="側邊欄-幾乎售罄-3" class="側邊欄-即將售罄-卡片 卡片 卡片-售罄 ">
+                        <div class="側邊欄-卡片-剩餘數量 卡片-數字欄位">
+                            <div id="側邊欄-幾乎售罄-3-數據" class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                        <div id="側邊欄-幾乎售罄-3-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-幾乎售罄-3-地址" class="卡片-地址">--</div>
+                    </div>
+                </div>
+                <div id="側邊欄-即將售罄-沒有更多" class="空白畫面文字 隱藏">沒有即將售罄的銷售點</div>
+            </div>
+            <div id="側邊欄-剛售罄">
+                <div class="中標題 側邊欄-中標題">剛售罄</div>
+                <div id="側邊欄-剛售罄-內容" class="側邊欄_區塊-卡片容器">
+                    <div id="側邊欄-剛售罄-1" class="側邊欄-剛售罄-卡片 卡片">
+                        <div id="側邊欄-剛售罄-1-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-剛售罄-1-地址" class="卡片-地址">--</div>
+                    </div>
+                    <div id="側邊欄-剛售罄-2" class="側邊欄-剛售罄-卡片 卡片">
+                        <div id="側邊欄-剛售罄-2-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-剛售罄-2-地址" class="卡片-地址">--</div>
+                    </div>
+                    <div id="側邊欄-剛售罄-3" class="側邊欄-剛售罄-卡片 卡片">
+                        <div id="側邊欄-剛售罄-3-名稱" class="卡片-名稱">--</div>
+                        <div id="側邊欄-剛售罄-3-地址" class="卡片-地址">--</div>
+                    </div>
+                </div>
+                <div id="側邊欄-剛售罄-沒有更多" class="空白畫面文字 隱藏">沒有剛售罄的銷售點</div>
+            </div>
+        </section>
+    </div>
+    <div id="側邊欄-頁面-尋找銷售點" class="側邊欄-頁面 側邊欄-頁面_隱藏">
+        <nav class="導覽列">
+            <div class="nav-左">
+                <div class="nav-左-返回">
+                    <div class="返回 nav-圖標"></div>
+                    <div class="nav-標題">尋找銷售點</div>
+                </div>
+            </div>
+            <div class="nav-右">
+                <div class="nav-右-最後更新 側邊欄-最近更新-小-這是什麼">
+                    <div class="nav-右-最後更新-icon"></div>
+                    <div id="nav-右-最後更新-時間">--</div>
+                    <div class="這是什麼"></div>
+                </div>
+            </div>
+        </nav>
+        <section id="側邊欄-尋找銷售點-列表" class="側邊欄-內容">
+            <div class="側邊欄-內容-頂端">
+                <div id="側邊欄-過濾">
+                    <div id="側邊欄-過濾-城市" class="側邊欄-過濾-城市-按鈕">
+                        <span id="側邊欄-過濾-城市-按鈕-文字" class="側邊欄-過濾-城市-按鈕">縣市</span>
+                        <span id="側邊欄-過濾-城市-下拉選單" class="下拉選單 下拉選單_預設">
+                        </span>
+                    </div>
+                    <div id="側邊欄-過濾-地區" class="側邊欄-過濾-地區-按鈕">
+                        <span id="側邊欄-過濾-地區-按鈕-文字" class="側邊欄-過濾-地區-按鈕">鄉鎮地區</span>
+                        <span id="側邊欄-過濾-地區-下拉選單" class="下拉選單 下拉選單_預設">
+                        </span>
+                    </div>
+                </div>
+                <div id="側邊欄-過濾規格" class="">
+                    <div id="側邊欄-過濾規格-全部" class="側邊欄-過濾規格_選項 側邊欄-過濾規格_選項_啟用">全部</div>
+                    <div id="側邊欄-過濾規格-僅限兒童" class="側邊欄-過濾規格_選項">僅限兒童</div>
+                    <div id="側邊欄-過濾規格-僅限成人" class="側邊欄-過濾規格_選項">僅限成人</div>
+                </div>
+            </div>
+            <div id="側邊欄-結果">
+                <div class="側邊欄-結果-項目">
+                    <div class="側邊欄-結果-項目-計數 卡片-售罄">
+                        <div class="側邊欄-結果-項目-計數-數據">
+                            <div class="卡片-數據_小">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                    </div>
+                    <div class="側邊欄-結果-項目-資訊">
+                        <div class="側邊欄-結果-項目-資訊-名稱">--</div>
+                        <div class="側邊欄-結果-項目-資訊-地址">--</div>
+                    </div>
+                </div>
+                <div class="側邊欄-結果-項目">
+                    <div class="側邊欄-結果-項目-計數 卡片-售罄">
+                        <div class="側邊欄-結果-項目-計數-數據">
+                            <div class="卡片-數據_大">0</div>
+                            <div class="卡片-數據_單位">份</div>
+                        </div>
+                    </div>
+                    <div class="側邊欄-結果-項目-資訊">
+                        <div class="側邊欄-結果-項目-資訊-名稱">--</div>
+                        <div class="側邊欄-結果-項目-資訊-地址">--</div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="側邊欄-結果-載入中-動畫" class="載入中 隱藏"></div>
+            <div id="側邊欄-結果-載入中-沒有更多" class="空白畫面文字 隱藏">沒有更多了</div>
+        </section>
+    </div>
+    <div id="側邊欄-頁面-檢視藥局" class="側邊欄-頁面 側邊欄-頁面_隱藏">
+        <nav class="導覽列">
+            <div class="nav-左">
+                <div id="側邊欄-頁面-檢視藥局-nav-返回" class="nav-左-返回"> <!--或 nav-左-返回總覽-->
+                    <div class="返回 nav-圖標"></div>
+                    <div id="側邊欄-頁面-檢視藥局-標題" class="nav-標題">--</div>
+                </div>
+            </div>
+            <div class="nav-右">
+                <div id="側邊欄-檢視藥局-這是什麼" class="nav-右-最後更新">
+                    <div class="nav-右-最後更新-icon"></div>
+                    <div id="nav-右-最後更新-時間-檢視藥局">--</div>
+                    <div class="這是什麼"></div>
+                </div>
+            </div>
+        </nav>
+        <section id="側邊欄-內容" class="側邊欄-內容">
+            <!--<div id="側邊欄-靜態地圖"></div>-->
+            <div id="側邊欄-販售存量">
+                <div id="側邊欄-販售存量-成人" class="卡片 卡片-售罄">
+                    <div class="小標題">成人口罩</div>
+                    <div class="側邊欄-販售存量_規格-數據">
+                        <div id="側邊欄-販售存量-成人-數據-數字" class="卡片-數據_大">--</div>
+                        <div class="卡片-數據_單位">份</div>
+                    </div>
+                </div>
+                <div id="側邊欄-販售存量-兒童" class="卡片 卡片-售罄">
+                    <div class="小標題">兒童口罩</div>
+                    <div class="側邊欄-販售存量_規格-數據">
+                        <div id="側邊欄-販售存量-兒童-數據-數字" class="卡片-數據_大">--</div>
+                        <div class="卡片-數據_單位">份</div>
+                    </div>
+                </div>
+            </div>
+            <div id="側邊欄-商家資訊">
+                <div id="側邊欄-商家資訊-電話">
+                    <div class="商家資訊圖標 電話"></div>
+                    <div class="側邊欄-商家資訊_資訊_內容">
+                        <div class="側邊欄-商家資訊_資訊_內容-標題">致電商家</div>
+                        <div id="側邊欄-商家資訊-電話-號碼">--</div>
+                    </div>
+                    <div class="進入"></div>
+                </div>
+                <div id="側邊欄-商家資訊-地址">
+                    <div class="商家資訊圖標 地址"></div>
+                    <div class="側邊欄-商家資訊_資訊_內容">
+                        <div class="側邊欄-商家資訊_資訊_內容-標題">開啟 Google 地圖</div>
+                        <div id="側邊欄-商家資訊-地址-地址">--</div>
+                    </div>
+                    <div class="進入"></div>
+                </div>
+            </div>
+            <div id="側邊欄-購買須知" class="隱藏">
+                <div id="側邊欄-購買須知-標題">
+                    <div class="中標題">購買須知</div>
+                    <div class="這是什麼" id="側邊欄-購買須知-標題-這是什麼"></div>
+                </div>
+                <div id="側邊欄-購買須知-內文" class="側邊欄-店家的提醒-內文"></div>
+            </div>
+            <div id="側邊欄-商家的提醒" class="隱藏">
+                    <div id="側邊欄-商家的提醒-標題">
+                        <div class="中標題">商家的提醒</div>
+                        <div class="這是什麼" id="側邊欄-商家的提醒-標題-這是什麼"></div>
+                    </div>
+                    <div id="側邊欄-商家的提醒-內文" class="側邊欄-店家的提醒-內文"></div>
+            </div>
+<!--            <div id="側邊欄-問卷調查">-->
+<!--                <div id="側邊欄-問卷調查-內容">-->
+<!--                    <div class="側邊欄-問卷調查-內容-問題">-->
+<!--                        <div class="側邊欄-問卷調查-內容_段落-標題">問卷調查</div>-->
+<!--                        <div class="側邊欄-問卷調查-內容_段落-內文">您是否滿意新的口罩指南視覺設計？</div>-->
+<!--                    </div>-->
+<!--                    <div class="側邊欄-問卷調查-內容-選項">-->
+<!--                        <div class="側邊欄-問卷調查-內容-選項_滿意度">-->
+<!--                            <div id="問卷調查_滿意視覺設計-滿意度_不滿意" class="側邊欄-問卷調查-內容-選項_滿意度_不滿意 側邊欄-問卷調查-內容-選項_選項">-->
+<!--                                <span class="material-icons">sentiment_very_dissatisfied</span><p>不滿意</p>-->
+<!--                            </div>-->
+<!--                            <div id="問卷調查_滿意視覺設計-滿意度_還可以" class="側邊欄-問卷調查-內容-選項_滿意度_還可以 側邊欄-問卷調查-內容-選項_選項">-->
+<!--                                <span class="material-icons">sentiment_satisfied</span><p>還可以</p>-->
+<!--                            </div>-->
+<!--                            <div id="問卷調查_滿意視覺設計-滿意度_滿意" class="側邊欄-問卷調查-內容-選項_滿意度_滿意 側邊欄-問卷調查-內容-選項_選項">-->
+<!--                                <span class="material-icons">sentiment_very_satisfied</span><p>滿意</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="側邊欄-問卷調查-內容-問題-結果" class="隱藏">-->
+<!--                    謝謝您的意見。<br>如果您願意，您也可以<a href="https://forms.gle/QpNNSvLXq4hiWBpL7" target="_blank">回答更多問題</a>。-->
+<!--                </div>-->
+<!--            </div>-->
+        </section>
+        <!--<div id="分享視窗" class="分享視窗_關閉">
+            <div id="分享視窗-視窗">
+                <div id="分享視窗-視窗-內容">
+                    <div id="分享視窗-分享-社群">
+                        <div id="分享視窗-分享-社群-Facebook" class="分享-社群-icon"></div>
+                <div id="分享視窗-分享-社群-Messenger" class="分享-社群-icon"></div>
+                        <div id="分享視窗-分享-社群-Twitter" class="分享-社群-icon"></div>
+                        <div id="分享視窗-分享-社群-LINE" class="分享-社群-icon"></div>
+                    </div>
+                    <div id="分享視窗-分享-網址">
+                        <input id="分享視窗-分享-網址-網址他自己">
+                    </div>
+                </div>
+                <div id="分享視窗-視窗-按鈕">完成</div>
+            </div>
+        </div>-->
+    </div>
+    <div id="側邊欄-頁面-關於" class="側邊欄-頁面 側邊欄-頁面_隱藏">
+        <nav class="導覽列">
+            <div class="nav-左">
+                <div class="nav-左-返回">
+                    <div class="返回 nav-圖標"></div>
+                    <div class="nav-標題">關於</div>
+                </div>
+            </div>
+            <div class="nav-右">
+                <div id="沙盒控制台-開啟">
+                    <img src="./src/outline_history_black_24dp.png" width="28px" height="28px" style="cursor: pointer">
+                </div>
+            </div>
+        </nav>
+        <section class="側邊欄-內容">
+            <div id="側邊欄-關於標題">
+                <div id="側邊欄-關於標題-logo" class="logo"></div>
+                <div id="側邊欄-關於標題-文字">口罩指南來自這些，以為民服務為宗旨、力圖打造更好世界，而不求回報的人才們。</div>
+            </div>
+            <div class="側邊欄-關於-人">
+                <div class="側邊欄-關於-人-資訊">
+                    <div class="側邊欄-關於-人-資訊-名字與專業">
+                        <div class="側邊欄-關於-人-名字">詹喆麟</div>
+                        <div class="側邊欄-關於-人-專業">使用者介面、體驗設計</div>
+                    </div>
+                    <img class="側邊欄-關於-人-資訊-照片" src="./src/pic_chelinchan24.png">
+                </div>
+                <div class="側邊欄-關於-人-說明與連結">
+                    <div class="側邊欄-關於-人-說明與連結-說明">
+                        口罩指南專案的主導者。他藉由自身的設計專業，讓口罩指南擁有獨特且卓越的表現。
+                    </div>
+                    <div class="側邊欄-關於-人-說明與連結-連結">
+                        <a href="http://chelinchan.com" class="側邊欄-關於-人-連結-按鈕"><span>個人網站</span></a>
+                        <a href="https://instagram.com/chelinchan24" class="側邊欄-關於-人-連結-按鈕"><span>Instagram</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="側邊欄-關於-人">
+                <div class="側邊欄-關於-人-資訊">
+                    <div class="側邊欄-關於-人-資訊-名字與專業">
+                        <div class="側邊欄-關於-人-名字">楊奇永</div>
+                        <div class="側邊欄-關於-人-專業">程式設計</div>
+                    </div>
+                    <img class="側邊欄-關於-人-資訊-照片" src="./src/pic_chiyung.jpg">
+                </div>
+                <div class="側邊欄-關於-人-說明與連結">
+                    <div class="側邊欄-關於-人-說明與連結-說明">
+                        最初包辦了口罩指南的程式設計。從零開始建構，為這獨一無二的平台帶來生命。
+                    </div>
+                    <div class="側邊欄-關於-人-說明與連結-連結">
+                        <a href="https://chiyung.dev" class="側邊欄-關於-人-連結-按鈕"><span>個人網站</span></a>
+                        <a href="https://instagram.com/yangchiyung" class="側邊欄-關於-人-連結-按鈕"><span>Instagram</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="側邊欄-關於-人">
+                <div class="側邊欄-關於-人-資訊">
+                    <div class="側邊欄-關於-人-資訊-名字與專業">
+                        <div class="側邊欄-關於-人-名字">Han（ハン）</div>
+                        <div class="側邊欄-關於-人-專業">殺蟲大師</div>
+                    </div>
+                    <img class="側邊欄-關於-人-資訊-照片" src="./src/pic_han.jpg">
+                </div>
+                <div class="側邊欄-關於-人-說明與連結">
+                    <div class="側邊欄-關於-人-說明與連結-說明">
+                        協助了口罩指南排除影響其運作的問題，使其重回正常狀態，繼續提供服務。
+                    </div>
+                    <div class="側邊欄-關於-人-說明與連結-連結">
+                        <a href="https://github.com/hannoeru" class="側邊欄-關於-人-連結-按鈕"><span>GitHub</span></a>
+                    </div>
+                </div>
+            </div>
+            <div id="側邊欄-關於-贊助">
+                <span><b>贊助</b></span>
+                <a href="https://mapbox.com" target="_blank"><img src="./src/mapbox-logo.png"></a>
+            </div>
+            <div id="側邊欄-版權">
+                <b>開放資料來源</b><br>
+                <a href="https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json">藥局+衛生所即時庫存 geojson</a>，<br>感謝作者「kiang」的付出:)
+                <br><br>
+                口罩指南 © 2020 - 2021
+            </div>
+        </section>
+    </div>
+</article>
+<div id="彈出視窗" class="彈出視窗_關閉">
+    <div id="彈出視窗-視窗">
+        <div id="彈出視窗-視窗-內容">
+        </div>
+        <div id="彈出視窗-視窗-按鈕"></div>
+    </div>
+    <div id="彈出視窗-背景"></div>
+</div>
+
+<!--<div id="行動-銷售點預覽" class="行動-銷售點預覽_關閉">-->
+<!--    <div id="行動-銷售點預覽-視窗">-->
+<!--        <div id="行動-銷售點預覽-內容">-->
+<!--            <nav class="導覽列">-->
+<!--                <div class="nav-左">-->
+<!--                    <div id="行動-銷售點預覽-標題" class="nav-標題">狗哥大醫院</div>-->
+<!--                </div>-->
+<!--                <div class="nav-右">-->
+<!--                </div>-->
+<!--            </nav>-->
+<!--            <div id="行動-銷售點預覽-販售存量">-->
+<!--                <div id="行動-銷售點預覽-販售存量-成人" class="卡片 卡片-售罄">-->
+<!--                    <div class="小標題">成人口罩</div>-->
+<!--                    <div class="行動-銷售點預覽-販售存量_規格-數據">-->
+<!--                        <div id="行動-銷售點預覽-販售存量-成人-數據-數字" class="卡片-數據_大">&#45;&#45;</div>-->
+<!--                        <div class="卡片-數據_單位">份</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="行動-銷售點預覽-販售存量-兒童" class="卡片 卡片-售罄">-->
+<!--                    <div class="小標題">兒童口罩</div>-->
+<!--                    <div class="行動-銷售點預覽-販售存量_規格-數據">-->
+<!--                        <div id="行動-銷售點預覽-販售存量-兒童-數據-數字" class="卡片-數據_大">&#45;&#45;</div>-->
+<!--                        <div class="卡片-數據_單位">份</div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+<script src="js/function.js?v=2021_1_7"></script>
+<script src="js/sidebar.js?v=2021_1_3"></script>
+</body>
+</html>
